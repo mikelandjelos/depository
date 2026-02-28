@@ -14,6 +14,8 @@ Custom theme built inline (no `themes/` directory). All templates live in
 | `layouts/_default/list.html` | Section list page: title, content, chronological post list |
 | `layouts/index.html` | Homepage: site title, description, recent 10 posts from `posts/` section |
 | `assets/css/tufte.css` | All styles — adapted Tufte CSS + site header/nav/footer/post-list |
+| `assets/css/syntax-light.css` | Chroma syntax highlighting — monokailight (light mode) |
+| `assets/css/syntax-dark.css` | Chroma syntax highlighting — monokai (dark mode) |
 
 ## Design Decisions
 
@@ -34,7 +36,8 @@ Custom theme built inline (no `themes/` directory). All templates live in
 
 - Background: `#fffff8` (off-white), text: `#111` (off-black)
 - Dark mode via `prefers-color-scheme: dark` — bg `#151515`, text `#ddd`
-- Code blocks: `#f5f5f0` background, `#1e1e1e` in dark mode
+- Inline code: `#e8e8e0` background (light), `#303030` with `#e0e0e0` text (dark)
+- Code blocks: transparent background, styled by Chroma syntax CSS
 - Links: inherit color, subtle underline (0.05em thickness, 0.15em offset)
 
 ### Sidenotes (from Tufte CSS)
@@ -46,16 +49,20 @@ Custom theme built inline (no `themes/` directory). All templates live in
 
 ### Math (KaTeX)
 
-- Loaded from jsDelivr CDN (v0.16.11) with SRI hashes
-- Auto-render extension: `$...$` for inline, `$$...$$` for display
+- KaTeX v0.16.33 loaded from jsDelivr CDN with SRI hashes
+- Auto-render extension: `$…$` for inline, `$$…$$` for display
+- Hugo passthrough extension (`markup.goldmark.extensions.passthrough`) preserves
+  LaTeX delimiters so Goldmark does not mangle backslashes
+- Display math centered via `.katex-display` CSS (width: 55%, text-align: center)
 - Deferred loading — does not block page render
 
 ### Syntax Highlighting
 
 - Hugo's built-in Chroma highlighter with `noClasses = false`
 - Uses CSS classes (not inline styles) for theme-ability
-- Note: no Chroma CSS is currently included — Hugo generates class-based
-  markup but we rely on browser defaults. TODO: Add a Chroma CSS theme file.
+- Two Chroma CSS files generated via `hugo gen chromastyles`:
+  - `syntax-light.css` (monokailight) — loaded with `media="(prefers-color-scheme: light)"`
+  - `syntax-dark.css` (monokai) — loaded with `media="(prefers-color-scheme: dark)"`
 
 ### Navigation
 
@@ -74,6 +81,7 @@ Custom theme built inline (no `themes/` directory). All templates live in
 
 - `timeZone = 'Europe/Belgrade'` — prevents today's posts being treated as future
 - `markup.goldmark.renderer.unsafe = true` — required for sidenote HTML in markdown
+- `markup.goldmark.extensions.passthrough` — preserves `$…$` and `$$…$$` for KaTeX
 - `markup.highlight.noClasses = false` — CSS-based syntax highlighting
 
 ## Sample Content
@@ -83,7 +91,6 @@ Custom theme built inline (no `themes/` directory). All templates live in
 
 ## Known TODOs
 
-- Add Chroma syntax highlighting CSS theme
 - Consider Hugo shortcodes for sidenotes (cleaner than raw HTML in markdown)
 - Add RSS feed customization
 - Add favicon
