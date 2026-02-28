@@ -11,10 +11,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 
-    <!-- KaTeX -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5EGIE0x3f/hr96TQu4qxa5+EQB/aS2YNp3dN2/7Klgy0BFswyYa" crossorigin="anonymous">
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRjXNNAMA4g+0Tpg" crossorigin="anonymous"
+    <!-- KaTeX v0.16.33 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.33/dist/katex.min.css" integrity="sha384-fgYS3VC1089n2J3rVcEbXDHlnDLQ9B2Y1hvpQ720q1NvxCduQqT4JoGc4u2QCnzE" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.33/dist/katex.min.js" integrity="sha384-YPHNAPyrxGS8BNnA7Q4ommqra8WQPEjooVSLzFgwgs8OXJBvadbyvx4QpfiFurGr" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.33/dist/contrib/auto-render.min.js" integrity="sha384-JKXHIJf8PKPyDFptuKZoUyMRQJAmQKj4B4xyOca62ebJhciMYGiDdq/9twUUWyZH" crossorigin="anonymous"
         onload="renderMathInElement(document.body, {
             delimiters: [
                 {left: '$$', right: '$$', display: true},
@@ -25,6 +25,11 @@
     <!-- CSS -->
     {{ $css := resources.Get "css/tufte.css" }}
     <link rel="stylesheet" href="{{ $css.RelPermalink }}">
+    <!-- Syntax highlighting: light theme default, dark theme for dark mode -->
+    {{ $syntaxLight := resources.Get "css/syntax-light.css" }}
+    {{ $syntaxDark := resources.Get "css/syntax-dark.css" }}
+    <link rel="stylesheet" href="{{ $syntaxLight.RelPermalink }}" media="(prefers-color-scheme: light)">
+    <link rel="stylesheet" href="{{ $syntaxDark.RelPermalink }}" media="(prefers-color-scheme: dark)">
 </head>
 <body>
     <header class="site-header">

@@ -34,13 +34,18 @@ body {
         border-top-color: #444;
     }
 
-    code,
-    pre > code {
-        background-color: #1e1e1e;
+    code {
+        background-color: #303030;
+        color: #e0e0e0;
     }
 
     pre > code {
-        border-left-color: #444;
+        background-color: transparent;
+    }
+
+    .highlight pre.chroma,
+    pre > code {
+        border-left-color: #555;
     }
 }
 
@@ -307,7 +312,7 @@ pre > code {
 }
 
 code {
-    background-color: #f5f5f0;
+    background-color: #e8e8e0;
     padding: 0.1em 0.3em;
     border-radius: 3px;
 }
@@ -318,9 +323,24 @@ pre > code {
     margin-left: 2.5%;
     overflow-x: auto;
     display: block;
-    background-color: #f5f5f0;
+    background-color: transparent;
     padding: 1em;
-    border-left: 2px solid #ccc;
+    border-left: 2px solid #999;
+    border-radius: 0;
+}
+
+/* Chroma syntax highlighting wrapper */
+.highlight pre.chroma {
+    width: 52.5%;
+    margin-left: 2.5%;
+    padding: 1em;
+    border-left: 2px solid #999;
+    overflow-x: auto;
+}
+
+.highlight pre.chroma code {
+    background-color: transparent;
+    padding: 0;
     border-radius: 0;
 }
 

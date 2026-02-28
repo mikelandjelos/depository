@@ -11,6 +11,11 @@ timeZone = 'Europe/Belgrade'
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true  # needed for sidenote HTML in markdown
+    [markup.goldmark.extensions.passthrough]
+      enable = true
+      [markup.goldmark.extensions.passthrough.delimiters]
+        block = [['$$', '$$']]
+        inline = [['$', '$']]
   [markup.highlight]
     noClasses = false  # use CSS classes for syntax highlighting
 
