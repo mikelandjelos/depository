@@ -2,8 +2,11 @@
 
 ## Project Overview
 
-Personal website/blog with a clean, academic, CS-oriented aesthetic.
+Personal website/blog for Mihajlo Madić. Clean, academic, CS-oriented aesthetic.
 Inspired by: gwern.net, distill.pub, ciechanow.ski, Andy Matuschak's notes.
+
+**Live site**: <https://depository.mihajlo-madic.workers.dev/>
+**Repository**: <https://github.com/mikelandjelos/depository>
 
 ## Tech Stack
 
@@ -11,7 +14,7 @@ Inspired by: gwern.net, distill.pub, ciechanow.ski, Andy Matuschak's notes.
 - **Typography**: EB Garamond (body text), JetBrains Mono (code)
 - **Layout/CSS**: Tufte CSS (sidenotes, wide margins, clean layout)
 - **Math rendering**: KaTeX v0.16.33 (CDN, with Hugo passthrough extension)
-- **Deployment**: Cloudflare Pages (native Git integration, auto-deploys on push)
+- **Deployment**: Cloudflare Workers (auto-deploys on push to main via wrangler)
 - **CI/CD**: GitHub Actions — lint on all pushes/PRs (deploy handled by Cloudflare)
 - **Linting**: pre-commit with markdownlint, typos, proselint, stylelint
 
@@ -28,7 +31,7 @@ site/
 ├── content/
 │   ├── about.md                   # About page
 │   └── posts/
-│       └── hello-world.md         # Sample post (draft) with all features
+│       └── hello-world.md         # Sample post with all features
 ├── data/                          # Data files (JSON/YAML/TOML)
 ├── docs/
 │   ├── DEPLOY.md                  # Deployment setup and instructions
@@ -41,11 +44,13 @@ site/
 │   │   ├── list.html              # Section list template
 │   │   └── single.html            # Article/post template
 │   └── index.html                 # Homepage template
-├── static/                        # Static files (fonts, images, etc.)
+├── static/
+│   ├── favicon.ico                # Favicon (32×32, from GitHub avatar)
+│   └── favicon.png                # Apple touch icon (180×180)
 ├── themes/                        # (unused — custom theme in layouts/ + assets/)
 ├── .github/
 │   └── workflows/
-│       └── deploy.yml             # CI/CD: lint + build + deploy
+│       └── deploy.yml             # CI: lint only (Cloudflare handles deploy)
 ├── .gitignore
 ├── .markdownlint-cli2.yaml        # Markdownlint config
 ├── .pre-commit-config.yaml        # Pre-commit hooks config
@@ -53,6 +58,7 @@ site/
 ├── .stylelintrc.json              # Stylelint config
 ├── _typos.toml                    # Typos spell checker config
 ├── hugo.toml                      # Hugo configuration
+├── wrangler.toml                  # Cloudflare Workers/Pages deploy config
 ├── README.md                      # Project README
 └── AGENTS.md                      # This file
 ```
@@ -67,16 +73,17 @@ site/
 - **Pre-commit hooks**: All commits are checked for markdown lint, spelling,
   prose quality, CSS lint, and Hugo build correctness.
 - **GitHub Actions CI/CD**: Lint-only — runs pre-commit on all pushes and PRs.
-  Deployment is handled by Cloudflare's native Git integration (not Actions).
+  Deployment is handled by Cloudflare (native Git integration + wrangler).
 - **Cross-links**: Site footer links to GitHub repo (`params.repoURL` in
   hugo.toml); README links to live site URL.
+- **Favicon**: Generated from GitHub profile picture (mikelandjelos).
 
 ## Task Sequence
 
 1. [DONE] Project setup — Hugo install, scaffold, git init, docs
 2. [DONE] Custom theme — Tufte CSS + fonts + KaTeX, inspired by reference sites
 3. [DONE] Linters/pre-commit — markdownlint, typos, proselint, stylelint, hugo build
-4. [IN PROGRESS] Deployment — Cloudflare Pages + GitHub Actions CI/CD
+4. [DONE] Deployment — Cloudflare Workers + GitHub Actions CI/CD
 
 ## Development
 

@@ -43,7 +43,7 @@ Build a minimal custom theme inline (layouts/ + assets/) using:
 - `assets/css/tufte.css`
 - `assets/css/syntax-light.css` (Chroma monokailight)
 - `assets/css/syntax-dark.css` (Chroma monokai)
-- `content/posts/hello-world.md` (draft)
+- `content/posts/hello-world.md`
 - `content/about.md`
 
 ## Task 3: Linters & Pre-commit [DONE]
@@ -67,25 +67,29 @@ Build a minimal custom theme inline (layouts/ + assets/) using:
 - `.proselintrc.json`
 - `_typos.toml`
 
-## Task 4: Deployment [IN PROGRESS]
+## Task 4: Deployment [DONE]
 
-- [x] Research hosting options and costs (Cloudflare Pages chosen — free, unlimited BW)
+- [x] Research hosting options and costs (Cloudflare chosen — free, unlimited BW)
 - [x] Create GitHub Actions workflow — lint only (.github/workflows/deploy.yml)
 - [x] Add cross-links: site footer → repo, README → live site
 - [x] Document deployment in docs/DEPLOY.md
-- [ ] Push latest changes to GitHub
-- [ ] Create Cloudflare Pages project via dashboard (native Git integration)
-- [ ] Verify first deploy
-- [ ] Update baseURL and live site URL once confirmed
-- [ ] Configure custom domain (if applicable)
+- [x] Create Cloudflare project via dashboard (native Git integration)
+- [x] Add wrangler.toml for static asset deployment
+- [x] Verify first deploy — live at depository.mihajlo-madic.workers.dev
+- [x] Update baseURL in hugo.toml
+- [x] Add favicon (from GitHub profile picture)
+- [x] Configure main-branch-only deploys (no non-production builds)
 
 ### Deployment Model
 
-Cloudflare Pages connects directly to GitHub (native Git integration).
-No API tokens or GitHub secrets needed. Cloudflare auto-builds on push to main.
+Cloudflare builds and deploys via native Git integration on push to main.
+`wrangler.toml` configures static asset serving from `public/` directory.
 GitHub Actions runs lint checks independently.
 
 ### Files Created
 
 - `.github/workflows/deploy.yml` (lint only)
 - `docs/DEPLOY.md`
+- `wrangler.toml`
+- `static/favicon.ico`
+- `static/favicon.png`

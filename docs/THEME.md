@@ -9,7 +9,7 @@ Custom theme built inline (no `themes/` directory). All templates live in
 
 | File | Purpose |
 |---|---|
-| `layouts/_default/baseof.html` | Base template: `<head>` with fonts, KaTeX, CSS; site header nav; footer |
+| `layouts/_default/baseof.html` | Base template: `<head>` with favicon, fonts, KaTeX, CSS; site header nav; footer |
 | `layouts/_default/single.html` | Article/post page: title, subtitle, date, tags, content |
 | `layouts/_default/list.html` | Section list page: title, content, chronological post list |
 | `layouts/index.html` | Homepage: site title, description, recent 10 posts from `posts/` section |
@@ -70,6 +70,17 @@ Custom theme built inline (no `themes/` directory). All templates live in
 - Links from `[menus.main]` in hugo.toml
 - Current pages: Posts, About
 
+### Favicon
+
+- `static/favicon.ico` — 32×32, generated from GitHub profile picture
+- `static/favicon.png` — 180×180, used as Apple touch icon
+- Linked in `baseof.html` head
+
+### Footer
+
+- Copyright notice + "Source" link to GitHub repo
+- Repo URL configured via `params.repoURL` in hugo.toml
+
 ### Responsive (<760px)
 
 - Body expands to 84% width, 8% padding each side
@@ -79,6 +90,8 @@ Custom theme built inline (no `themes/` directory). All templates live in
 
 ## Hugo Configuration Notes
 
+- `baseURL = 'https://depository.mihajlo-madic.workers.dev/'`
+- `title = 'Mihajlo Madić'`
 - `timeZone = 'Europe/Belgrade'` — prevents today's posts being treated as future
 - `markup.goldmark.renderer.unsafe = true` — required for sidenote HTML in markdown
 - `markup.goldmark.extensions.passthrough` — preserves `$…$` and `$$…$$` for KaTeX
@@ -86,12 +99,11 @@ Custom theme built inline (no `themes/` directory). All templates live in
 
 ## Sample Content
 
-- `content/posts/hello-world.md` — demonstrates all features (draft)
+- `content/posts/hello-world.md` — demonstrates all features (sidenotes, math, code)
 - `content/about.md` — placeholder about page
 
 ## Known TODOs
 
 - Consider Hugo shortcodes for sidenotes (cleaner than raw HTML in markdown)
 - Add RSS feed customization
-- Add favicon
 - Add Open Graph / meta tags for social sharing
