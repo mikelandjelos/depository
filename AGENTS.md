@@ -11,7 +11,8 @@ Inspired by: gwern.net, distill.pub, ciechanow.ski, Andy Matuschak's notes.
 - **Typography**: EB Garamond (body text), JetBrains Mono (code)
 - **Layout/CSS**: Tufte CSS (sidenotes, wide margins, clean layout)
 - **Math rendering**: KaTeX v0.16.33 (CDN, with Hugo passthrough extension)
-- **Deployment**: Cloudflare Pages
+- **Deployment**: Cloudflare Pages (native Git integration, auto-deploys on push)
+- **CI/CD**: GitHub Actions — lint on all pushes/PRs (deploy handled by Cloudflare)
 - **Linting**: pre-commit with markdownlint, typos, proselint, stylelint
 
 ## Project Structure
@@ -30,6 +31,7 @@ site/
 │       └── hello-world.md         # Sample post (draft) with all features
 ├── data/                          # Data files (JSON/YAML/TOML)
 ├── docs/
+│   ├── DEPLOY.md                  # Deployment setup and instructions
 │   ├── PLAN.md                    # High-level plan and task tracking
 │   └── THEME.md                   # Theme implementation details
 ├── i18n/                          # Translations
@@ -41,6 +43,9 @@ site/
 │   └── index.html                 # Homepage template
 ├── static/                        # Static files (fonts, images, etc.)
 ├── themes/                        # (unused — custom theme in layouts/ + assets/)
+├── .github/
+│   └── workflows/
+│       └── deploy.yml             # CI/CD: lint + build + deploy
 ├── .gitignore
 ├── .markdownlint-cli2.yaml        # Markdownlint config
 ├── .pre-commit-config.yaml        # Pre-commit hooks config
@@ -61,13 +66,17 @@ site/
   Hugo passthrough extension preserves LaTeX delimiters in Markdown.
 - **Pre-commit hooks**: All commits are checked for markdown lint, spelling,
   prose quality, CSS lint, and Hugo build correctness.
+- **GitHub Actions CI/CD**: Lint-only — runs pre-commit on all pushes and PRs.
+  Deployment is handled by Cloudflare's native Git integration (not Actions).
+- **Cross-links**: Site footer links to GitHub repo (`params.repoURL` in
+  hugo.toml); README links to live site URL.
 
 ## Task Sequence
 
 1. [DONE] Project setup — Hugo install, scaffold, git init, docs
 2. [DONE] Custom theme — Tufte CSS + fonts + KaTeX, inspired by reference sites
 3. [DONE] Linters/pre-commit — markdownlint, typos, proselint, stylelint, hugo build
-4. [TODO] Deployment — Cloudflare Pages setup + alternatives research
+4. [IN PROGRESS] Deployment — Cloudflare Pages + GitHub Actions CI/CD
 
 ## Development
 

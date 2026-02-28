@@ -67,9 +67,25 @@ Build a minimal custom theme inline (layouts/ + assets/) using:
 - `.proselintrc.json`
 - `_typos.toml`
 
-## Task 4: Deployment
+## Task 4: Deployment [IN PROGRESS]
 
-- [ ] Research hosting options and costs
-- [ ] Set up Cloudflare Pages
+- [x] Research hosting options and costs (Cloudflare Pages chosen — free, unlimited BW)
+- [x] Create GitHub Actions workflow — lint only (.github/workflows/deploy.yml)
+- [x] Add cross-links: site footer → repo, README → live site
+- [x] Document deployment in docs/DEPLOY.md
+- [ ] Push latest changes to GitHub
+- [ ] Create Cloudflare Pages project via dashboard (native Git integration)
+- [ ] Verify first deploy
+- [ ] Update baseURL and live site URL once confirmed
 - [ ] Configure custom domain (if applicable)
-- [ ] Document deployment process
+
+### Deployment Model
+
+Cloudflare Pages connects directly to GitHub (native Git integration).
+No API tokens or GitHub secrets needed. Cloudflare auto-builds on push to main.
+GitHub Actions runs lint checks independently.
+
+### Files Created
+
+- `.github/workflows/deploy.yml` (lint only)
+- `docs/DEPLOY.md`

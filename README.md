@@ -1,5 +1,8 @@
 # Personal Site
 
+<!-- TODO: update URL once Cloudflare Pages project is created -->
+**Live site**: [depository.pages.dev](https://depository.pages.dev)
+
 Personal website built with Hugo, styled with Tufte CSS typography.
 
 ## Stack
@@ -40,3 +43,10 @@ Checks: markdownlint, typos, proselint, stylelint, Hugo build.
 ## Project Structure
 
 See [AGENTS.md](AGENTS.md) for full project context and architecture decisions.
+
+## Deployment
+
+Deployed to [Cloudflare Pages](https://pages.cloudflare.com/) via native Git integration.
+Every push to `main` auto-builds and deploys.
+
+GitHub Actions runs lint checks on all pushes and PRs.

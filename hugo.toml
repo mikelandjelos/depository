@@ -6,6 +6,7 @@ timeZone = 'Europe/Belgrade'
 [params]
   description = 'Personal site — research, notes, and writing.'
   footer = '&copy; 2026'
+  repoURL = 'https://github.com/mikelandjelos/depository'
 
 [markup]
   [markup.goldmark]

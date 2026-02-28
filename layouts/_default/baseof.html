@@ -48,7 +48,8 @@
     </main>
 
     <footer class="site-footer">
-        <p>{{ .Site.Params.footer | default "&copy; 2026" | safeHTML }}</p>
+        <p>{{ .Site.Params.footer | default "&copy; 2026" | safeHTML }}
+        {{ with .Site.Params.repoURL }} · <a href="{{ . }}">Source</a>{{ end }}</p>
     </footer>
 </body>
 </html>
