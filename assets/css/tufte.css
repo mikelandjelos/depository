@@ -35,17 +35,13 @@ body {
     }
 
     code {
-        background-color: #303030;
+        background-color: #303030 !important;
         color: #e0e0e0;
     }
 
-    pre > code {
-        background-color: transparent;
-    }
-
-    .highlight pre.chroma,
-    pre > code {
-        border-left-color: #555;
+    pre > code,
+    .highlight pre.chroma code {
+        background-color: transparent !important;
     }
 }
 
@@ -325,7 +321,6 @@ pre > code {
     display: block;
     background-color: transparent;
     padding: 1em;
-    border-left: 2px solid #999;
     border-radius: 0;
 }
 
@@ -334,7 +329,6 @@ pre > code {
     width: 52.5%;
     margin-left: 2.5%;
     padding: 1em;
-    border-left: 2px solid #999;
     overflow-x: auto;
 }
 
@@ -466,6 +460,14 @@ header.site-header .nav-links a:hover {
     opacity: 0.6;
     margin-top: -1rem;
     margin-bottom: 2rem;
+}
+
+/* ---------- KaTeX display math ---------- */
+
+.katex-display {
+    text-align: center;
+    width: 55%;
+    margin: 1.4rem 0;
 }
 
 /* ---------- Footer ---------- */
