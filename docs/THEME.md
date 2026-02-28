@@ -13,7 +13,7 @@ Custom theme built inline (no `themes/` directory). All templates live in
 | `layouts/_default/single.html` | Article/post page: title, subtitle, date, tags, content |
 | `layouts/_default/list.html` | Section list page: title, content, chronological post list |
 | `layouts/index.html` | Homepage: site title, description, recent 10 posts from `posts/` section |
-| `assets/css/tufte.css` | All styles — adapted Tufte CSS + site header/nav/footer/post-list |
+| `assets/css/tufte.css` | All styles — adapted Tufte CSS + site header/nav/footer/post-list/avatar |
 | `assets/css/syntax-light.css` | Chroma syntax highlighting — monokailight (light mode) |
 | `assets/css/syntax-dark.css` | Chroma syntax highlighting — monokai (dark mode) |
 
@@ -70,11 +70,13 @@ Custom theme built inline (no `themes/` directory). All templates live in
 - Links from `[menus.main]` in hugo.toml
 - Current pages: Posts, About
 
-### Favicon
+### Favicon & Avatar
 
 - `static/favicon.ico` — 32×32, generated from GitHub profile picture
-- `static/favicon.png` — 180×180, used as Apple touch icon
-- Linked in `baseof.html` head
+- `static/favicon.png` — 180×180, used as Apple touch icon and homepage avatar
+- Favicon linked in `baseof.html` head
+- Homepage avatar: 64px circular, slightly transparent (opacity 0.85), displayed
+  inline next to site title via `.home-header` flexbox in `index.html`
 
 ### Footer
 

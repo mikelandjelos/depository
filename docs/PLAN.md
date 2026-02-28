@@ -78,6 +78,7 @@ Build a minimal custom theme inline (layouts/ + assets/) using:
 - [x] Verify first deploy — live at depository.mihajlo-madic.workers.dev
 - [x] Update baseURL in hugo.toml
 - [x] Add favicon (from GitHub profile picture)
+- [x] Add homepage avatar (64px circular, from same profile picture)
 - [x] Configure main-branch-only deploys (no non-production builds)
 
 ### Deployment Model

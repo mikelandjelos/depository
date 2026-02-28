@@ -1,7 +1,12 @@
 {{ define "main" }}
 <article>
-    <h1>{{ .Site.Title }}</h1>
-    {{ with .Site.Params.description }}<p class="subtitle">{{ . }}</p>{{ end }}
+    <div class="home-header">
+        <img src="{{ "favicon.png" | relURL }}" alt="{{ .Site.Title }}" class="home-avatar">
+        <div>
+            <h1>{{ .Site.Title }}</h1>
+            {{ with .Site.Params.description }}<p class="subtitle">{{ . }}</p>{{ end }}
+        </div>
+    </div>
     {{ .Content }}
     {{ $posts := where .Site.RegularPages "Section" "posts" }}
     {{ if $posts }}

@@ -46,7 +46,7 @@ site/
 │   └── index.html                 # Homepage template
 ├── static/
 │   ├── favicon.ico                # Favicon (32×32, from GitHub avatar)
-│   └── favicon.png                # Apple touch icon (180×180)
+│   └── favicon.png                # Apple touch icon (180×180) + homepage avatar
 ├── themes/                        # (unused — custom theme in layouts/ + assets/)
 ├── .github/
 │   └── workflows/
@@ -76,7 +76,8 @@ site/
   Deployment is handled by Cloudflare (native Git integration + wrangler).
 - **Cross-links**: Site footer links to GitHub repo (`params.repoURL` in
   hugo.toml); README links to live site URL.
-- **Favicon**: Generated from GitHub profile picture (mikelandjelos).
+- **Favicon & avatar**: Generated from GitHub profile picture (mikelandjelos).
+  Also displayed as a small circular avatar on the homepage next to site title.
 
 ## Task Sequence
 

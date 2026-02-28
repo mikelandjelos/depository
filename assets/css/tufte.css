@@ -453,6 +453,26 @@ header.site-header .nav-links a:hover {
     font-size: 1.3rem;
 }
 
+/* ---------- Home header with avatar ---------- */
+
+.home-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.home-header h1 {
+    margin-top: 0;
+}
+
+.home-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    opacity: 0.85;
+    flex-shrink: 0;
+}
+
 /* ---------- Post metadata ---------- */
 
 .post-meta {
