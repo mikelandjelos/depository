@@ -1,3 +1,25 @@
 baseURL = 'https://example.org/'
 languageCode = 'en-us'
-title = 'My New Hugo Project'
+title = 'Your Name'
+timeZone = 'Europe/Belgrade'
+
+[params]
+  description = 'Personal site — research, notes, and writing.'
+  footer = '&copy; 2026'
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true  # needed for sidenote HTML in markdown
+  [markup.highlight]
+    noClasses = false  # use CSS classes for syntax highlighting
+
+[menus]
+  [[menus.main]]
+    name = 'Posts'
+    url = '/posts/'
+    weight = 10
+  [[menus.main]]
+    name = 'About'
+    url = '/about/'
+    weight = 20

@@ -1,0 +1,15 @@
+{{ define "main" }}
+<article>
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.subtitle }}<p class="subtitle">{{ . }}</p>{{ end }}
+    <p class="post-meta">
+        {{ .Date.Format "January 2, 2006" }}
+        {{ with .Params.tags }}
+            — {{ range $i, $t := . }}{{ if $i }}, {{ end }}{{ $t }}{{ end }}
+        {{ end }}
+    </p>
+    <section>
+        {{ .Content }}
+    </section>
+</article>
+{{ end }}
