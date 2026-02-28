@@ -1,7 +1,6 @@
 # Personal Site
 
-<!-- TODO: update URL once Cloudflare Pages project is created -->
-**Live site**: [depository.pages.dev](https://depository.pages.dev)
+**Live site**: [visit](https://depository.mihajlo-madic.workers.dev/)
 
 Personal website built with Hugo, styled with Tufte CSS typography.
 

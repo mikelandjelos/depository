@@ -2,7 +2,7 @@
 title: "Hello World: A Sample Post"
 subtitle: "Testing the theme with all its features"
 date: 2026-02-28
-draft: true
+draft: false
 tags: ["meta", "test"]
 ---
 

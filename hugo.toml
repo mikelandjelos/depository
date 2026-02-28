@@ -1,6 +1,6 @@
-baseURL = 'https://example.org/'
+baseURL = 'https://depository.mihajlo-madic.workers.dev/'
 languageCode = 'en-us'
-title = 'Your Name'
+title = 'Mihajlo Madić'
 timeZone = 'Europe/Belgrade'
 
 [params]
