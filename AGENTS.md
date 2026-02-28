@@ -48,6 +48,7 @@ site/
 ├── .stylelintrc.json              # Stylelint config
 ├── _typos.toml                    # Typos spell checker config
 ├── hugo.toml                      # Hugo configuration
+├── README.md                      # Project README
 └── AGENTS.md                      # This file
 ```
 
