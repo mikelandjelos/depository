@@ -23,7 +23,7 @@ their place in the main text.
 
 ## Margin notes
 
-Margin notes are sidenotes without numbers.
+These are sidenotes without numbers.
 <label for="mn-example" class="margin-toggle">&#8853;</label>
 <input type="checkbox" id="mn-example" class="margin-toggle">
 <span class="marginnote">This is a margin note. Notice it lacks a number — it

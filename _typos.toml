@@ -1,0 +1,11 @@
+[files]
+extend-exclude = [
+    "public/",
+    "resources/",
+    ".hugo_build.lock",
+    "assets/css/syntax-*.css",
+]
+
+[default.extend-words]
+# Add false positive overrides here, e.g.:
+# som = "som"

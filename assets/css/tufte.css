@@ -194,7 +194,7 @@ figure {
     max-width: 55%;
     -webkit-margin-start: 0;
     -webkit-margin-end: 0;
-    margin: 0 0 3em 0;
+    margin: 0 0 3em;
 }
 
 figcaption {
@@ -304,7 +304,7 @@ pre > code {
         monospace;
     font-size: 1rem;
     line-height: 1.42;
-    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
 }
 
 code {
@@ -488,7 +488,7 @@ footer.site-footer {
 
 /* ---------- Responsive ---------- */
 
-@media (max-width: 760px) {
+@media (width <= 760px) {
     body {
         width: 84%;
         padding-left: 8%;
@@ -524,7 +524,7 @@ footer.site-footer {
 
     blockquote {
         margin-left: 1.5em;
-        margin-right: 0em;
+        margin-right: 0;
     }
 
     blockquote p,

@@ -1,0 +1,15 @@
+config:
+  # Disable line length — long lines are fine in prose
+  MD013: false
+  # Allow inline HTML (needed for Tufte sidenotes/margin notes)
+  MD033: false
+  # Allow bare URLs
+  MD034: false
+  # Allow duplicate headings in different sections
+  MD024:
+    siblings_only: true
+  # First line doesn't need to be a top-level heading (Hugo front matter)
+  MD041: false
+
+globs:
+  - "content/**/*.md"

@@ -1,0 +1,15 @@
+{
+  "extends": "stylelint-config-standard",
+  "ignoreFiles": [
+    "assets/css/syntax-*.css",
+    "public/**"
+  ],
+  "rules": {
+    "no-descending-specificity": null,
+    "selector-class-pattern": null,
+    "custom-property-pattern": null,
+    "declaration-block-no-redundant-longhand-properties": null,
+    "declaration-block-no-shorthand-property-overrides": null,
+    "font-family-name-quotes": "always-where-recommended"
+  }
+}

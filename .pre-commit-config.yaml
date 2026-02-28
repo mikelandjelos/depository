@@ -1,0 +1,53 @@
+repos:
+  # General file hygiene
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-toml
+      - id: check-merge-conflict
+      - id: mixed-line-ending
+        args: [--fix=lf]
+
+  # Markdown linting
+  - repo: https://github.com/DavidAnson/markdownlint-cli2
+    rev: v0.17.2
+    hooks:
+      - id: markdownlint-cli2
+        args: []
+
+  # Spell checking (typos - fast, low false positives)
+  - repo: https://github.com/crate-ci/typos
+    rev: v1.29.10
+    hooks:
+      - id: typos
+
+  # Prose linting (awkward phrasing, jargon, cliches)
+  - repo: local
+    hooks:
+      - id: proselint
+        name: proselint
+        entry: proselint check
+        language: system
+        types: [markdown]
+
+  # CSS linting
+  - repo: local
+    hooks:
+      - id: stylelint
+        name: stylelint
+        entry: stylelint --fix
+        language: system
+        types: [css]
+
+  # Hugo build check
+  - repo: local
+    hooks:
+      - id: hugo-build
+        name: hugo build
+        entry: hugo --quiet
+        language: system
+        pass_filenames: false
+        always_run: true
