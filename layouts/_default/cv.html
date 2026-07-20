@@ -1,0 +1,46 @@
+{{ define "main" }}
+{{ $cv := .Site.Data.cv }}
+<article class="cv">
+    <h1>{{ .Title }}</h1>
+
+    {{ with $cv.last_updated }}<p class="cv-updated">Last updated {{ . }}</p>{{ end }}
+
+    {{ if $cv.contact }}
+    <p class="cv-contact">
+        {{ range $i, $c := $cv.contact }}
+            {{ if $i }}<span class="cv-contact-sep"> · </span>{{ end }}
+            {{ if $c.href }}<a href="{{ $c.href }}">{{ $c.text }}</a>{{ else }}{{ $c.text }}{{ end }}
+        {{ end }}
+    </p>
+    {{ end }}
+
+    {{ range $cv.sections }}
+    <section class="cv-section">
+        <h2>{{ .title }}</h2>
+        {{ range .entries }}
+            {{ if eq .kind "entry" }}
+            <div class="cv-entry">
+                <div class="cv-entry-main">
+                    <div class="cv-entry-title">{{ .title | markdownify }}</div>
+                    {{ if .subtitle }}<div class="cv-entry-subtitle">{{ .subtitle | markdownify }}</div>{{ end }}
+                </div>
+                {{ if .meta }}
+                <div class="cv-entry-meta">
+                    {{ range .meta }}<div>{{ . | markdownify }}</div>{{ end }}
+                </div>
+                {{ end }}
+            </div>
+            {{ end }}
+            {{ if .highlights }}
+            <ul class="cv-highlights">
+                {{ range .highlights }}<li>{{ . | markdownify }}</li>{{ end }}
+            </ul>
+            {{ end }}
+            {{ if eq .kind "text" }}
+            <p class="cv-text">{{ .text | markdownify }}</p>
+            {{ end }}
+        {{ end }}
+    </section>
+    {{ end }}
+</article>
+{{ end }}

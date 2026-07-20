@@ -9,3 +9,4 @@ extend-exclude = [
 [default.extend-words]
 # Add false positive overrides here, e.g.:
 # som = "som"
+nd = "nd" # ordinal suffix key ("2nd") in scripts/sync_cv.py's SUPERSCRIPT_MAP

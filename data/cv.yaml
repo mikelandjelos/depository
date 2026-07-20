@@ -1,0 +1,175 @@
+name: Mihajlo Madić
+contact:
+- icon: map-marker
+  text: Niš, Serbia
+  href: null
+- icon: envelope
+  text: mihajlo.madic@gmail.com
+  href: mailto:mihajlo.madic@gmail.com
+- icon: phone
+  text: +381 621438800
+  href: tel:+381 621438800
+- icon: linkedin
+  text: mihajlo-madić
+  href: https://www.linkedin.com/in/mihajlo-madi%C4%87-a3675116a/
+- icon: github
+  text: mikelandjelos
+  href: https://github.com/mikelandjelos
+- icon: globe
+  text: depository.blog
+  href: https://depository.blog/
+last_updated: July 2026
+sections:
+- title: About me – Summary
+  entries:
+  - kind: text
+    text: 'Professional software engineer and computer science student with an eye for detail, high level
+      of diligence, and a knack for tinkering. I''m deeply invested in mathematics, which is the root
+      of all areas I take interest in. I''m a keen and thorough researcher who loves materializing abstract
+      ideas, mostly through software projects.
+
+      Some of my current interests are Bayesian modeling, image processing and computer vision, parallelization
+      and concurrency (HPC, SIMD), computer architecture and general systems programming and low-level
+      software engineering (C/C++), statistical learning (ML/DL), and, more recently, computational physics
+      (CFD).'
+- title: Education
+  entries:
+  - kind: entry
+    title: '**University of Niš, Faculty of Electronic Engineering**'
+    subtitle: '*Master''s Studies in Artificial Intelligence and Machine Learning*'
+    meta:
+    - '*Oct 2025 – Ongoing*'
+    highlights:
+    - '**ECTS credits:** 60'
+    - '**Grade average:** 10/10'
+    - '**Most impactful courses:** Deep Learning, Machine Learning, Big Data Systems, Mathematical Methods
+      for AI/ML.'
+    text: ''
+  - kind: entry
+    title: '**University of Niš, Faculty of Electronic Engineering**'
+    subtitle: '*Bachelor''s Studies in Computer Science and Electrical Engineering*'
+    meta:
+    - '*Oct 2020 – Oct 2025*'
+    highlights:
+    - '**ECTS credits:** 240'
+    - '**Grade average:** 9.8/10'
+    - '**Most impactful courses:** Algorithm Design and Analysis, Computer Vision, Internet of Things,
+      Distributed Systems, Operating Systems, Parallel Systems (HPC & SIMD), Object Oriented Design, Algorithms
+      and Data Structures, Computer Networks, Computer Organization & Architecture, Database Systems.'
+    - '**Extracurricular activities**: Two-time medal winner (2ⁿᵈ place 2023 Ohrid, 3ʳᵈ place 2024 Trebinje)
+      at international student competition in ***C++ and Object-Oriented Programming*** ([Elektrijada](https://www.elektrijada.net/)).'
+    text: ''
+- title: Selected Skills
+  entries:
+  - kind: text
+    text: '**Programming Languages:** C, C++ (up to C++20), Python, R, Bash, C#/Java'
+  - kind: text
+    text: '**Scientific/Statistical Computing:** NumPy, SciPy, OpenCV, PyTorch, PyMC, scikit-learn, Eigen,
+      Stan'
+  - kind: text
+    text: '**High-Performance Computing & Profiling:** OpenMP, SIMD (AVX/NEON), Multi-threading (Intel
+      TBB), CPU Profiling (`perf`, Valgrind, Google Benchmark), Cache Optimization/DOD (Cachegrind)'
+  - kind: text
+    text: '**Tools & Infrastructure:** CMake, GCC/MSVC, Linux (Arch/Debian), Docker, Git, GTest, Quarto'
+- title: Working Experience
+  entries:
+  - kind: entry
+    title: '**Software Engineer**'
+    subtitle: '*[Zebra Technologies](https://www.zebra.com/us/en.html)*'
+    meta:
+    - '*Niš, Serbia*'
+    - '*Oct 2025 – Ongoing*'
+    highlights:
+    - Actively working on algorithms and architecture for **1D barcode decoder** libraries, utilized in
+      **resource-constrained devices** – learning about robust and efficient algorithm design for dynamic
+      systems.
+    - Performed thorough **unit and integration testing** using `gtest`, plus baseline performance evaluations
+      and hardening of C++ decoder libraries on real image datasets – strengthening data analysis/reporting
+      and memory/time **performance profiling**.
+    - Designed and implemented robust **pattern matching** algorithms “from scratch”, in mature C/C++
+      codebases of Zebra's 1D barcode decoding libraries – learned about fuzzy pattern matching applied
+      to barcode decoding in **noisy environments**.
+    - '**Additionally:** Learned how to use miscellaneous tooling for C/C++ projects, e.g. CMake, Doxygen.
+      Got exposed to AIDC/barcode standards (GS1 General Specifications, ISO/IEC 15420).'
+    text: ''
+  - kind: entry
+    title: '**Software Engineer and Junior Security Consultant**'
+    subtitle: '*[The Cyberhive Technology Partners](https://www.thecyberhive.org/)*'
+    meta:
+    - '*Niš, Serbia*'
+    - '*Apr 2025 – Oct 2025*'
+    highlights:
+    - Designed and worked on development of a service-oriented, modular server-side project, used as a
+      back-end for a **SIEM** Web application, to automate cybersecurity assessment, using Node.js ecosystem
+      – learned security concepts, and worked on implementing **service oriented back-end** architecture.
+    - Designed and developed custom backend framework based on Express – learned about “low-level” details
+      of **REST APIs**, and **network programming**.
+    - Developed **data visualization** dashboards for cybersecurity assessment evaluation, and **risk/threat
+      reporting** – learned about good visualization practices, automated reporting, and security audits.
+    - Performed data analysis for cybersecurity **vulnerability assessment** reports – distilling a large
+      corpus of system-generated records into high-level, presentable reports.
+    - '**Additionally:** Learned to work in a distributed, remote, and flexible work environment, strengthened
+      my soft skills. Became familiar with security frameworks (NIST CSF 2.0, NIST SP 800-53, CIS Controls
+      v8, ISO/IEC 27001).'
+    text: ''
+  - kind: entry
+    title: '**Software Engineer Intern**'
+    subtitle: '*[Diffine](https://diffine.com/)*'
+    meta:
+    - '*Niš, Serbia*'
+    - '*Oct 2023 – Apr 2024*'
+    highlights:
+    - Worked on an app used for making and testing **nuclear segmentation pipelines** - learned basics
+      of **image processing** and **computer vision**, with emphasis on developing/tweaking implementations
+      of well-known algorithms (using SciPy, scikit-image, OpenCV, ...); did GUI programming in Python.
+    - Made a package for automated generation of [TOML](https://toml.io/en/) configuration files through
+      Python code, with an approach heavily relying on [dataclasses](https://docs.python.org/3/library/dataclasses.html)
+      and [tomlkit](https://pypi.org/project/tomlkit/) library – first real-world Python project; learned
+      about TOML format, solidified understanding and knowledge of using Poetry ecosystem.
+    - '**Additionally:** Learned to completely rely on using terminal and CLI tools, which changed my
+      workflow and effectiveness; solidified Linux knowledge, tried out [Manjaro](https://manjaro.org/)
+      as my daily driver and got used to Arch-based tooling ([pacman](https://wiki.manjaro.org/index.php?title=Pacman_Overview)).'
+    text: ''
+- title: Selected Projects
+  entries:
+  - kind: entry
+    title: '**The “Lost Drone” Tracker (Monte Carlo Localization)**'
+    subtitle: ''
+    meta:
+    - '*[github-repo](https://github.com/mikelandjelos/lost-drone-tracker)*'
+    highlights:
+    - '**Description:** Real-time 2D state estimation and tracking system for a drone experiencing physical
+      process noise (wind gusts) and measurement noise (noisy GPS sensor).'
+    - '**Outcome:** Implemented kinematics-based prediction models and simulation-based sequential Bayesian
+      updates (Monte Carlo localization); built a particle filter managing a swarm of N particles to represent
+      position probability distribution; handled real-time resampling to collapse tracking uncertainty.'
+    - '**Tools Used:** C++ (Eigen, OpenMP, GTest, Google Benchmark), Python (NumPy, Matplotlib, Quarto).'
+    text: ''
+  - kind: entry
+    title: '**Bayesian Barcode Restoration**'
+    subtitle: ''
+    meta:
+    - '*[github-repo](https://github.com/mikelandjelos/bayesian-barcode-restoration)*'
+    highlights:
+    - '**Description:** Bayesian inference system designed to restore degraded, blurry, or low-contrast
+      1D barcode signals back into clear binary patterns.'
+    - '**Outcome:** Formulated the barcode restoration task as a hidden Markov model and binary state
+      estimation problem; modeled physical lens degradation (Gaussian blur) and camera sensor noise as
+      the likelihood function; implemented a neighbor-dependent binary prior to enforce structural barcode
+      constraints; applied Bayesian optimization/inference to reconstruct original sequences.'
+    - '**Tools Used:** C++ (Eigen, GTest), Python (PyMC, OpenCV, NumPy, SciPy, Quarto).'
+    text: ''
+  - kind: entry
+    title: '**Log Anomaly Detection System - Bachelor Thesis**'
+    subtitle: ''
+    meta:
+    - '*[github-repo](https://github.com/mikelandjelos/loki-siem)*'
+    highlights:
+    - '**Description:** System for log data aggregation, analysis - pointed towards anomaly detection
+      based on principal component analysis (PCA) – and visualization of results using open source technologies.'
+    - '**Outcome:** Built a log-aggregation and anomaly-detection pipeline for unbounded, out-of-order
+      data sources; applied PCA for anomaly detection and the [Drain](https://jiemingzhu.github.io/pub/pjhe_icws2017.pdf)
+      algorithm for log-template extraction; translated ideas from research papers into a working, enterprise-style
+      pipeline.'
+    - '**Tools Used:** Docker (Compose), Loki, Grafana, ELK stack, Shell scripting, Python (with Poetry).'
+    text: ''
