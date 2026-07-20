@@ -416,6 +416,20 @@ span.newthought {
     font-size: 1.2em;
 }
 
+/* ---------- Drop cap ---------- */
+
+article section > p:first-child::first-letter {
+    font-family: UnifrakturMaguntia, "EB Garamond", serif;
+    font-weight: 400;
+    font-size: 4.2rem;
+    line-height: 1;
+    float: left;
+    padding-right: 0.15em;
+    padding-top: 0.05em;
+    color: inherit;
+    opacity: 0.85;
+}
+
 /* ---------- Sidenote toggle (mobile) ---------- */
 
 input.margin-toggle {
@@ -538,6 +552,69 @@ header.site-header .nav-links a:hover {
     margin-bottom: 2rem;
 }
 
+/* ---------- Table of contents ----------
+   Numbered decimal outline (1, 1.1, 1.1.1 …), plain text, no box —
+   in the spirit of gwern.net's TOC.
+   #TableOfContents is Hugo's own hardcoded id, hence the disable below. */
+
+/* stylelint-disable selector-id-pattern */
+
+p.toc-label {
+    font-variant: small-caps;
+    letter-spacing: 0.05em;
+    font-size: 1.2rem;
+    opacity: 0.6;
+    margin-top: 2rem;
+    margin-bottom: 0.6rem;
+}
+
+#TableOfContents {
+    width: 55%;
+    margin: 0 0 2.5rem;
+    font-size: 1.2rem;
+    line-height: 1.7;
+}
+
+#TableOfContents ul {
+    list-style: none;
+    margin: 0;
+    padding-left: 1.4em;
+    counter-reset: toc;
+}
+
+#TableOfContents > ul {
+    padding-left: 0;
+}
+
+#TableOfContents li {
+    counter-increment: toc;
+}
+
+#TableOfContents li::before {
+    content: counters(toc, ".") " ";
+    display: inline-block;
+    min-width: 1.6em;
+    opacity: 0.5;
+    font-variant-numeric: tabular-nums;
+}
+
+#TableOfContents a {
+    text-decoration: none;
+}
+
+#TableOfContents a:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 0.05em;
+    text-underline-offset: 0.15em;
+}
+
+#TableOfContents ul ul {
+    font-size: 0.9em;
+    opacity: 0.8;
+}
+
+/* stylelint-enable selector-id-pattern */
+
 /* ---------- KaTeX display math ---------- */
 
 .katex-display {
@@ -588,6 +665,11 @@ footer.site-footer {
         width: 100%;
         overflow-x: auto;
         overflow-y: hidden;
+    }
+
+    /* stylelint-disable-next-line selector-id-pattern */
+    #TableOfContents {
+        width: 100%;
     }
 
     section > dl,

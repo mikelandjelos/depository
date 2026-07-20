@@ -8,6 +8,11 @@
             — {{ range $i, $t := . }}{{ if $i }}, {{ end }}{{ $t }}{{ end }}
         {{ end }}
     </p>
+    {{ $headingCount := len (findRE "<h[2-6][^>]*>" .Content) }}
+    {{ if ge $headingCount 2 }}
+        <p class="toc-label">Contents</p>
+        {{ .TableOfContents }}
+    {{ end }}
     <section>
         {{ .Content }}
     </section>
