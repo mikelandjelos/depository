@@ -313,8 +313,9 @@ code {
     border-radius: 3px;
 }
 
-pre > code {
-    font-size: 0.9rem;
+/* Plain (non-highlighted) code fences: pre wraps code directly, so code
+   itself carries the width/margin/scroll box. */
+pre:not(.chroma) > code {
     width: calc(52.5% + 2px);
     margin-left: 2.5%;
     overflow-x: auto;
@@ -325,7 +326,14 @@ pre > code {
     border-radius: 0;
 }
 
-/* Chroma syntax highlighting wrapper */
+pre > code {
+    font-size: 0.9rem;
+}
+
+/* Chroma syntax highlighting wrapper: the sized/scrollable box is the
+   outer pre.chroma. The inner code must just fill it — giving code its
+   own width/margin here would double-shrink it (52.5% of an already
+   52.5%-wide box) and give it its own independent scrollbar. */
 .highlight pre.chroma {
     width: calc(52.5% + 2px);
     margin-left: 2.5%;
@@ -335,6 +343,10 @@ pre > code {
 }
 
 .highlight pre.chroma code {
+    display: block;
+    width: 100%;
+    margin-left: 0;
+    overflow-x: visible;
     background-color: transparent;
     padding: 0;
     border-radius: 0;
@@ -566,7 +578,7 @@ footer.site-footer {
         width: 100%;
     }
 
-    pre > code,
+    pre:not(.chroma) > code,
     .highlight pre.chroma {
         width: calc(97% + 2px);
         margin-left: 0;
