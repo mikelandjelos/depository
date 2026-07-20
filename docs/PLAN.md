@@ -116,12 +116,19 @@ sequence, skipping issue #5 (Graph indexing) for last/brainstorm.
   - Illuminated-manuscript-style drop cap on a post's first letter.
   - Metadata (tags/category/date/draft) split into sub-issue #8, design
     still being brainstormed.
-- [ ] **#8 Post metadata** [OPEN, sub-issue of #2] — tags, singular category,
-      date-created, draft/not-draft "digital garden" maturity system.
-- [ ] **ToC layout refinement** [OPEN] — current TOC inserts too much
+- [ ] **#8 Post metadata** [OPEN, sub-issue of #2] — refined scope:
+  - Tags (multiple, taxonomy) — front matter exists, navigation doesn't yet.
+  - Category (singular, taxonomy) — new field.
+  - Date created — already `date` front matter; just needs explicit "created"
+    labeling in the UI.
+  - Draft/maturity: **decided** to publish everything and show a visible
+    "seedling"/"draft"-style badge on unfinished posts, rather than hiding
+    them via Hugo's `draft: true`. Needs a new front-matter field (name/values
+    TBD) + a small badge component. Exact wording/levels still open.
+- [ ] **#9 ToC layout refinement** [OPEN] — current TOC inserts too much
       vertical whitespace; needs a more gwern-like compact layout.
-- [ ] **Manual light/dark mode toggle** [OPEN] — gwern-style mode switcher,
-      not just `prefers-color-scheme`.
+- [ ] **#10 Manual light/dark mode toggle** [OPEN] — gwern-style mode
+      switcher, not just `prefers-color-scheme`.
 - [ ] **#3 About Me page** [OPEN]
 - [ ] **#4 Integrate Quarto Scientific publishing** [OPEN]
 - [ ] **#6 Articles** [OPEN]
