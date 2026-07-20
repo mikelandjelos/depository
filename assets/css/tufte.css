@@ -315,9 +315,10 @@ code {
 
 pre > code {
     font-size: 0.9rem;
-    width: 52.5%;
+    width: calc(52.5% + 2px);
     margin-left: 2.5%;
     overflow-x: auto;
+    overflow-y: hidden;
     display: block;
     background-color: transparent;
     padding: 1em;
@@ -326,10 +327,11 @@ pre > code {
 
 /* Chroma syntax highlighting wrapper */
 .highlight pre.chroma {
-    width: 52.5%;
+    width: calc(52.5% + 2px);
     margin-left: 2.5%;
     padding: 1em;
     overflow-x: auto;
+    overflow-y: hidden;
 }
 
 .highlight pre.chroma code {
@@ -351,6 +353,48 @@ h3 > code {
 .marginnote > code,
 .sidenote > code {
     font-size: 1rem;
+}
+
+/* Thin, theme-colored scrollbar for horizontally scrollable code/tables,
+   instead of the bulky native one (most noticeable at non-100% browser zoom) */
+pre > code,
+.highlight pre.chroma,
+div.table-wrapper {
+    scrollbar-width: thin;
+    scrollbar-color: #ccc transparent;
+}
+
+pre > code::-webkit-scrollbar,
+.highlight pre.chroma::-webkit-scrollbar,
+div.table-wrapper::-webkit-scrollbar {
+    height: 6px;
+}
+
+pre > code::-webkit-scrollbar-track,
+.highlight pre.chroma::-webkit-scrollbar-track,
+div.table-wrapper::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+pre > code::-webkit-scrollbar-thumb,
+.highlight pre.chroma::-webkit-scrollbar-thumb,
+div.table-wrapper::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 3px;
+}
+
+@media (prefers-color-scheme: dark) {
+    pre > code,
+    .highlight pre.chroma,
+    div.table-wrapper {
+        scrollbar-color: #555 transparent;
+    }
+
+    pre > code::-webkit-scrollbar-thumb,
+    .highlight pre.chroma::-webkit-scrollbar-thumb,
+    div.table-wrapper::-webkit-scrollbar-thumb {
+        background-color: #555;
+    }
 }
 
 /* ---------- New thought (small-caps opener) ---------- */
@@ -522,8 +566,16 @@ footer.site-footer {
         width: 100%;
     }
 
-    pre > code {
-        width: 97%;
+    pre > code,
+    .highlight pre.chroma {
+        width: calc(97% + 2px);
+        margin-left: 0;
+    }
+
+    .katex-display {
+        width: 100%;
+        overflow-x: auto;
+        overflow-y: hidden;
     }
 
     section > dl,
