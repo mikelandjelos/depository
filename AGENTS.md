@@ -67,7 +67,8 @@ site/
 
 - **No external theme**: Custom minimal theme built from Tufte CSS, living in
   `layouts/` and `assets/` directly (not under `themes/`).
-- **Fonts via Google Fonts**: EB Garamond + JetBrains Mono loaded from CDN.
+- **Fonts via Google Fonts**: EB Garamond + JetBrains Mono + UnifrakturMaguntia
+  (drop cap only) loaded from CDN.
 - **KaTeX via CDN**: Client-side math rendering with auto-render extension.
   Hugo passthrough extension preserves LaTeX delimiters in Markdown.
 - **Pre-commit hooks**: All commits are checked for markdown lint, spelling,
@@ -78,6 +79,11 @@ site/
   hugo.toml); README links to live site URL.
 - **Favicon & avatar**: Generated from GitHub profile picture (mikelandjelos).
   Also displayed as a small circular avatar on the homepage next to site title.
+- **Table of contents**: Hugo's built-in `.TableOfContents`, not a custom
+  shortcode/JS solution — styled with CSS counters into a gwern-inspired
+  numbered outline. See docs/THEME.md → "Table of contents".
+- **Drop cap font**: UnifrakturMaguntia (Google Fonts) for the illuminated
+  first-letter treatment on post openings. See docs/THEME.md → Typography.
 
 ## Task Sequence
 
@@ -85,6 +91,9 @@ site/
 2. [DONE] Custom theme — Tufte CSS + fonts + KaTeX, inspired by reference sites
 3. [DONE] Linters/pre-commit — markdownlint, typos, proselint, stylelint, hugo build
 4. [DONE] Deployment — Cloudflare Workers + GitHub Actions CI/CD
+5. [IN PROGRESS] GitHub-issue-driven fixes/features — see docs/PLAN.md → Task 5
+   for the live status of each issue. Issues are worked one at a time, in the
+   order listed there, with #5 (Graph indexing) deliberately saved for last.
 
 ## Development
 

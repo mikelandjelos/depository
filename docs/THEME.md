@@ -25,6 +25,9 @@ Custom theme built inline (no `themes/` directory). All templates live in
 - **Code**: JetBrains Mono (Google Fonts) — 1rem inline, 0.9rem in blocks
 - **Headings**: h1 normal weight 3.2rem; h2/h3 italic weight 400
 - **New thought**: `span.newthought` — small-caps opener for topic shifts
+- **Drop cap**: `article section > p:first-child::first-letter` — first letter of a
+  post's first paragraph rendered large (4.2rem) in UnifrakturMaguntia (Google
+  Fonts), an illuminated-manuscript-style blackletter face
 
 ### Layout
 
@@ -39,6 +42,24 @@ Custom theme built inline (no `themes/` directory). All templates live in
 - Inline code: `#e8e8e0` background (light), `#303030` with `#e0e0e0` text (dark)
 - Code blocks: transparent background, styled by Chroma syntax CSS
 - Links: inherit color, subtle underline (0.05em thickness, 0.15em offset)
+
+### Table of contents
+
+- Auto-generated via Hugo's built-in `.TableOfContents` (from goldmark), shown
+  in `single.html` only when a post has 2+ headings
+  (`len (findRE "<h[2-6][^>]*>" .Content) >= 2`)
+- Hugo emits `<nav id="TableOfContents"><ul>...</ul></nav>` — the `id` is
+  hardcoded by Hugo itself, hence the `selector-id-pattern` stylelint-disable
+  around that block in `tufte.css`
+- Styled as a numbered decimal outline (1, 1.1, 1.1.1 …) purely with CSS
+  counters (`counter-reset`/`counter-increment`/`counters()`), no box or
+  background — inspired by gwern.net's TOC treatment, adapted into this site's
+  existing single-column flow rather than copying gwern's separate left-rail
+  column layout
+- Nested levels shrink slightly in size/opacity (selector targets any nested
+  `ul` inside `#TableOfContents`)
+- "Contents" label above it: `p.toc-label`, small-caps, matches other
+  small-caps accents on the site
 
 ### Sidenotes (from Tufte CSS)
 
@@ -64,6 +85,33 @@ Custom theme built inline (no `themes/` directory). All templates live in
   - `syntax-light.css` (monokailight) — loaded with `media="(prefers-color-scheme: light)"`
   - `syntax-dark.css` (monokai) — loaded with `media="(prefers-color-scheme: dark)"`
 
+### Code blocks — width/scroll architecture (important gotcha)
+
+Chroma's highlighted output nests `<code class="language-...">` directly
+inside `<pre class="chroma">`. The generic `pre > code` selector (meant for
+*plain*, non-highlighted fences) also matches that nested `<code>`. Giving
+both the outer `pre.chroma` and the inner `code` their own `width: 52.5%`
+double-shrinks the actual text column (52.5% of an already 52.5%-wide box,
+~27.5% of the container) while the visible background box stays full width —
+and gives the inner `code` its own independent `overflow-x: auto` scrollbar
+nested inside the outer one. Most lines fit inside that hidden narrower
+column so it went unnoticed, but a longer line (or browser zoom, which
+shrinks available CSS pixels) would overflow it, producing a
+scrollbar/clipped text sitting mid-box, well short of the box's visible right
+edge.
+
+Fix (`tufte.css`): scope the width/margin/scroll box rule to
+`pre:not(.chroma) > code` (plain fences only); `.highlight pre.chroma` owns
+sizing/scrolling for highlighted blocks, and its inner `code` just fills it
+(`display: block; width: 100%; overflow-x: visible`). Same split applies in
+the mobile media query. Also: a `calc(<pct> + 2px)` buffer on the outer boxes
+plus explicit `overflow-y: hidden` guards against subpixel-rounding
+false-positive scrollbars at non-100% zoom (setting only `overflow-x` lets
+the browser compute `overflow-y` as an ambiguous auto-like value per spec).
+Horizontal scrollbars (on code blocks and `div.table-wrapper`) are styled
+thin/theme-colored via `scrollbar-width`/`scrollbar-color` +
+`::-webkit-scrollbar*`, instead of the bulky OS-default one.
+
 ### Navigation
 
 - Minimal top bar: site name (small-caps, left) + nav links (right, flexbox)
@@ -86,7 +134,8 @@ Custom theme built inline (no `themes/` directory). All templates live in
 ### Responsive (<760px)
 
 - Body expands to 84% width, 8% padding each side
-- Main content + lists + code blocks expand to ~100% width
+- Main content + lists + code blocks + `.katex-display` + `#TableOfContents`
+  expand to ~100% width
 - Sidenotes/margin notes collapse to toggleable inline blocks
 - Images scale to 100% width
 
@@ -109,3 +158,12 @@ Custom theme built inline (no `themes/` directory). All templates live in
 - Consider Hugo shortcodes for sidenotes (cleaner than raw HTML in markdown)
 - Add RSS feed customization
 - Add Open Graph / meta tags for social sharing
+- TOC layout needs refinement — currently inserts too much vertical
+  whitespace; should read more like gwern.net's compact TOC treatment
+  (tracked in GitHub issue, see docs/PLAN.md)
+- Manual light/dark mode toggle (currently `prefers-color-scheme` only, no
+  user override) — inspired by gwern.net's mode selector (tracked in GitHub
+  issue, see docs/PLAN.md)
+- Post metadata: tags, singular category, date-created, and a
+  draft/not-draft "digital garden" maturity system — design still being
+  brainstormed (tracked as GitHub sub-issue #8 of #2)

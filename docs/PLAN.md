@@ -94,3 +94,43 @@ GitHub Actions runs lint checks independently.
 - `wrangler.toml`
 - `static/favicon.ico`
 - `static/favicon.png`
+
+## Task 5: GitHub-issue-driven fixes/features [IN PROGRESS]
+
+Working through <https://github.com/mikelandjelos/depository/issues> in
+sequence, skipping issue #5 (Graph indexing) for last/brainstorm.
+
+- [x] **#1 Mobile view issues** [CLOSED] — code blocks and KaTeX math were
+      clipped/squeezed on mobile and at non-100% browser zoom.
+  - Mobile media query widened `pre > code` but missed `.highlight
+    pre.chroma` and `.katex-display`, so they stayed at desktop widths on
+    small screens.
+  - Real root cause of the persistent zoom-triggered scrollbar/clipping bug:
+    a CSS selector collision double-shrinking the `<code>` inside
+    chroma-highlighted blocks (see docs/THEME.md → "Code blocks — width/scroll
+    architecture").
+  - Added themed thin scrollbars for code/table horizontal overflow.
+- [x] **#2 Page/post enhancement** [CLOSED] — auto TOC + drop cap.
+  - Auto-generated numbered-outline TOC (gwern-inspired), shown for posts
+    with 2+ headings.
+  - Illuminated-manuscript-style drop cap on a post's first letter.
+  - Metadata (tags/category/date/draft) split into sub-issue #8, design
+    still being brainstormed.
+- [ ] **#8 Post metadata** [OPEN, sub-issue of #2] — tags, singular category,
+      date-created, draft/not-draft "digital garden" maturity system.
+- [ ] **ToC layout refinement** [OPEN] — current TOC inserts too much
+      vertical whitespace; needs a more gwern-like compact layout.
+- [ ] **Manual light/dark mode toggle** [OPEN] — gwern-style mode switcher,
+      not just `prefers-color-scheme`.
+- [ ] **#3 About Me page** [OPEN]
+- [ ] **#4 Integrate Quarto Scientific publishing** [OPEN]
+- [ ] **#6 Articles** [OPEN]
+- [ ] **#7 Github interop** [OPEN]
+- [ ] **#5 Graph indexing** [OPEN] — deliberately last; needs a brainstorming
+      pass before implementation.
+
+### Notes
+
+- Every fix in this task is verified in-browser (via claude-in-chrome) before
+  being committed, not just by `hugo build` succeeding.
+- Each closed issue gets a comment summarizing what shipped, before closing.
