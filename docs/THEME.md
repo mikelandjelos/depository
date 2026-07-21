@@ -63,6 +63,12 @@ Custom theme built inline (no `themes/` directory). All templates live in
   `ul` inside `#TableOfContents`)
 - "Contents" label above it: `p.toc-label`, small-caps, matches other
   small-caps accents on the site
+- Vertical rhythm deliberately tighter than body prose (line-height 1.35 at
+  1.15rem, vs. body's ~1.43 at 1.4rem) — issue #9 flagged the original
+  values (1.7 line-height, 1.2rem, 2.5rem bottom margin) as reading like a
+  big empty block before the article started. This is a reference list, not
+  flowing prose, so it should read compact rather than matching paragraph
+  spacing.
 
 ### Metadata: tags, categories, status
 

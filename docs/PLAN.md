@@ -158,8 +158,10 @@ sequence, skipping issue #5 (Graph indexing) for last/brainstorm.
     beyond the `hello-world.md` demo (`status: "seedling"`).
   - See docs/THEME.md → "Metadata: tags, categories, status" for the full
     design.
-- [ ] **#9 ToC layout refinement** [OPEN] — current TOC inserts too much
-      vertical whitespace; needs a more gwern-like compact layout.
+- [x] **#9 ToC layout refinement** [CLOSED] — tightened line-height
+      (1.7 → 1.35), font-size (1.2rem → 1.15rem), and margins around
+      `#TableOfContents`/`p.toc-label`; ~26% shorter block for a 7-item
+      list. See docs/THEME.md → "Table of contents".
 - [ ] **#10 Manual light/dark mode toggle** [OPEN] — gwern-style mode
       switcher, not just `prefers-color-scheme`.
 - [ ] **#4 Integrate Quarto Scientific publishing** [OPEN]
