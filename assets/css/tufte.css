@@ -669,6 +669,70 @@ section.futures h2 {
     margin-left: 0.4em;
 }
 
+/* ---------- Statistics page (#12) ---------- */
+
+.stats-list {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 0.3rem 1.5rem;
+    font-size: 1.3rem;
+    width: 65%;
+    margin: 1rem 0 2rem;
+}
+
+.stats-list dt {
+    opacity: 0.6;
+    margin: 0;
+}
+
+.stats-list dd {
+    margin: 0;
+    font-weight: 700;
+    text-align: left;
+}
+
+.sparkline {
+    font-family: "JetBrains Mono", Consolas, "Liberation Mono", Menlo, Courier,
+        monospace;
+    font-size: 2.4rem;
+    letter-spacing: 0.1em;
+    line-height: 1;
+    margin: 1.5rem 0 0.5rem;
+    opacity: 0.85;
+}
+
+.stats-months {
+    list-style: none;
+    padding: 0;
+    width: 65%;
+    columns: 2;
+    column-gap: 2rem;
+}
+
+.stats-months li {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: 1.1rem;
+    margin-bottom: 0.3rem;
+    break-inside: avoid;
+}
+
+.stats-month-label {
+    opacity: 0.7;
+}
+
+.stats-month-count {
+    opacity: 0.5;
+    white-space: nowrap;
+}
+
+.stats-source {
+    font-size: 1rem;
+    opacity: 0.5;
+    margin-top: 1.5rem;
+}
+
 .post-tags,
 .post-category {
     font-size: 1.1rem;
@@ -971,6 +1035,12 @@ footer.site-footer {
     p.cv-contact,
     section.cv-section {
         width: 100%;
+    }
+
+    .stats-list,
+    .stats-months {
+        width: 100%;
+        columns: 1;
     }
 
     .cv-entry {

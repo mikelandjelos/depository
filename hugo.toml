@@ -46,3 +46,7 @@ timeZone = 'Europe/Belgrade'
     name = 'Curriculum Vitae'
     url = '/cv/'
     weight = 30
+  [[menus.main]]
+    name = 'Statistics'
+    url = '/stats/'
+    weight = 40

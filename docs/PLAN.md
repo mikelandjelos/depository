@@ -174,12 +174,16 @@ sequence, skipping issue #5 (Graph indexing) for last/brainstorm.
       open `article`-labeled issues at Hugo build time and lists them under
       "Unresolved Promises", each linking to its GitHub issue. See
       docs/THEME.md → "Unresolved Promises (GitHub interop, #7)".
-- [ ] **#12 Repo statistics page** [OPEN] — "see how actively I'm writing
-      on this site."
+- [x] **#12 Repo statistics page** [CLOSED] — `/stats/`: writing stats
+      (post/word counts, dates), tag counts, and repo activity (commit
+      count, repo age, a Tufte-sparkline of monthly commits). See
+      docs/THEME.md → "Statistics".
 - [ ] **#13 Add RSS/Atom feed** [OPEN]
 - [ ] **#14 Add Open Graph / social meta tags** [OPEN]
 - [ ] **#11 Zotero Integration** [OPEN, question] — not scoped yet.
 - [ ] **#15 Artsy** [OPEN, enhancement/style] — not scoped yet.
+- [ ] **#16 Nightly scheduled rebuild** [OPEN] — keeps Statistics and
+      Unresolved Promises fresh even with no pushes to `depository`.
 - [ ] **#4 Integrate Quarto Scientific publishing** [OPEN]
 - [ ] **#6 Articles** [OPEN]
 - [ ] **#5 Graph indexing** [OPEN] — deliberately last; needs a brainstorming

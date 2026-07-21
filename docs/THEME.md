@@ -16,6 +16,7 @@ Custom theme built inline (no `themes/` directory). All templates live in
 | `layouts/_default/term.html` | Single tag/category page: chronological list of posts with that term |
 | `layouts/index.html` | Homepage: site title, description, recent 10 posts from `posts/` section |
 | `layouts/_default/cv.html` | Curriculum Vitae page: renders `data/cv.yaml` (see "Curriculum Vitae" below) |
+| `layouts/_default/stats.html` | Statistics page: writing/tag/repo-activity numbers (see "Statistics" below) |
 | `assets/css/tufte.css` | All styles — adapted Tufte CSS + site header/nav/footer/post-list/avatar |
 | `assets/css/syntax-light.css` | Chroma syntax highlighting — monokailight (light mode) |
 | `assets/css/syntax-dark.css` | Chroma syntax highlighting — monokai (dark mode) |
@@ -184,7 +185,39 @@ issue, with its number and opened date.
   itself trigger a rebuild the way the CV repo's push does (no
   `repository_dispatch` wiring was added for this, unlike the CV pipeline;
   wasn't judged worth the extra cross-repo complexity for a low-frequency,
-  same-repo teaser list).
+  same-repo teaser list). Same freshness caveat applies to the Statistics
+  page below; #16 tracks adding a nightly scheduled rebuild to keep both
+  fresh even with no pushes.
+
+### Statistics (#12)
+
+`/stats/` — "see how actively I'm writing on this site." Three sections:
+
+- **Writing**: post count, total/average word count (`.WordCount` summed
+  over `where .Site.RegularPages "Section" "posts"`), first/latest post
+  date — all computed from Hugo's own page data, no external fetch.
+- **Tags**: every tag with its post count, via `.Site.Taxonomies.tags`
+  (alphabetical; reuses the taxonomy system from #8).
+- **Repository activity**: total commit count and repo age (from GitHub's
+  repo-info endpoint's `created_at`), plus a **sparkline** — literally
+  Tufte's own term/invention, a nice fit for this site's lineage — of
+  monthly commit counts using Unicode block-element characters (`▁▂▃▄▅▆▇█`,
+  U+2581–U+2588), each scaled to the max month's count and set in
+  JetBrains Mono (block glyphs need a font that renders partial-height
+  fills correctly; the body serif font doesn't). A plain-text table below
+  gives the same data in numbers, newest month first.
+- Deliberately used the direct `/commits` endpoint, not GitHub's
+  `/stats/participation` endpoint — the latter is asynchronously computed
+  and cache-lagged (confirmed live: it reported 19 total commits when the
+  real count was already past 30), unsuitable for something whose whole
+  point is "how actively am I working on this." `/commits?per_page=100`
+  is a direct, always-accurate query; this repo will need pagination once
+  it passes 100 commits (currently ~30).
+- Grouping-by-month uses `newScratch`'s `.Add` for counts and slice-append
+  (`(slice $month)` accumulates into a list of month keys, deduplicated
+  with `uniq` — first-occurrence order, so this list comes out
+  newest-first since the API returns commits newest-first; `sort` on that
+  gives the chronological order the sparkline needs instead).
 
 ### Sidenotes (from Tufte CSS)
 

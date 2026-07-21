@@ -1,0 +1,105 @@
+{{ define "main" }}
+{{ $repo := "mikelandjelos/depository" }}
+<article>
+    <h1>{{ .Title }}</h1>
+    <p class="subtitle">A running tally of how actively this site gets written and worked on.</p>
+
+    {{ $posts := where .Site.RegularPages "Section" "posts" }}
+    <section>
+        <h2>Writing</h2>
+        {{ if $posts }}
+            {{ $totalWords := 0 }}
+            {{ range $posts }}{{ $totalWords = add $totalWords .WordCount }}{{ end }}
+            {{ $sorted := $posts.ByDate }}
+            <dl class="stats-list">
+                <dt>Posts</dt>
+                <dd>{{ len $posts }}</dd>
+                <dt>Total words</dt>
+                <dd>{{ $totalWords }}</dd>
+                <dt>Average words per post</dt>
+                <dd>{{ div $totalWords (len $posts) }}</dd>
+                <dt>First post</dt>
+                <dd>{{ (index $sorted 0).Date.Format "January 2, 2006" }}</dd>
+                <dt>Latest post</dt>
+                <dd>{{ (index $sorted.Reverse 0).Date.Format "January 2, 2006" }}</dd>
+            </dl>
+        {{ else }}
+            <p>No posts yet.</p>
+        {{ end }}
+    </section>
+
+    {{ $tags := .Site.Taxonomies.tags }}
+    {{ if $tags }}
+    <section>
+        <h2>Tags</h2>
+        <dl class="stats-list">
+            {{ range $tags.Alphabetical }}
+            <dt><a href="{{ .Page.RelPermalink }}">{{ .Page.Title }}</a></dt>
+            <dd>{{ len .Pages }}</dd>
+            {{ end }}
+        </dl>
+    </section>
+    {{ end }}
+
+    <section>
+        <h2>Repository activity</h2>
+        {{ $repoTry := try (resources.GetRemote (printf "https://api.github.com/repos/%s" $repo) (dict "headers" (dict "Accept" "application/vnd.github+json"))) }}
+        {{ $commitsTry := try (resources.GetRemote (printf "https://api.github.com/repos/%s/commits?per_page=100" $repo) (dict "headers" (dict "Accept" "application/vnd.github+json"))) }}
+        {{ with $repoTry.Err }}
+            {{ warnf "Statistics: failed to fetch repo info: %s" . }}
+        {{ end }}
+        {{ with $commitsTry.Err }}
+            {{ warnf "Statistics: failed to fetch commits: %s" . }}
+        {{ end }}
+        {{ if and $repoTry.Value $commitsTry.Value }}
+            {{ $repoInfo := $repoTry.Value | transform.Unmarshal }}
+            {{ $commits := $commitsTry.Value | transform.Unmarshal }}
+            {{ $createdAt := time.AsTime $repoInfo.created_at }}
+            {{ $ageDays := div (sub now.Unix $createdAt.Unix) 86400 }}
+
+            {{ $s := newScratch }}
+            {{ range $commits }}
+                {{ $month := dateFormat "2006-01" .commit.author.date }}
+                {{ $s.Add "months" (slice $month) }}
+                {{ $s.Add (printf "count-%s" $month) 1 }}
+                {{ $s.Set (printf "label-%s" $month) (dateFormat "January 2006" .commit.author.date) }}
+            {{ end }}
+            {{ $monthsDesc := $s.Get "months" | uniq }}
+            {{ $monthsAsc := sort $monthsDesc }}
+
+            {{ $max := 1 }}
+            {{ range $monthsAsc }}
+                {{ $c := $s.Get (printf "count-%s" .) }}
+                {{ if gt $c $max }}{{ $max = $c }}{{ end }}
+            {{ end }}
+
+            <dl class="stats-list">
+                <dt>Total commits</dt>
+                <dd>{{ len $commits }}{{ if eq (len $commits) 100 }}+{{ end }}</dd>
+                <dt>Repo age</dt>
+                <dd>{{ $ageDays }} days</dd>
+            </dl>
+
+            {{ $blocks := slice "▁" "▂" "▃" "▄" "▅" "▆" "▇" "█" }}
+            <p class="sparkline" aria-hidden="true">
+                {{ range $monthsAsc }}
+                    {{ $c := $s.Get (printf "count-%s" .) }}
+                    {{ $level := int (math.Round (mul (div (float $c) (float $max)) 7)) }}
+                    <span title="{{ $s.Get (printf "label-%s" .) }}: {{ $c }} commit{{ if ne $c 1 }}s{{ end }}">{{ index $blocks $level }}</span>
+                {{ end }}
+            </p>
+
+            <ul class="stats-months">
+                {{ range $monthsDesc }}
+                <li>
+                    <span class="stats-month-label">{{ $s.Get (printf "label-%s" .) }}</span>
+                    <span class="stats-month-count">{{ $s.Get (printf "count-%s" .) }} commit{{ if ne ($s.Get (printf "count-%s" .)) 1 }}s{{ end }}</span>
+                </li>
+                {{ end }}
+            </ul>
+
+            <p class="stats-source">Live from <a href="https://github.com/{{ $repo }}">github.com/{{ $repo }}</a>.</p>
+        {{ end }}
+    </section>
+</article>
+{{ end }}
