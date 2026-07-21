@@ -124,10 +124,17 @@ sequence, skipping issue #5 (Graph indexing) for last/brainstorm.
     curriculum-vitae repo's `cv.tex` via `scripts/sync_cv.py` →
     `data/cv.yaml` → `layouts/_default/cv.html`. See docs/THEME.md →
     "Curriculum Vitae" for the full pipeline.
-  - **Blocked/pending**: instant sync requires a `DEPOSITORY_DISPATCH_TOKEN`
-    secret added to the curriculum-vitae repo (self-service, PAT creation
-    can't be done on the user's behalf) — until added, sync only runs via
-    manual `workflow_dispatch` in this repo.
+  - **Confirmed working end-to-end**: a real push to `cv.tex` on
+    curriculum-vitae now auto-syncs to `/cv/` with no manual step — verified
+    live (notify workflow → `repository_dispatch` → sync-cv.yml →
+    `data/cv.yaml` commit → Cloudflare auto-deploy). Needed two secrets:
+    `DEPOSITORY_DISPATCH_TOKEN` in curriculum-vitae (dispatch permission on
+    depository) and `CURRICULUM_VITAE_READ_TOKEN` in depository
+    (Contents:Read on curriculum-vitae, since it's a *private* repo — the
+    original design assumed public and had to be fixed after the first
+    real test 404'd). Also fixed a parser bug found in the same test pass:
+    LaTeX comments (`% ...`) weren't stripped, so a commented-out `\item`
+    still rendered.
   - **Still open**: About page's actual personal/philosophical content —
     intentionally deferred, that's Mihajlo's voice to write, not something
     to fabricate on his behalf.
