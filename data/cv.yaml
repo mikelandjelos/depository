@@ -35,7 +35,7 @@ sections:
   entries:
   - kind: entry
     title: '**University of Niš, Faculty of Electronic Engineering**'
-    subtitle: '*MSc in Artificial Intelligence and Machine Learning*'
+    subtitle: '*Master''s Studies in Artificial Intelligence and Machine Learning*'
     meta:
     - '*Oct 2025 – Ongoing*'
     highlights:
@@ -45,7 +45,7 @@ sections:
     text: ''
   - kind: entry
     title: '**University of Niš, Faculty of Electronic Engineering**'
-    subtitle: '*BSc in Computer Science and Electrical Engineering*'
+    subtitle: '*Bachelor''s Studies in Computer Science and Electrical Engineering*'
     meta:
     - '*Oct 2020 – Oct 2025*'
     highlights:
