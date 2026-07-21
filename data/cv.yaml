@@ -28,15 +28,14 @@ sections:
       of all areas I take interest in. I''m a keen and thorough researcher who loves materializing abstract
       ideas, mostly through software projects.
 
-      Some of my current interests are Bayesian modeling, image processing and computer vision, parallelization
-      and concurrency (HPC, SIMD), computer architecture and general systems programming and low-level
-      software engineering (C/C++), statistical learning (ML/DL), and, more recently, computational physics
-      (CFD).'
+      Some of my current interests are image processing and computer vision, parallelization and concurrency
+      (HPC, SIMD), computer architecture and general systems programming and low-level software engineering
+      (C/C++), statistical learning (ML/DL), and more recently, Bayesian modeling.'
 - title: Education
   entries:
   - kind: entry
     title: '**University of Niš, Faculty of Electronic Engineering**'
-    subtitle: '*Master''s Studies in Artificial Intelligence and Machine Learning*'
+    subtitle: '*MSc in Artificial Intelligence and Machine Learning*'
     meta:
     - '*Oct 2025 – Ongoing*'
     highlights:
@@ -47,7 +46,7 @@ sections:
     text: ''
   - kind: entry
     title: '**University of Niš, Faculty of Electronic Engineering**'
-    subtitle: '*Bachelor''s Studies in Computer Science and Electrical Engineering*'
+    subtitle: '*BSc in Computer Science and Electrical Engineering*'
     meta:
     - '*Oct 2020 – Oct 2025*'
     highlights:
@@ -64,8 +63,7 @@ sections:
   - kind: text
     text: '**Programming Languages:** C, C++ (up to C++20), Python, R, Bash, C#/Java'
   - kind: text
-    text: '**Scientific/Statistical Computing:** NumPy, SciPy, OpenCV, PyTorch, PyMC, scikit-learn, Eigen,
-      Stan'
+    text: '**Scientific/Statistical Computing:** NumPy, SciPy, OpenCV, PyTorch, PyMC, scikit-learn, Eigen'
   - kind: text
     text: '**High-Performance Computing & Profiling:** OpenMP, SIMD (AVX/NEON), Multi-threading (Intel
       TBB), CPU Profiling (`perf`, Valgrind, Google Benchmark), Cache Optimization/DOD (Cachegrind)'
@@ -89,8 +87,8 @@ sections:
     - Designed and implemented robust **pattern matching** algorithms “from scratch”, in mature C/C++
       codebases of Zebra's 1D barcode decoding libraries – learned about fuzzy pattern matching applied
       to barcode decoding in **noisy environments**.
-    - '**Additionally:** Learned how to use miscellaneous tooling for C/C++ projects, e.g. CMake, Doxygen.
-      Got exposed to AIDC/barcode standards (GS1 General Specifications, ISO/IEC 15420).'
+    - '**Additionally:** *Learned how to use tooling for C/C++ projects, e.g. CMake, Doxygen. Got exposed
+      to AIDC/barcode standards (GS1 General Specifications, ISO/IEC 15420).*'
     text: ''
   - kind: entry
     title: '**Software Engineer and Junior Security Consultant**'
@@ -108,9 +106,9 @@ sections:
       reporting** – learned about good visualization practices, automated reporting, and security audits.
     - Performed data analysis for cybersecurity **vulnerability assessment** reports – distilling a large
       corpus of system-generated records into high-level, presentable reports.
-    - '**Additionally:** Learned to work in a distributed, remote, and flexible work environment, strengthened
+    - '**Additionally:** *Learned to work in a distributed, remote, and flexible work environment, strengthened
       my soft skills. Became familiar with security frameworks (NIST CSF 2.0, NIST SP 800-53, CIS Controls
-      v8, ISO/IEC 27001).'
+      v8, ISO/IEC 27001).*'
     text: ''
   - kind: entry
     title: '**Software Engineer Intern**'
@@ -126,9 +124,9 @@ sections:
       Python code, with an approach heavily relying on [dataclasses](https://docs.python.org/3/library/dataclasses.html)
       and [tomlkit](https://pypi.org/project/tomlkit/) library – first real-world Python project; learned
       about TOML format, solidified understanding and knowledge of using Poetry ecosystem.
-    - '**Additionally:** Learned to completely rely on using terminal and CLI tools, which changed my
+    - '**Additionally:** *Learned to completely rely on using terminal and CLI tools, which changed my
       workflow and effectiveness; solidified Linux knowledge, tried out [Manjaro](https://manjaro.org/)
-      as my daily driver and got used to Arch-based tooling ([pacman](https://wiki.manjaro.org/index.php?title=Pacman_Overview)).'
+      as my daily driver and got used to Arch-based tooling ([pacman](https://wiki.manjaro.org/index.php?title=Pacman_Overview)).*'
     text: ''
 - title: Selected Projects
   entries:
