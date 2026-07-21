@@ -11,7 +11,7 @@ Custom theme built inline (no `themes/` directory). All templates live in
 |---|---|
 | `layouts/_default/baseof.html` | Base template: `<head>` with favicon, fonts, KaTeX, CSS; site header nav; footer |
 | `layouts/_default/single.html` | Article/post page: title, status badge, subtitle, date, category, tags, content |
-| `layouts/_default/list.html` | Section list page: title, content, chronological post list |
+| `layouts/_default/list.html` | Section list page: title, content, chronological post list, "Unresolved Promises" on `/posts/` (see below) |
 | `layouts/_default/taxonomy.html` | Tag/category index page: alphabetical list of terms with post counts |
 | `layouts/_default/term.html` | Single tag/category page: chronological list of posts with that term |
 | `layouts/index.html` | Homepage: site title, description, recent 10 posts from `posts/` section |
@@ -161,6 +161,30 @@ created, draft/"digital garden" maturity system):
   demos this with `status: "seedling"`. Exact vocabulary/levels beyond that
   one demo value are still open — could grow into a seedling/budding/
   evergreen spectrum later if wanted.
+
+### Unresolved Promises (GitHub interop, #7)
+
+`/posts/` fetches this repo's own open, `article`-labeled GitHub issues at
+**Hugo build time** (`resources.GetRemote` on the public GitHub REST API —
+no auth needed, unlike the CV pipeline, since `depository` is public) and
+renders them as a teaser list below the real posts, under the heading
+"Unresolved Promises" — article ideas that exist as a GitHub issue but
+haven't become an actual post yet. Each entry links straight to the GitHub
+issue, with its number and opened date.
+
+- Scoped to `{{ if eq .Section "posts" }}` in `layouts/_default/list.html`
+  so it doesn't render on other list-kind pages.
+- Fetch failure (rate limit, network blip during a CI build) is handled
+  with Hugo's `try` keyword — logs a `warnf` and simply omits the section,
+  rather than failing the whole build. (`resources.Err` was removed in
+  Hugo v0.141 in favor of `try`.)
+- **Freshness caveat**: this only re-fetches on an actual Hugo build, i.e.
+  whenever `depository` itself gets pushed to (triggering the existing
+  Cloudflare auto-deploy) — filing/closing an `article` issue doesn't
+  itself trigger a rebuild the way the CV repo's push does (no
+  `repository_dispatch` wiring was added for this, unlike the CV pipeline;
+  wasn't judged worth the extra cross-repo complexity for a low-frequency,
+  same-repo teaser list).
 
 ### Sidenotes (from Tufte CSS)
 

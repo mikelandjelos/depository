@@ -12,6 +12,15 @@ timeZone = 'Europe/Belgrade'
   tag = 'tags'
   category = 'categories'
 
+[caches]
+  [caches.getresource]
+    # Hugo's default is maxAge = -1 (cache forever) for resources.GetRemote,
+    # which made the "Unresolved Promises" GitHub issue list (list.html) go
+    # stale indefinitely on the local dev server after an issue was
+    # retitled. 1h keeps it reasonably fresh without hammering the GitHub
+    # API on every build.
+    maxAge = '1h'
+
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]

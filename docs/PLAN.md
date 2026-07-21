@@ -169,9 +169,19 @@ sequence, skipping issue #5 (Graph indexing) for last/brainstorm.
       (checked gwern.net's actual UI live — icon-based, not text — before
       building), with `localStorage` persistence and anti-FOUC inline
       scripts. See docs/THEME.md → "Light/dark/auto theme toggle".
+- [x] **#7 Github interop** [CLOSED] — scoped down from its vague original
+      body to a concrete feature: `/posts/` now fetches this repo's own
+      open `article`-labeled issues at Hugo build time and lists them under
+      "Unresolved Promises", each linking to its GitHub issue. See
+      docs/THEME.md → "Unresolved Promises (GitHub interop, #7)".
+- [ ] **#12 Repo statistics page** [OPEN] — "see how actively I'm writing
+      on this site."
+- [ ] **#13 Add RSS/Atom feed** [OPEN]
+- [ ] **#14 Add Open Graph / social meta tags** [OPEN]
+- [ ] **#11 Zotero Integration** [OPEN, question] — not scoped yet.
+- [ ] **#15 Artsy** [OPEN, enhancement/style] — not scoped yet.
 - [ ] **#4 Integrate Quarto Scientific publishing** [OPEN]
 - [ ] **#6 Articles** [OPEN]
-- [ ] **#7 Github interop** [OPEN]
 - [ ] **#5 Graph indexing** [OPEN] — deliberately last; needs a brainstorming
       pass before implementation.
 

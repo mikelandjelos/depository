@@ -605,6 +605,52 @@ header.site-header .nav-links a:hover {
     font-size: 1.3rem;
 }
 
+/* ---------- Unresolved Promises (pending article-idea teasers, #7) ---------- */
+
+section.futures {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-border);
+}
+
+section.futures h2 {
+    margin-top: 0;
+}
+
+.futures-subtitle {
+    font-style: italic;
+    opacity: 0.6;
+    font-size: 1.1rem;
+    margin-top: -1rem;
+    margin-bottom: 1.5rem;
+}
+
+.futures-list {
+    list-style: none;
+    padding: 0;
+}
+
+.futures-list li {
+    margin-bottom: 1rem;
+}
+
+.futures-list a {
+    font-size: 1.3rem;
+    font-style: italic;
+    opacity: 0.8;
+}
+
+.futures-list a:hover {
+    opacity: 1;
+}
+
+.futures-meta {
+    display: block;
+    font-size: 1rem;
+    opacity: 0.5;
+    margin-top: 0.1rem;
+}
+
 /* ---------- Taxonomy (tags/categories) ---------- */
 
 .term-list {

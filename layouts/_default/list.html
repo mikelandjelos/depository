@@ -18,5 +18,29 @@
         </ul>
     </section>
     {{ end }}
+
+    {{ if eq .Section "posts" }}
+        {{ $opts := dict "headers" (dict "Accept" "application/vnd.github+json") }}
+        {{ $try := try (resources.GetRemote "https://api.github.com/repos/mikelandjelos/depository/issues?labels=article&state=open&per_page=100" $opts) }}
+        {{ with $try.Err }}
+            {{ warnf "Unresolved Promises: failed to fetch article-labeled issues: %s" . }}
+        {{ else with $try.Value }}
+            {{ $issues := . | transform.Unmarshal }}
+            {{ if $issues }}
+            <section class="futures">
+                <h2>Unresolved Promises</h2>
+                <p class="futures-subtitle">Article ideas that haven't resolved into posts yet.</p>
+                <ul class="futures-list">
+                    {{ range $issues }}
+                    <li>
+                        <a href="{{ .html_url }}">{{ .title }}</a>
+                        <span class="futures-meta">#{{ .number }} · opened {{ dateFormat "2006-01-02" .created_at }}</span>
+                    </li>
+                    {{ end }}
+                </ul>
+            </section>
+            {{ end }}
+        {{ end }}
+    {{ end }}
 </article>
 {{ end }}
