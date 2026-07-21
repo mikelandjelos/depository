@@ -251,7 +251,14 @@ def parse_sections(doc: str) -> list[dict]:
     return sections
 
 
+def strip_comments(tex: str) -> str:
+    """Drop LaTeX comments (an unescaped % to end of line) so commented-out
+    \\item/etc. lines don't end up in the parsed output."""
+    return re.sub(r"(?<!\\)%.*", "", tex)
+
+
 def parse_cv(tex: str) -> dict:
+    tex = strip_comments(tex)
     doc_m = re.search(r"\\begin\{document\}(.*)\\end\{document\}", tex, re.DOTALL)
     doc = doc_m.group(1) if doc_m else tex
 
