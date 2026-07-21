@@ -8,6 +8,10 @@ timeZone = 'Europe/Belgrade'
   footer = '&copy; 2026'
   repoURL = 'https://github.com/mikelandjelos/depository'
 
+[taxonomies]
+  tag = 'tags'
+  category = 'categories'
+
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]

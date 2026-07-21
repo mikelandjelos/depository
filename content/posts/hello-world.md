@@ -3,6 +3,8 @@ title: "Hello World: A Sample Post"
 subtitle: "Testing the theme with all its features"
 date: 2026-02-28
 draft: false
+status: "seedling"
+categories: ["meta"]
 tags: ["meta", "test"]
 ---
 

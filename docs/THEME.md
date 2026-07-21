@@ -10,8 +10,10 @@ Custom theme built inline (no `themes/` directory). All templates live in
 | File | Purpose |
 |---|---|
 | `layouts/_default/baseof.html` | Base template: `<head>` with favicon, fonts, KaTeX, CSS; site header nav; footer |
-| `layouts/_default/single.html` | Article/post page: title, subtitle, date, tags, content |
+| `layouts/_default/single.html` | Article/post page: title, status badge, subtitle, date, category, tags, content |
 | `layouts/_default/list.html` | Section list page: title, content, chronological post list |
+| `layouts/_default/taxonomy.html` | Tag/category index page: alphabetical list of terms with post counts |
+| `layouts/_default/term.html` | Single tag/category page: chronological list of posts with that term |
 | `layouts/index.html` | Homepage: site title, description, recent 10 posts from `posts/` section |
 | `layouts/_default/cv.html` | Curriculum Vitae page: renders `data/cv.yaml` (see "Curriculum Vitae" below) |
 | `assets/css/tufte.css` | All styles — adapted Tufte CSS + site header/nav/footer/post-list/avatar |
@@ -61,6 +63,37 @@ Custom theme built inline (no `themes/` directory). All templates live in
   `ul` inside `#TableOfContents`)
 - "Contents" label above it: `p.toc-label`, small-caps, matches other
   small-caps accents on the site
+
+### Metadata: tags, categories, status
+
+Resolved from GitHub issue #8's brainstorm (tags, singular category, date
+created, draft/"digital garden" maturity system):
+
+- **Tags** and **categories** are real Hugo taxonomies (`[taxonomies]` in
+  hugo.toml: `tag = 'tags'`, `category = 'categories'`), not plain front
+  matter strings — this gets `/tags/`, `/tags/<term>/`, `/categories/`, and
+  `/categories/<term>/` index pages automatically. `layouts/_default/taxonomy.html`
+  renders the "all terms" index (alphabetical, with post counts);
+  `layouts/_default/term.html` renders a single term's post list (same
+  markup/CSS as the post-list on `/posts/`). Front matter: `tags: [...]`
+  (multiple) and `categories: [...]` (Hugo taxonomies are inherently
+  multi-value, but the convention here is one category per post — just
+  keep the list to a single item).
+- In `single.html`, both render as links (via `.GetTerms "tags"` /
+  `.GetTerms "categories"`, not raw `.Params` strings) in the post-meta
+  line: `date — category — tag, tag`.
+- **Date created** is still just the existing `date` front-matter field —
+  no separate field was added, "created" is implicit/conventional rather
+  than an explicit UI label.
+- **Maturity/draft badge**: decided in the #8 brainstorm to publish
+  everything (not hide via Hugo's own `draft: true`) and show a visible
+  badge on unfinished posts instead. New front-matter field `status` (any
+  string; the CSS doesn't hardcode specific values), rendered as a small
+  bordered small-caps pill (`p.status-badge`) right under the title when
+  present, omitted entirely otherwise. `content/posts/hello-world.md`
+  demos this with `status: "seedling"`. Exact vocabulary/levels beyond that
+  one demo value are still open — could grow into a seedling/budding/
+  evergreen spectrum later if wanted.
 
 ### Sidenotes (from Tufte CSS)
 

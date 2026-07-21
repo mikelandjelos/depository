@@ -147,15 +147,17 @@ sequence, skipping issue #5 (Graph indexing) for last/brainstorm.
     `date` front-matter field added (was missing entirely, which rendered
     as "January 1, 0001" via `single.html`'s `.Date.Format` once the page
     had real content to look at).
-- [ ] **#8 Post metadata** [OPEN, sub-issue of #2] — refined scope:
-  - Tags (multiple, taxonomy) — front matter exists, navigation doesn't yet.
-  - Category (singular, taxonomy) — new field.
-  - Date created — already `date` front matter; just needs explicit "created"
-    labeling in the UI.
-  - Draft/maturity: **decided** to publish everything and show a visible
-    "seedling"/"draft"-style badge on unfinished posts, rather than hiding
-    them via Hugo's `draft: true`. Needs a new front-matter field (name/values
-    TBD) + a small badge component. Exact wording/levels still open.
+- [x] **#8 Post metadata** [CLOSED, sub-issue of #2]
+  - Tags and categories are real Hugo taxonomies now (`/tags/`,
+    `/categories/`, and per-term pages), linked from post-meta instead of
+    plain text.
+  - Date created: kept as the existing `date` field, no separate field
+    added.
+  - Maturity badge: new `status` front-matter field, rendered as a small
+    bordered pill when present, omitted otherwise. Vocabulary still open
+    beyond the `hello-world.md` demo (`status: "seedling"`).
+  - See docs/THEME.md → "Metadata: tags, categories, status" for the full
+    design.
 - [ ] **#9 ToC layout refinement** [OPEN] — current TOC inserts too much
       vertical whitespace; needs a more gwern-like compact layout.
 - [ ] **#10 Manual light/dark mode toggle** [OPEN] — gwern-style mode
