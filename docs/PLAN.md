@@ -135,9 +135,18 @@ sequence, skipping issue #5 (Graph indexing) for last/brainstorm.
     real test 404'd). Also fixed a parser bug found in the same test pass:
     LaTeX comments (`% ...`) weren't stripped, so a commented-out `\item`
     still rendered.
-  - **Still open**: About page's actual personal/philosophical content —
-    intentionally deferred, that's Mihajlo's voice to write, not something
-    to fabricate on his behalf.
+  - Scaffolded `content/about.md`: a `p.wip-notice` marker (small, italic,
+    excluded from the drop-cap selector so it doesn't get the illuminated
+    first-letter treatment meant for real opening prose — see docs/THEME.md
+    → Typography), plus two placeholder section headers ("Who I am", "Why
+    this site") and a link to `/cv/` for the professional side. The
+    headers auto-trigger the TOC feature from #2 (2+ headings).
+  - **Still open**: filling in the actual personal/philosophical content
+    under those headers — intentionally left to Mihajlo to write himself,
+    not something to fabricate on his behalf. `about.md` also needed a
+    `date` front-matter field added (was missing entirely, which rendered
+    as "January 1, 0001" via `single.html`'s `.Date.Format` once the page
+    had real content to look at).
 - [ ] **#8 Post metadata** [OPEN, sub-issue of #2] — refined scope:
   - Tags (multiple, taxonomy) — front matter exists, navigation doesn't yet.
   - Category (singular, taxonomy) — new field.
