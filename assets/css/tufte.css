@@ -5,6 +5,53 @@
    Based on: https://github.com/edwardtufte/tufte-css (Dave Liepmann)
    ========================================================================== */
 
+/* ---------- Theme colors ----------
+   Light values are the :root default. Dark values apply via the system's
+   prefers-color-scheme, OR are forced by [data-theme="dark"]/
+   [data-theme="light"] when a visitor overrides the system preference
+   with the header toggle (see baseof.html's inline scripts). The
+   [data-theme] rules always win over the media query: an attribute
+   selector on :root has higher specificity than a bare :root inside
+   @media, regardless of source order. */
+
+:root {
+    --color-bg: #fffff8;
+    --color-text: #111;
+    --color-border: #ccc;
+    --color-code-bg: #e8e8e0;
+    --color-code-text: #111;
+    --color-scrollbar-thumb: #ccc;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-bg: #151515;
+        --color-text: #ddd;
+        --color-border: #444;
+        --color-code-bg: #303030;
+        --color-code-text: #e0e0e0;
+        --color-scrollbar-thumb: #555;
+    }
+}
+
+:root[data-theme="light"] {
+    --color-bg: #fffff8;
+    --color-text: #111;
+    --color-border: #ccc;
+    --color-code-bg: #e8e8e0;
+    --color-code-text: #111;
+    --color-scrollbar-thumb: #ccc;
+}
+
+:root[data-theme="dark"] {
+    --color-bg: #151515;
+    --color-text: #ddd;
+    --color-border: #444;
+    --color-code-bg: #303030;
+    --color-code-text: #e0e0e0;
+    --color-scrollbar-thumb: #555;
+}
+
 /* Tufte CSS styles */
 html {
     font-size: 15px;
@@ -17,32 +64,10 @@ body {
     padding-left: 12.5%;
     font-family: "EB Garamond", Palatino, "Palatino Linotype",
         "Palatino LT STD", "Book Antiqua", Georgia, serif;
-    background-color: #fffff8;
-    color: #111;
+    background-color: var(--color-bg);
+    color: var(--color-text);
     max-width: 1400px;
     counter-reset: sidenote-counter;
-}
-
-/* Dark mode */
-@media (prefers-color-scheme: dark) {
-    body {
-        background-color: #151515;
-        color: #ddd;
-    }
-
-    hr {
-        border-top-color: #444;
-    }
-
-    code {
-        background-color: #303030 !important;
-        color: #e0e0e0;
-    }
-
-    pre > code,
-    .highlight pre.chroma code {
-        background-color: transparent !important;
-    }
 }
 
 /* ---------- Headings ---------- */
@@ -106,7 +131,7 @@ hr {
     height: 1px;
     width: 55%;
     border: 0;
-    border-top: 1px solid #ccc;
+    border-top: 1px solid var(--color-border);
     margin: 1em 0;
     padding: 0;
 }
@@ -308,7 +333,8 @@ pre > code {
 }
 
 code {
-    background-color: #e8e8e0;
+    background-color: var(--color-code-bg);
+    color: var(--color-code-text);
     padding: 0.1em 0.3em;
     border-radius: 3px;
 }
@@ -373,7 +399,7 @@ pre > code,
 .highlight pre.chroma,
 div.table-wrapper {
     scrollbar-width: thin;
-    scrollbar-color: #ccc transparent;
+    scrollbar-color: var(--color-scrollbar-thumb) transparent;
 }
 
 pre > code::-webkit-scrollbar,
@@ -391,22 +417,8 @@ div.table-wrapper::-webkit-scrollbar-track {
 pre > code::-webkit-scrollbar-thumb,
 .highlight pre.chroma::-webkit-scrollbar-thumb,
 div.table-wrapper::-webkit-scrollbar-thumb {
-    background-color: #ccc;
+    background-color: var(--color-scrollbar-thumb);
     border-radius: 3px;
-}
-
-@media (prefers-color-scheme: dark) {
-    pre > code,
-    .highlight pre.chroma,
-    div.table-wrapper {
-        scrollbar-color: #555 transparent;
-    }
-
-    pre > code::-webkit-scrollbar-thumb,
-    .highlight pre.chroma::-webkit-scrollbar-thumb,
-    div.table-wrapper::-webkit-scrollbar-thumb {
-        background-color: #555;
-    }
 }
 
 /* ---------- New thought (small-caps opener) ---------- */
@@ -499,6 +511,76 @@ header.site-header .nav-links a:hover {
     text-decoration: underline;
     text-decoration-thickness: 0.05em;
     text-underline-offset: 0.15em;
+}
+
+/* ---------- Theme toggle (standalone corner control, not a nav link) ---------- */
+
+.theme-toggle {
+    position: fixed;
+    top: 1.8rem;
+    right: 1.8rem;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    color: var(--color-text);
+    opacity: 0.5;
+    transition: opacity 0.2s ease;
+}
+
+.theme-toggle:hover {
+    opacity: 1;
+}
+
+.theme-toggle svg {
+    position: absolute;
+    width: 19px;
+    height: 19px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(0deg) scale(1);
+    transition:
+        opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.theme-toggle .icon-moon {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(-90deg) scale(0.5);
+}
+
+.theme-toggle[data-theme-state="dark"] .icon-sun {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(90deg) scale(0.5);
+}
+
+.theme-toggle[data-theme-state="dark"] .icon-moon {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(0deg) scale(1);
+}
+
+.theme-toggle[data-theme-state="auto"] .icon-sun {
+    opacity: 0.55;
+    transform: translate(-50%, -50%) rotate(-20deg) scale(0.8);
+}
+
+.theme-toggle[data-theme-state="auto"] .icon-moon {
+    opacity: 0.55;
+    transform: translate(-50%, -50%) rotate(20deg) scale(0.8);
+}
+
+@media (width <= 760px) {
+    .theme-toggle {
+        top: 1.1rem;
+        right: 1.1rem;
+    }
 }
 
 /* ---------- Post list ---------- */
@@ -802,15 +884,9 @@ p.cv-text {
 footer.site-footer {
     margin-top: 4rem;
     padding: 2rem 0;
-    border-top: 1px solid #ccc;
+    border-top: 1px solid var(--color-border);
     font-size: 1rem;
     opacity: 0.6;
-}
-
-@media (prefers-color-scheme: dark) {
-    footer.site-footer {
-        border-top-color: #444;
-    }
 }
 
 /* ---------- Responsive ---------- */

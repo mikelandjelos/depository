@@ -41,10 +41,71 @@ Custom theme built inline (no `themes/` directory). All templates live in
 ### Colors
 
 - Background: `#fffff8` (off-white), text: `#111` (off-black)
-- Dark mode via `prefers-color-scheme: dark` — bg `#151515`, text `#ddd`
+- Dark mode: bg `#151515`, text `#ddd`
 - Inline code: `#e8e8e0` background (light), `#303030` with `#e0e0e0` text (dark)
 - Code blocks: transparent background, styled by Chroma syntax CSS
 - Links: inherit color, subtle underline (0.05em thickness, 0.15em offset)
+- All theme-dependent colors are CSS custom properties (`--color-bg`,
+  `--color-text`, `--color-border`, `--color-code-bg`, `--color-code-text`,
+  `--color-scrollbar-thumb`) defined once at the top of `tufte.css` — see
+  "Light/dark/auto theme toggle" below for why (a manual override needs to
+  win over the system's `prefers-color-scheme`, which a scattered
+  per-component `@media` block can't do cleanly).
+
+### Light/dark/auto theme toggle
+
+Resolved GitHub issue #10 (gwern-style manual override, not just following
+the OS setting):
+
+- **CSS**: `:root` defines the light values for the `--color-*` custom
+  properties above; `@media (prefers-color-scheme: dark)` overrides them at
+  `:root` for the system-follows-dark case; `:root[data-theme="light"]` and
+  `:root[data-theme="dark"]` override them again for an explicit visitor
+  choice. The attribute-selector rules always win over the media query
+  regardless of source order, because an attribute selector on `:root` has
+  higher specificity than a bare `:root` inside `@media` — this is *why*
+  the custom-property approach was worth the refactor: the old scattered
+  `@media (prefers-color-scheme: dark) { body {...} hr {...} code {...} }`
+  pattern had no clean way to be overridden by a `data-theme` attribute
+  without duplicating every rule three times (base/media/override).
+- **Toggle**: `.theme-toggle` is a standalone `position: fixed` icon button
+  in the top-right corner — deliberately *not* inside `.nav-links`; an
+  early version put it there as a text label ("Auto"/"Light"/"Dark") and it
+  read as a stray nav item, not a control, and didn't match gwern.net's
+  actual corner-icon treatment (checked live — gwern uses small monochrome
+  sun/moon/half-circle icons in a floating corner toolbar, not text).
+  Contains two inline SVGs (`.icon-sun`, `.icon-moon`, both Feather-style
+  line icons matching the CV page's contact icons) absolutely stacked on
+  top of each other; CSS `transition` on `opacity`/`transform` (rotate +
+  scale) cross-fades between them, giving the sun/moon "morph" animation.
+  `data-theme-state="auto"` shows *both* icons simultaneously at reduced
+  opacity and opposing tilt (a distinct third look, since a two-icon morph
+  can't otherwise represent a three-state control); `"light"`/`"dark"`
+  resolve to one icon fully shown. Click cycles auto → light → dark → auto;
+  `aria-label` is updated on each state change to describe the *next*
+  action (screen-reader users get no benefit from the visual animation).
+- **Persistence**: `localStorage["theme"]` — `"light"`/`"dark"` for an
+  explicit choice, absent entirely for "auto" (so removing the override
+  cleanly falls back to `prefers-color-scheme` with no leftover state).
+- **Anti-FOUC**: two small inline `<script>` blocks in `baseof.html`'s
+  `<head>` (before the CSS `<link>` tags render anything) read
+  `localStorage` synchronously and set `data-theme` on `<html>` before
+  first paint, so a returning visitor with an override never sees a flash
+  of the wrong theme. A third script (wiring the click handler, setting
+  the button's initial `data-theme-state`/`aria-label`) runs at the end of
+  `<body>` — that one can wait, since it doesn't affect paint.
+- **Syntax highlighting is a separate problem**: `syntax-light.css` and
+  `syntax-dark.css` are loaded via `<link media="(prefers-color-scheme:
+  ...)">`, which only ever reflects the *system* preference — the
+  `data-theme` attribute has no effect on a `<link>`'s own `media`
+  attribute. Both scripts also give each `<link>` an `id`
+  (`syntax-light-css`/`syntax-dark-css`) and, when an override is active,
+  directly set `.media = "all"` on the matching one and `"not all"` on the
+  other (reverting to the original `prefers-color-scheme` query strings
+  when back in "auto"). Without this, forcing dark mode while the OS is in
+  light mode would keep code blocks in the light Chroma theme — same bug
+  class as the page-background FOUC, just for a `<link>` instead of CSS
+  variables.
 
 ### Table of contents
 

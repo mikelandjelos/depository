@@ -162,8 +162,13 @@ sequence, skipping issue #5 (Graph indexing) for last/brainstorm.
       (1.7 → 1.35), font-size (1.2rem → 1.15rem), and margins around
       `#TableOfContents`/`p.toc-label`; ~26% shorter block for a 7-item
       list. See docs/THEME.md → "Table of contents".
-- [ ] **#10 Manual light/dark mode toggle** [OPEN] — gwern-style mode
-      switcher, not just `prefers-color-scheme`.
+- [x] **#10 Manual light/dark mode toggle** [CLOSED] — refactored all
+      theme colors in tufte.css to CSS custom properties (needed so a
+      `[data-theme]` override can cleanly win over `prefers-color-scheme`),
+      added an animated sun/moon icon toggle as a standalone corner control
+      (checked gwern.net's actual UI live — icon-based, not text — before
+      building), with `localStorage` persistence and anti-FOUC inline
+      scripts. See docs/THEME.md → "Light/dark/auto theme toggle".
 - [ ] **#4 Integrate Quarto Scientific publishing** [OPEN]
 - [ ] **#6 Articles** [OPEN]
 - [ ] **#7 Github interop** [OPEN]

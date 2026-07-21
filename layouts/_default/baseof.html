@@ -3,6 +3,17 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Apply a saved theme override before first paint, to avoid a flash
+         of the wrong theme. See the wiring script near the end of <body>
+         for the full light/dark/auto toggle logic. -->
+    <script>
+        (function () {
+            var t = localStorage.getItem("theme");
+            if (t === "light" || t === "dark") {
+                document.documentElement.setAttribute("data-theme", t);
+            }
+        })();
+    </script>
     <title>{{ if not .IsHome }}{{ .Title }} — {{ end }}{{ .Site.Title }}</title>
     <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
 
@@ -32,8 +43,17 @@
     <!-- Syntax highlighting: light theme default, dark theme for dark mode -->
     {{ $syntaxLight := resources.Get "css/syntax-light.css" }}
     {{ $syntaxDark := resources.Get "css/syntax-dark.css" }}
-    <link rel="stylesheet" href="{{ $syntaxLight.RelPermalink }}" media="(prefers-color-scheme: light)">
-    <link rel="stylesheet" href="{{ $syntaxDark.RelPermalink }}" media="(prefers-color-scheme: dark)">
+    <link id="syntax-light-css" rel="stylesheet" href="{{ $syntaxLight.RelPermalink }}" media="(prefers-color-scheme: light)">
+    <link id="syntax-dark-css" rel="stylesheet" href="{{ $syntaxDark.RelPermalink }}" media="(prefers-color-scheme: dark)">
+    <script>
+        (function () {
+            var t = localStorage.getItem("theme");
+            if (t === "light" || t === "dark") {
+                document.getElementById("syntax-light-css").media = t === "light" ? "all" : "not all";
+                document.getElementById("syntax-dark-css").media = t === "dark" ? "all" : "not all";
+            }
+        })();
+    </script>
 </head>
 <body>
     <header class="site-header">
@@ -47,6 +67,28 @@
         </nav>
     </header>
 
+    <!-- Light/dark/auto theme toggle: a standalone corner control (not a
+         nav-link), with an animated sun/moon icon morph. "Auto" shows both
+         icons faded/tilted; "Light"/"Dark" resolve to one icon fully shown.
+         See tufte.css's "Theme colors" block for how [data-theme] wins over
+         the prefers-color-scheme query via specificity. -->
+    <button type="button" id="theme-toggle" class="theme-toggle" data-theme-state="auto" aria-label="Toggle color theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"></circle>
+            <line x1="12" y1="2" x2="12" y2="4"></line>
+            <line x1="12" y1="20" x2="12" y2="22"></line>
+            <line x1="4.93" y1="4.93" x2="6.34" y2="6.34"></line>
+            <line x1="17.66" y1="17.66" x2="19.07" y2="19.07"></line>
+            <line x1="2" y1="12" x2="4" y2="12"></line>
+            <line x1="20" y1="12" x2="22" y2="12"></line>
+            <line x1="4.93" y1="19.07" x2="6.34" y2="17.66"></line>
+            <line x1="17.66" y1="6.34" x2="19.07" y2="4.93"></line>
+        </svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+    </button>
+
     <main>
         {{ block "main" . }}{{ end }}
     </main>
@@ -55,5 +97,45 @@
         <p>{{ .Site.Params.footer | default "&copy; 2026" | safeHTML }}
         {{ with .Site.Params.repoURL }} · <a href="{{ . }}">Source</a>{{ end }}</p>
     </footer>
+
+    <script>
+        (function () {
+            var KEY = "theme";
+            var btn = document.getElementById("theme-toggle");
+            var lightLink = document.getElementById("syntax-light-css");
+            var darkLink = document.getElementById("syntax-dark-css");
+
+            function describe(t) {
+                return t === "light" ? "Switch to dark theme" : t === "dark" ? "Follow system theme" : "Switch to light theme";
+            }
+
+            function apply(t) {
+                if (t === "light" || t === "dark") {
+                    document.documentElement.setAttribute("data-theme", t);
+                    lightLink.media = t === "light" ? "all" : "not all";
+                    darkLink.media = t === "dark" ? "all" : "not all";
+                } else {
+                    document.documentElement.removeAttribute("data-theme");
+                    lightLink.media = "(prefers-color-scheme: light)";
+                    darkLink.media = "(prefers-color-scheme: dark)";
+                }
+                btn.setAttribute("data-theme-state", t);
+                btn.setAttribute("aria-label", describe(t));
+            }
+
+            var current = localStorage.getItem(KEY) || "auto";
+            apply(current);
+
+            btn.addEventListener("click", function () {
+                current = current === "auto" ? "light" : current === "light" ? "dark" : "auto";
+                if (current === "auto") {
+                    localStorage.removeItem(KEY);
+                } else {
+                    localStorage.setItem(KEY, current);
+                }
+                apply(current);
+            });
+        })();
+    </script>
 </body>
 </html>
