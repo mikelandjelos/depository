@@ -7,9 +7,11 @@
 
     {{ if $cv.contact }}
     <p class="cv-contact">
-        {{ range $i, $c := $cv.contact }}
-            {{ if $i }}<span class="cv-contact-sep"> · </span>{{ end }}
-            {{ if $c.href }}<a href="{{ $c.href }}">{{ $c.text }}</a>{{ else }}{{ $c.text }}{{ end }}
+        {{ range $cv.contact }}
+        <span class="cv-contact-item">
+            {{ with .icon }}{{ partial "icon.html" . }}{{ end }}
+            {{ if .href }}<a href="{{ .href }}">{{ .text }}</a>{{ else }}{{ .text }}{{ end }}
+        </span>
         {{ end }}
     </p>
     {{ end }}

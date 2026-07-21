@@ -625,6 +625,13 @@ p.toc-label {
 
 /* ---------- Curriculum Vitae ---------- */
 
+/* Printed CVs are page-width (~800px), not browser-width — stretching
+   title-left/date-right rows across the site's full ~1400px container
+   leaves huge dead gaps in every row. Cap the article itself instead. */
+article.cv {
+    max-width: 850px;
+}
+
 p.cv-updated {
     font-size: 1.1rem;
     font-style: italic;
@@ -634,20 +641,41 @@ p.cv-updated {
 }
 
 p.cv-contact {
-    width: 55%;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 1.3rem;
     font-size: 1.2rem;
     opacity: 0.85;
     margin-bottom: 2.5rem;
     line-height: 1.9;
 }
 
-.cv-contact-sep {
-    opacity: 0.4;
-    margin: 0 0.1em;
+.cv-contact-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35em;
+}
+
+.cv-contact-icon {
+    width: 1em;
+    height: 1em;
+    flex-shrink: 0;
+    opacity: 0.7;
 }
 
 section.cv-section {
-    width: 55%;
+    width: 100%;
+}
+
+/* Override the blog-prose width constraints (section > p / ul / ol / dl)
+   which would otherwise silently clip these to 55%/50%. */
+section.cv-section > p,
+section.cv-section > ul,
+section.cv-section > ol,
+section.cv-section > dl {
+    width: 100%;
 }
 
 section.cv-section h2 {

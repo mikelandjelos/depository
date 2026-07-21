@@ -13,6 +13,7 @@ Custom theme built inline (no `themes/` directory). All templates live in
 | `layouts/_default/single.html` | Article/post page: title, subtitle, date, tags, content |
 | `layouts/_default/list.html` | Section list page: title, content, chronological post list |
 | `layouts/index.html` | Homepage: site title, description, recent 10 posts from `posts/` section |
+| `layouts/_default/cv.html` | Curriculum Vitae page: renders `data/cv.yaml` (see "Curriculum Vitae" below) |
 | `assets/css/tufte.css` | All styles — adapted Tufte CSS + site header/nav/footer/post-list/avatar |
 | `assets/css/syntax-light.css` | Chroma syntax highlighting — monokailight (light mode) |
 | `assets/css/syntax-dark.css` | Chroma syntax highlighting — monokai (dark mode) |
@@ -116,7 +117,70 @@ thin/theme-colored via `scrollbar-width`/`scrollbar-color` +
 
 - Minimal top bar: site name (small-caps, left) + nav links (right, flexbox)
 - Links from `[menus.main]` in hugo.toml
-- Current pages: Posts, About
+- Current pages: Posts, About, Curriculum Vitae
+
+### Curriculum Vitae
+
+The `/cv/` page renders live from Mihajlo's separate
+[curriculum-vitae](https://github.com/mikelandjelos/curriculum-vitae) repo
+(source of truth: `cv.tex`), not hand-authored content. Split out from
+GitHub issue #3 (which originally asked for CV content to live on the About
+page) — About and CV serve different purposes: About is a personal/site-
+philosophy page (à la [gwern.net/about](https://gwern.net/about)), CV is the
+professional résumé. About remains a placeholder until that content gets
+written.
+
+**Pipeline:**
+
+1. `scripts/sync_cv.py` fetches `cv.tex` (from a local path or the repo's raw
+   URL) and parses it into `data/cv.yaml`. This is a **targeted parser for
+   this specific LaTeX template**, not a general LaTeX-to-anything
+   converter — the template uses custom `onecolentry`/`twocolentry`/
+   `highlights`/`header` environments (from a RenderCV-style CV template)
+   that plain `pandoc` cannot render (it doesn't know what to do with
+   undefined custom environments). The parser does balanced-brace-aware
+   extraction of those environments plus a `clean_latex()` pass that
+   converts `\textbf`/`\textit`/`\texttt`/`\href` etc. into Markdown, so the
+   resulting YAML holds Markdown strings that `layouts/_default/cv.html`
+   renders via Hugo's `markdownify`.
+2. `layouts/_default/cv.html` reads `.Site.Data.cv` and renders header
+   (name + contact line, no icon font — plain text joined with `·`),
+   then each section's entries: `kind: entry` (title/subtitle left,
+   right-aligned `meta` — a list of lines, not a folded string, since YAML
+   flow-scalar line-folding collapses blank-line-separated text to a single
+   `\n`/space rather than preserving a real line break) with optional
+   `highlights` bullets, or `kind: text` for a plain paragraph (used by the
+   Summary and Skills sections, which have no title/date row).
+3. `.github/workflows/sync-cv.yml` (in this repo) re-runs the parser and
+   commits `data/cv.yaml` if it changed, on a `repository_dispatch`
+   `cv-updated` event or manual `workflow_dispatch`. That commit triggers
+   the existing Cloudflare auto-deploy — no separate deploy step needed.
+4. The curriculum-vitae repo has a companion workflow (pushed directly
+   there, **not** tracked in this repo) that fires the `cv-updated`
+   dispatch on every push to `cv.tex`. It needs a `DEPOSITORY_DISPATCH_TOKEN`
+   secret (a PAT scoped to trigger `repository_dispatch` on `depository`)
+   added to curriculum-vitae's repo secrets before it'll actually work —
+   until that's added, the sync only runs via manual `workflow_dispatch`.
+
+**Styling:** contact icons are minimal inline SVGs (Feather-icons-style,
+`layouts/partials/icon.html`, keyed by the `icon` field in `data/cv.yaml`) —
+no external icon-font dependency for just six glyphs. Section headings get a
+`border-bottom` rule (visual nod to the LaTeX template's `\titlerule`)
+rather than the italic `h2` style used elsewhere. Entry rows are a flex row
+(title/subtitle left, date/location right), stacking to a single column on
+mobile (`<760px`).
+
+**Width, twice fixed:** `article.cv` is capped at `max-width: 850px` —
+printed CVs are page-width, not browser-width, and stretching title-left/
+date-right rows across the site's full ~1400px container leaves huge dead
+gaps in every row. Separately, `section.cv-section`'s direct `p`/`ul`/`ol`/
+`dl` children need an explicit `width: 100%` override, because the site's
+global blog-prose rules (`section > p { width: 55% }`,
+`section > ul { width: 50% }`) silently apply to `.cv-text`/`.cv-highlights`
+too otherwise (same-specificity selectors that this page's own rules never
+overrode, since a rule that doesn't set `width` doesn't "win" against one
+that does) — the mismatch is not obvious until you compare a paragraph's
+wrap width against a sibling entry row's date position.
 
 ### Favicon & Avatar
 

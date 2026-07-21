@@ -116,6 +116,21 @@ sequence, skipping issue #5 (Graph indexing) for last/brainstorm.
   - Illuminated-manuscript-style drop cap on a post's first letter.
   - Metadata (tags/category/date/draft) split into sub-issue #8, design
     still being brainstormed.
+- [x] **#3 About Me page** [CV part shipped in 32038e2; About part still open]
+  - Originally asked for CV content to live on the About page — split
+    instead, since About (personal/site-philosophy, gwern.net/about-style)
+    and CV (professional resume) serve different purposes.
+  - Shipped: `/cv/` page, data-driven from Mihajlo's separate
+    curriculum-vitae repo's `cv.tex` via `scripts/sync_cv.py` →
+    `data/cv.yaml` → `layouts/_default/cv.html`. See docs/THEME.md →
+    "Curriculum Vitae" for the full pipeline.
+  - **Blocked/pending**: instant sync requires a `DEPOSITORY_DISPATCH_TOKEN`
+    secret added to the curriculum-vitae repo (self-service, PAT creation
+    can't be done on the user's behalf) — until added, sync only runs via
+    manual `workflow_dispatch` in this repo.
+  - **Still open**: About page's actual personal/philosophical content —
+    intentionally deferred, that's Mihajlo's voice to write, not something
+    to fabricate on his behalf.
 - [ ] **#8 Post metadata** [OPEN, sub-issue of #2] — refined scope:
   - Tags (multiple, taxonomy) — front matter exists, navigation doesn't yet.
   - Category (singular, taxonomy) — new field.
@@ -129,7 +144,6 @@ sequence, skipping issue #5 (Graph indexing) for last/brainstorm.
       vertical whitespace; needs a more gwern-like compact layout.
 - [ ] **#10 Manual light/dark mode toggle** [OPEN] — gwern-style mode
       switcher, not just `prefers-color-scheme`.
-- [ ] **#3 About Me page** [OPEN]
 - [ ] **#4 Integrate Quarto Scientific publishing** [OPEN]
 - [ ] **#6 Articles** [OPEN]
 - [ ] **#7 Github interop** [OPEN]
