@@ -119,7 +119,7 @@ sequence, skipping issue #5 (Graph indexing) for last/brainstorm.
 - [x] **#3 About Me page** [CV part shipped in 32038e2; About part still open]
   - Originally asked for CV content to live on the About page — split
     instead, since About (personal/site-philosophy, gwern.net/about-style)
-    and CV (professional resume) serve different purposes.
+    and CV (professional résumé) serve different purposes.
   - Shipped: `/cv/` page, data-driven from Mihajlo's separate
     curriculum-vitae repo's `cv.tex` via `scripts/sync_cv.py` →
     `data/cv.yaml` → `layouts/_default/cv.html`. See docs/THEME.md →

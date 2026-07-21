@@ -132,35 +132,43 @@ written.
 
 **Pipeline:**
 
-1. `scripts/sync_cv.py` fetches `cv.tex` (from a local path or the repo's raw
-   URL) and parses it into `data/cv.yaml`. This is a **targeted parser for
-   this specific LaTeX template**, not a general LaTeX-to-anything
-   converter — the template uses custom `onecolentry`/`twocolentry`/
-   `highlights`/`header` environments (from a RenderCV-style CV template)
-   that plain `pandoc` cannot render (it doesn't know what to do with
-   undefined custom environments). The parser does balanced-brace-aware
-   extraction of those environments plus a `clean_latex()` pass that
-   converts `\textbf`/`\textit`/`\texttt`/`\href` etc. into Markdown, so the
-   resulting YAML holds Markdown strings that `layouts/_default/cv.html`
-   renders via Hugo's `markdownify`.
-2. `layouts/_default/cv.html` reads `.Site.Data.cv` and renders header
-   (name + contact line, no icon font — plain text joined with `·`),
-   then each section's entries: `kind: entry` (title/subtitle left,
+1. `scripts/sync_cv.py` parses `cv.tex` (from a local path via `--input`, or
+   — only useful if the repo ever becomes public — its raw URL) into
+   `data/cv.yaml`. This is a **targeted parser for this specific LaTeX
+   template**, not a general LaTeX-to-anything converter — the template uses
+   custom `onecolentry`/`twocolentry`/`highlights`/`header` environments
+   (from a RenderCV-style CV template) that plain `pandoc` cannot render (it
+   doesn't know what to do with undefined custom environments). The parser
+   does balanced-brace-aware extraction of those environments plus a
+   `clean_latex()` pass that converts `\textbf`/`\textit`/`\texttt`/`\href`
+   etc. into Markdown, so the resulting YAML holds Markdown strings that
+   `layouts/_default/cv.html` renders via Hugo's `markdownify`.
+2. `layouts/_default/cv.html` reads `.Site.Data.cv` and renders the header
+   (name and contact line — inline SVG icons from
+   `layouts/partials/icon.html`, keyed by each contact entry's `icon` field,
+   no icon-font dependency), then each section's entries: `kind: entry`
+   (title/subtitle left,
    right-aligned `meta` — a list of lines, not a folded string, since YAML
    flow-scalar line-folding collapses blank-line-separated text to a single
    `\n`/space rather than preserving a real line break) with optional
    `highlights` bullets, or `kind: text` for a plain paragraph (used by the
    Summary and Skills sections, which have no title/date row).
-3. `.github/workflows/sync-cv.yml` (in this repo) re-runs the parser and
-   commits `data/cv.yaml` if it changed, on a `repository_dispatch`
-   `cv-updated` event or manual `workflow_dispatch`. That commit triggers
-   the existing Cloudflare auto-deploy — no separate deploy step needed.
+3. `.github/workflows/sync-cv.yml` (in this repo) checks out
+   **curriculum-vitae — a private repo** — using a
+   `CURRICULUM_VITAE_READ_TOKEN` secret (a PAT with Contents:Read on
+   curriculum-vitae, added to *this* repo's secrets), then re-runs the
+   parser against that checkout and commits `data/cv.yaml` if it changed, on
+   a `repository_dispatch` `cv-updated` event or manual `workflow_dispatch`.
+   That commit triggers the existing Cloudflare auto-deploy — no separate
+   deploy step needed. (Earlier versions of this workflow tried an
+   unauthenticated `raw.githubusercontent.com` fetch, which 404s for a
+   private repo — first real end-to-end test caught this.)
 4. The curriculum-vitae repo has a companion workflow (pushed directly
    there, **not** tracked in this repo) that fires the `cv-updated`
-   dispatch on every push to `cv.tex`. It needs a `DEPOSITORY_DISPATCH_TOKEN`
-   secret (a PAT scoped to trigger `repository_dispatch` on `depository`)
-   added to curriculum-vitae's repo secrets before it'll actually work —
-   until that's added, the sync only runs via manual `workflow_dispatch`.
+   dispatch on every push to `cv.tex`, using a `DEPOSITORY_DISPATCH_TOKEN`
+   secret (a PAT with Contents:Read-and-write on `depository`, added to
+   curriculum-vitae's secrets) — confirmed working as of the first real
+   sync.
 
 **Styling:** contact icons are minimal inline SVGs (Feather-icons-style,
 `layouts/partials/icon.html`, keyed by the `icon` field in `data/cv.yaml`) —

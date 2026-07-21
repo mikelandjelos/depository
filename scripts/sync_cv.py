@@ -7,6 +7,13 @@ mikelandjelos/curriculum-vitae (custom `onecolentry`/`twocolentry`/
 `highlights`/`header` environments) -- not a general LaTeX-to-anything
 converter. If the template's structure changes significantly, this will
 need updating alongside it.
+
+curriculum-vitae is a *private* repo, so the anonymous RAW_URL fetch below
+only works if you're authenticated some other way (e.g. a browser session
+cookie, which urllib doesn't have) -- it's kept as a convenience default
+for a possible future where the repo is public. In CI (.github/workflows/
+sync-cv.yml), the workflow checks out curriculum-vitae with a PAT first
+and calls this script with --input pointing at that local checkout.
 """
 
 from __future__ import annotations
