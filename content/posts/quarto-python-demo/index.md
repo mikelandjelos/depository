@@ -1,0 +1,68 @@
+---
+title: 'Notebooks as Posts: A Python Demo'
+subtitle: This post's plot and numbers were computed at build time, not pasted in
+date: 2026-07-25T00:00:00.000Z
+status: seedling
+categories:
+  - meta
+tags:
+  - meta
+  - quarto
+  - python
+---
+
+
+<span class="newthought">This post is written</span> as a Quarto `.qmd`
+document rather than plain Markdown. The prose you’re reading and the code
+below live in the same source file, and the code actually runs: Quarto
+executes it at build time via Jupyter, then hands the rendered Markdown —
+prose, code, and figures — to Hugo, which lays it out with the site’s usual
+typography, table of contents, and tags.
+
+Here’s a small numerical experiment: approximating $\pi$ by sampling random
+points in a unit square and checking what fraction land inside the inscribed
+circle.
+
+``` python
+import numpy as np
+
+rng = np.random.default_rng(seed=42)
+n = 20_000
+x, y = rng.uniform(-1, 1, n), rng.uniform(-1, 1, n)
+inside = x**2 + y**2 <= 1
+estimate = 4 * inside.sum() / n
+estimate
+```
+
+    np.float64(3.1384)
+
+That estimate should be somewhere close to the real thing:
+
+$$\pi \approx 3.14159\ldots$$
+
+A plot makes the sampling easier to see than the number alone does — points
+inside the circle in one color, points outside in another:
+
+``` python
+import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots(figsize=(5, 5))
+ax.scatter(x[inside], y[inside], s=2, color="#a8071a")
+ax.scatter(x[~inside], y[~inside], s=2, color="#888")
+ax.set_aspect("equal")
+ax.set_xticks([])
+ax.set_yticks([])
+for spine in ax.spines.values():
+    spine.set_visible(False)
+plt.show()
+```
+
+<div class="quarto-figure">
+<img src="index_files/figure-markdown_strict/cell-3-output-1.png" width="389" height="389" />
+</div>
+
+The point of this post isn’t the Monte Carlo estimate itself — it’s that
+this whole thing (code, output, and figure) regenerates automatically
+whenever the source `.qmd` changes, the same way the [statistics
+page](/stats/) regenerates from live GitHub data rather than being
+hand-updated.

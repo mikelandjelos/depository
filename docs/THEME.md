@@ -219,6 +219,54 @@ issue, with its number and opened date.
   newest-first since the API returns commits newest-first; `sort` on that
   gives the chronological order the sparkline needs instead).
 
+### Quarto posts (#4)
+
+Posts can be written as executable Quarto documents (`.qmd`, Python via
+Jupyter or R via knitr) or as hand-authored Jupyter notebooks (`.ipynb`),
+not just plain Markdown. Full toolchain setup and authoring workflow lives
+in docs/QUARTO.md — this section is the design rationale.
+
+**Compile to Hugo-native Markdown, not an embedded/iframed HTML document.**
+Quarto's `hugo-md` output format renders a `.qmd`/`.ipynb` straight to
+Markdown (code, executed output, and figures included), which lands in the
+exact same `content/posts/<slug>/index.md` shape as a hand-written post —
+same `single.html` template, same ToC/tags/status-badge/theme-toggle
+treatment. The alternative (render to standalone HTML, embed via iframe)
+would preserve true JS interactivity (plotly, ipywidgets) but the iframed
+document wouldn't inherit the site's fonts or dark-mode sync, and would sit
+outside the ToC/sidenote/drop-cap system built for every other post. Given
+this site's whole identity is the Tufte-native typography, consistency won
+over interactivity; nothing built so far (static plots, tables) needed a
+JS widget anyway.
+
+**Page bundle convention:** every Quarto post's source lives at
+`content/posts/<slug>/index.qmd` (or `index.ipynb`), and Quarto renders
+`index.md` plus a figures directory as siblings in that same folder — a
+Hugo leaf bundle, so figures are picked up as page resources automatically,
+no `static/` copying required. `hugo.toml`'s `ignoreFiles` excludes the raw
+`.qmd`/`.ipynb` source from being published as a static file.
+
+Three demo posts (mirroring `hello-world.md`'s role as the plain-Markdown
+feature demo): `quarto-python-demo` (Jupyter engine — numpy/matplotlib),
+`quarto-r-demo` (knitr engine — base R plotting + a `knitr::kable` table),
+`quarto-ipynb-demo` (a notebook that was never a `.qmd` at all, front
+matter in a raw cell instead of a YAML header).
+
+Several `hugo-md` quirks needed fixing up in `scripts/render_quarto.py`
+(the wrapper every render goes through) rather than working around them
+per-post — see docs/QUARTO.md → "Known quirks" for the full list: smart
+punctuation flattening em dashes, root-relative links resolving against
+disk depth instead of Hugo's URL depth, bare figure `<img>` tags needing a
+wrapper div to align with their code block's column, `.ipynb` not
+executing by default, and non-theme-adaptive plot colors (fixed via
+`matplotlibrc` + `_quarto.yml`'s knitr `dev.args`, both defaulting to
+transparent backgrounds and mid-gray `#888888` text/ticks that read on
+both the light and dark theme's background).
+
+Julia isn't wired up — explored as an option per #4's original ask, but
+not started; would need a separate IJulia engine install following the
+same shape as Python/R.
+
 ### Sidenotes (from Tufte CSS)
 
 - Uses checkbox toggle pattern: `<label>` + `<input type="checkbox">` + `<span>`
@@ -269,6 +317,46 @@ the browser compute `overflow-y` as an ambiguous auto-like value per spec).
 Horizontal scrollbars (on code blocks and `div.table-wrapper`) are styled
 thin/theme-colored via `scrollbar-width`/`scrollbar-color` +
 `::-webkit-scrollbar*`, instead of the bulky OS-default one.
+
+**Left-edge alignment (found via #4's Quarto posts):** the boxes above used
+to be `width: calc(52.5% + 2px); margin-left: 2.5%` — inset from the left
+edge by 2.5%, with a matching width reduction so the *right* edge still
+lined up with paragraphs (`width: 55%`, no margin). This went unnoticed for
+a long time because nothing sat directly under a code block closely enough
+to expose it. The R Quarto demo post (`knitr::kable` table right under a
+code block) made the misalignment obvious: the code block visibly started
+and ended shifted right of the table beneath it. Fixed by dropping the
+2.5% inset (`margin-left: 0; width: calc(55% + 2px)`) so code blocks are
+flush with paragraphs/tables on both edges. Also added
+`box-sizing: border-box` to both rules — without it, the `1em` padding
+added *on top of* the specified width (default `content-box` sizing),
+pushing the box's right edge out past the 55% column by `2 × 1em`; this
+was a separate, previously-invisible overflow that only became visible
+once the left edge was fixed and the right-edge mismatch was the one thing
+left to spot.
+
+### Tables
+
+No table styling existed beyond the browser default (and an unused
+`div.table-wrapper { overflow-x: auto }` rule with nothing to wrap) until
+issue #4's Quarto R demo put a real `knitr::kable` table on the page and
+made "plain browser default" look obviously unfinished next to the rest of
+the site's typography.
+
+Default look (no front matter needed) is a classic Tufte rule-table: bold
+header with a rule underneath, a closing rule under the last row, no
+vertical lines. Two opt-in alternates via front matter:
+
+```yaml
+tableStyle: "striped"   # zebra-striped rows (var(--color-code-bg))
+tableStyle: "grid"      # full bordered grid, for dense/wide data
+```
+
+`single.html` turns the field into a class on the content `<section>`
+(`table-style-striped` / `table-style-grid`), so the CSS scoping is
+per-post, not per-table — every table in a post shares the same style.
+All colors are theme-variable-based (`--color-text`, `--color-border`,
+`--color-code-bg`), so they follow the light/dark toggle automatically.
 
 ### Navigation
 
@@ -376,10 +464,15 @@ wrap width against a sibling entry row's date position.
 - `markup.goldmark.renderer.unsafe = true` — required for sidenote HTML in markdown
 - `markup.goldmark.extensions.passthrough` — preserves `$…$` and `$$…$$` for KaTeX
 - `markup.highlight.noClasses = false` — CSS-based syntax highlighting
+- `ignoreFiles = ['\.qmd$', '\.ipynb$']` — Quarto source files live alongside
+  their rendered `index.md` in a page bundle; this keeps Hugo from
+  publishing the raw source as a static file (see docs/QUARTO.md)
 
 ## Sample Content
 
 - `content/posts/hello-world.md` — demonstrates all features (sidenotes, math, code)
+- `content/posts/quarto-python-demo/`, `quarto-r-demo/`, `quarto-ipynb-demo/`
+  — demonstrate Quarto/notebook-authored posts (see "Quarto posts (#4)" above)
 - `content/about.md` — placeholder about page
 
 ## Known TODOs

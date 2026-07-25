@@ -23,8 +23,16 @@ code in JetBrains Mono. Math is rendered client-side with
 [KaTeX](https://katex.org/). Long posts get an automatically generated
 table of contents (a numbered outline, styled after
 [gwern.net](https://gwern.net/)'s), and each post opens with an
-illuminated-manuscript-style drop cap. The site respects your system's
-light/dark preference; there's no manual toggle yet.
+illuminated-manuscript-style drop cap. Light/dark/auto theme is a manual
+toggle (top-right corner icon), on top of respecting your system preference
+by default.
+
+Some posts are written as executable notebooks rather than plain prose —
+a [Quarto](https://quarto.org/) `.qmd` document or a Jupyter `.ipynb`,
+in Python or R. The code actually runs at build time: the numbers, tables,
+and plots you see are computed then, not pasted in by hand, and they
+render through the same typography, table of contents, and tags as every
+other post here.
 
 The [Curriculum Vitae](/cv/) page is not hand-written here — it's
 generated from the LaTeX source of a separate, private CV repository.

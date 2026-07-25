@@ -1,0 +1,13 @@
+savefig.transparent: True
+figure.facecolor: none
+axes.facecolor: none
+
+# The site's background flips between near-white and near-black across
+# light/dark mode, but a baked PNG can't follow that switch. Pure black
+# text/ticks (matplotlib's default) disappear in dark mode, so every text
+# element defaults to a mid-gray that reads reasonably on both.
+text.color: 888888
+axes.labelcolor: 888888
+axes.edgecolor: 888888
+xtick.color: 888888
+ytick.color: 888888

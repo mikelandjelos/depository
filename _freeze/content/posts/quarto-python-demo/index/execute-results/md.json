@@ -1,0 +1,12 @@
+{
+  "hash": "952b362891b9ac5b252b2c679d4c31d5",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "---\ntitle: \"Notebooks as Posts: A Python Demo\"\nsubtitle: \"This post's plot and numbers were computed at build time, not pasted in\"\ndate: 2026-07-25\nstatus: \"seedling\"\ncategories: [\"meta\"]\ntags: [\"meta\", \"quarto\", \"python\"]\n---\n\n<span class=\"newthought\">This post is written</span> as a Quarto `.qmd`\ndocument rather than plain Markdown. The prose you're reading and the code\nbelow live in the same source file, and the code actually runs: Quarto\nexecutes it at build time via Jupyter, then hands the rendered Markdown —\nprose, code, and figures — to Hugo, which lays it out with the site's usual\ntypography, table of contents, and tags.\n\nHere's a small numerical experiment: approximating $\\pi$ by sampling random\npoints in a unit square and checking what fraction land inside the inscribed\ncircle.\n\n::: {.cell execution_count=1}\n``` {.python .cell-code}\nimport numpy as np\n\nrng = np.random.default_rng(seed=42)\nn = 20_000\nx, y = rng.uniform(-1, 1, n), rng.uniform(-1, 1, n)\ninside = x**2 + y**2 <= 1\nestimate = 4 * inside.sum() / n\nestimate\n```\n\n::: {.cell-output .cell-output-display execution_count=1}\n```\nnp.float64(3.1384)\n```\n:::\n:::\n\n\nThat estimate should be somewhere close to the real thing:\n\n$$\\pi \\approx 3.14159\\ldots$$\n\nA plot makes the sampling easier to see than the number alone does — points\ninside the circle in one color, points outside in another:\n\n::: {.cell execution_count=2}\n``` {.python .cell-code}\nimport matplotlib.pyplot as plt\n\nfig, ax = plt.subplots(figsize=(5, 5))\nax.scatter(x[inside], y[inside], s=2, color=\"#a8071a\")\nax.scatter(x[~inside], y[~inside], s=2, color=\"#888\")\nax.set_aspect(\"equal\")\nax.set_xticks([])\nax.set_yticks([])\nfor spine in ax.spines.values():\n    spine.set_visible(False)\nplt.show()\n```\n\n::: {.cell-output .cell-output-display}\n![](index_files/figure-markdown_strict/cell-3-output-1.png){width=389 height=389}\n:::\n:::\n\n\nThe point of this post isn't the Monte Carlo estimate itself — it's that\nthis whole thing (code, output, and figure) regenerates automatically\nwhenever the source `.qmd` changes, the same way the [statistics\npage](/stats/) regenerates from live GitHub data rather than being\nhand-updated.\n\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

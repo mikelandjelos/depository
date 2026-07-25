@@ -17,7 +17,7 @@
         <p class="toc-label">Contents</p>
         {{ .TableOfContents }}
     {{ end }}
-    <section>
+    <section{{ with .Params.tableStyle }} class="table-style-{{ . }}"{{ end }}>
         {{ .Content }}
     </section>
 </article>

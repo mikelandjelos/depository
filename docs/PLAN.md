@@ -184,7 +184,30 @@ sequence, skipping issue #5 (Graph indexing) for last/brainstorm.
 - [ ] **#15 Artsy** [OPEN, enhancement/style] — not scoped yet.
 - [ ] **#16 Nightly scheduled rebuild** [OPEN] — keeps Statistics and
       Unresolved Promises fresh even with no pushes to `depository`.
-- [ ] **#4 Integrate Quarto Scientific publishing** [OPEN]
+- [ ] **#4 Integrate Quarto Scientific publishing** [IN PROGRESS] — Python
+      and R working end-to-end; Julia not started.
+  - `.qmd`/`.ipynb` posts render to Hugo-native Markdown via Quarto's
+    `hugo-md` format, landing in `content/posts/<slug>/index.md` page
+    bundles — same template, same styling as hand-written posts. See
+    docs/QUARTO.md for the full toolchain setup and
+    `scripts/render_quarto.py` for the render wrapper.
+  - Three demo posts shipped: `quarto-python-demo` (Jupyter engine,
+    matplotlib), `quarto-r-demo` (knitr engine, base R graphics + a
+    `knitr::kable` table), `quarto-ipynb-demo` (a notebook authored
+    directly as `.ipynb`, not compiled from `.qmd`).
+  - Fixed along the way, all documented in docs/QUARTO.md: Quarto's
+    "smart" typography flattening em dashes, root-relative links resolving
+    wrong relative to disk depth instead of Hugo's URL depth, bare `<img>`
+    figures needing a wrapper to align with their code block, `.ipynb`
+    files not executing by default, and non-theme-adaptive plot colors
+    (transparent figure backgrounds + mid-gray text/ticks via
+    `matplotlibrc` and `_quarto.yml`'s knitr `dev.args`).
+  - Also fixed two site-wide issues these demo posts exposed: code blocks
+    were inset 2.5% from paragraphs/tables (unnoticed until a table sat
+    directly under one), and tables had no styling at all beyond browser
+    defaults. See docs/THEME.md → "Code blocks" and "Tables".
+  - **Not started**: Julia/IJulia engine. Quarto supports it the same
+    shape as Python/R; just not installed or wired up yet.
 - [ ] **#6 Articles** [OPEN]
 - [ ] **#5 Graph indexing** [OPEN] — deliberately last; needs a brainstorming
       pass before implementation.

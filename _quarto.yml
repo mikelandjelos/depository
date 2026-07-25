@@ -1,0 +1,19 @@
+project:
+  type: default
+  render:
+    - "content/posts/**/*.qmd"
+    - "content/posts/**/*.ipynb"
+
+execute:
+  freeze: auto
+  enabled: true
+
+knitr:
+  opts_chunk:
+    dev.args:
+      bg: "transparent"
+
+format:
+  hugo-md:
+    default-image-extension: png
+    variant: "-smart"

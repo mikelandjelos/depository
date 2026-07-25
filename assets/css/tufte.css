@@ -196,6 +196,11 @@ section > table {
     width: 55%;
 }
 
+section > p {
+    text-align: justify;
+    hyphens: auto;
+}
+
 section > dl,
 section > ol,
 section > ul {
@@ -255,6 +260,21 @@ a:hover {
 
 img {
     max-width: 100%;
+}
+
+/* Quarto code-cell output figures. render_quarto.py wraps the bare <img>
+   Quarto emits in this div, sized to match .highlight pre.chroma's column
+   (55% width) so a figure lines up with the code that produced it instead
+   of centering on the full article width. */
+.quarto-figure {
+    width: calc(55% + 2px);
+}
+
+.quarto-figure img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 1.5rem auto;
 }
 
 /* ---------- Sidenotes & margin notes ---------- */
@@ -321,6 +341,43 @@ div.table-wrapper {
     overflow-x: auto;
 }
 
+/* Default table look: a classic Tufte rule-table -- bold header, a rule
+   under it, a closing rule under the body, no vertical lines. Opt into an
+   alternate via front matter (tableStyle: "striped" / "grid"), which
+   `single.html` turns into a class on the surrounding <section>. */
+table {
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+}
+
+thead th {
+    border-bottom: 1px solid var(--color-text);
+    padding: 0.3em 1em 0.3em 0;
+    font-weight: 700;
+}
+
+td {
+    padding: 0.25em 1em 0.25em 0;
+}
+
+tbody tr:last-child td {
+    border-bottom: 1px solid var(--color-text);
+}
+
+.table-style-striped tbody tr:nth-child(even) td {
+    background-color: var(--color-code-bg);
+}
+
+.table-style-grid table {
+    border-collapse: collapse;
+}
+
+.table-style-grid th,
+.table-style-grid td {
+    border: 1px solid var(--color-border);
+    padding: 0.3em 0.8em;
+}
+
 /* ---------- Code ---------- */
 
 code,
@@ -342,8 +399,8 @@ code {
 /* Plain (non-highlighted) code fences: pre wraps code directly, so code
    itself carries the width/margin/scroll box. */
 pre:not(.chroma) > code {
-    width: calc(52.5% + 2px);
-    margin-left: 2.5%;
+    box-sizing: border-box;
+    width: calc(55% + 2px);
     overflow-x: auto;
     overflow-y: hidden;
     display: block;
@@ -361,8 +418,8 @@ pre > code {
    own width/margin here would double-shrink it (52.5% of an already
    52.5%-wide box) and give it its own independent scrollbar. */
 .highlight pre.chroma {
-    width: calc(52.5% + 2px);
-    margin-left: 2.5%;
+    box-sizing: border-box;
+    width: calc(55% + 2px);
     padding: 1em;
     overflow-x: auto;
     overflow-y: hidden;
@@ -1016,7 +1073,8 @@ footer.site-footer {
     }
 
     pre:not(.chroma) > code,
-    .highlight pre.chroma {
+    .highlight pre.chroma,
+    .quarto-figure {
         width: calc(97% + 2px);
         margin-left: 0;
     }

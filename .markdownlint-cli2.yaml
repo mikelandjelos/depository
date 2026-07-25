@@ -13,3 +13,9 @@ config:
 
 globs:
   - "content/**/*.md"
+
+# Quarto-generated post bundles (content/posts/<slug>/index.md) -- rendered
+# output, not hand-authored. Pandoc's indented-output-block convention and
+# code-cell figures with no alt text aren't things to hand-fix per post.
+ignores:
+  - "content/posts/*/index.md"

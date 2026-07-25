@@ -3,6 +3,11 @@ languageCode = 'en-us'
 title = 'Mihajlo Madić'
 timeZone = 'Europe/Belgrade'
 
+# Quarto source files (.qmd/.ipynb) live alongside their rendered index.md in
+# content/posts/<slug>/ page bundles. Hugo should serve the rendered output
+# and the figures Quarto generates, but not publish the raw source.
+ignoreFiles = ['\.qmd$', '\.ipynb$']
+
 [params]
   description = 'Personal site — research, notes, and writing.'
   footer = '&copy; 2026'

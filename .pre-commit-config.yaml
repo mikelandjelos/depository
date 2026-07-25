@@ -32,6 +32,10 @@ repos:
         entry: proselint check
         language: system
         types: [markdown]
+        # Quarto-rendered post bundles: pandoc's plain-text output blocks
+        # (e.g. fixed-width R summary() tables) trip proselint's spacing
+        # heuristics, and it's generated content, not hand-authored prose.
+        exclude: ^content/posts/[^/]+/index\.md$
 
   # CSS linting
   - repo: local
