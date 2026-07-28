@@ -10,10 +10,13 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 GENERATOR = REPO_ROOT / "scripts" / "generate_post_cards.py"
+VENV_PYTHON = REPO_ROOT / ".venv" / "bin" / "python3"
 
 
 def main() -> int:
-    result = subprocess.run([sys.executable, GENERATOR], cwd=REPO_ROOT)
+    # Prefer the project's pinned local environment; CI uses its configured Python.
+    renderer = VENV_PYTHON if VENV_PYTHON.is_file() else Path(sys.executable)
+    result = subprocess.run([renderer, GENERATOR], cwd=REPO_ROOT)
     if result.returncode:
         return result.returncode
 

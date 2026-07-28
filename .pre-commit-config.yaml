@@ -51,7 +51,7 @@ repos:
     hooks:
       - id: generate-post-cards
         name: generate post cards
-        entry: .venv/bin/python3 scripts/stage_post_cards.py
+        entry: python3 scripts/stage_post_cards.py
         language: system
         files: ^content/posts/
         pass_filenames: false

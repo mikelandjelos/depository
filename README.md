@@ -42,13 +42,12 @@ Quarto posts use a Hugo page bundle at `content/posts/<slug>/`. Render a
 
 ```bash
 python3 scripts/render_quarto.py content/posts/my-post/index.qmd
-.venv/bin/python3 scripts/generate_post_cards.py
 ```
 
 Commit the source, generated `index.md`, and any generated figures together.
-Post cards need no author action: GitHub Actions generates and commits them
-in the same commit through the local pre-commit hook; GitHub Actions verifies
-that the committed cards are current.
+Post cards need no author action: the local pre-commit hook generates and
+stages them in the same commit, while GitHub Actions verifies that committed
+cards are current.
 See [docs/QUARTO.md](docs/QUARTO.md) for the full Python, R, and notebook
 workflow.
 

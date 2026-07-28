@@ -142,6 +142,8 @@ site/
   card fields or assets. The `generate-post-cards` pre-commit hook invokes
   `scripts/stage_post_cards.py`, which generates and stages opaque 1200×630
   PNG files plus `data/post_cards.yaml` in the same post-changing commit.
+  The hook prefers `.venv/bin/python3` locally and falls back to the active
+  Python interpreter in CI; both CI workflows pin the renderer dependencies.
   `generate-post-cards.yml` regenerates in CI and fails if the committed
   results differ. A post body hash chooses and
   parameterizes the drawing family (flow fields, Voronoi geometry, Julia

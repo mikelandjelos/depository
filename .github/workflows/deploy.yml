@@ -21,9 +21,9 @@ jobs:
         with:
           node-version: "22"
 
-      - name: Install linters
+      - name: Install linters and post-card renderer
         run: |
-          pip install pre-commit proselint
+          pip install pre-commit proselint matplotlib==3.11.1 numpy==2.5.1
           npm install -g markdownlint-cli2 stylelint stylelint-config-standard
 
       - name: Install Hugo

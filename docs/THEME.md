@@ -508,6 +508,9 @@ same commit. `.github/workflows/generate-post-cards.yml` pins the renderer
 versions, regenerates the cards in CI, and fails if the committed assets are
 stale. Cloudflare therefore receives posts and cards in one deploy, with no
 card front matter, manual generation command, or follow-up commit.
+The hook prefers `.venv/bin/python3` on a developer machine and falls back to
+the active Python interpreter in CI; both CI workflows install the same pinned
+`matplotlib` and `numpy` versions.
 
 ### Syndication (#13)
 
