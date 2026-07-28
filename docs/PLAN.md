@@ -178,15 +178,13 @@ sequence, skipping issue #5 (Graph indexing) for last/brainstorm.
       (post/word counts, dates), tag counts, and repo activity (commit
       count, repo age, a Tufte-sparkline of monthly commits). See
       docs/THEME.md → "Statistics".
-- [x] **#13 Add RSS/Atom feed** [IMPLEMENTED, AWAITING REVIEW] — Hugo's native
-      RSS 2.0 output is now explicitly enabled for the home page, post
-      section, taxonomy indexes, and individual tag/category terms. Every
-      page with a feed advertises it through an HTML alternate-feed link and
-      exposes an `RSS feed` footer link. This provides `/index.xml`,
-      `/posts/index.xml`, and scoped feeds such as `/tags/quarto/index.xml`
-      without maintaining a custom feed template. See docs/THEME.md →
-      "Syndication (#13)". Post the GitHub summary comment and close only
-      after Mihajlo approves it.
+- [x] **#13 Add RSS/Atom feed** [CLOSED] — Hugo's native RSS 2.0 output is
+      explicitly enabled for the home page, post section, taxonomy indexes,
+      and individual tag/category terms. Every page with a feed advertises it
+      through an HTML alternate-feed link and exposes an `RSS feed` footer
+      link. This provides `/index.xml`, `/posts/index.xml`, and scoped feeds
+      such as `/tags/quarto/index.xml` without maintaining a custom feed
+      template. See docs/THEME.md → "Syndication (#13)".
 - [ ] **#14 Add Open Graph / social meta tags** [OPEN]
 - [ ] **#11 Zotero Integration** [OPEN, question] — not scoped yet.
 - [ ] **#15 Artsy** [OPEN, enhancement/style] — not scoped yet.
