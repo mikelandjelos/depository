@@ -203,8 +203,8 @@ sequence, skipping issue #5 (Graph indexing) for last/brainstorm.
       `generate-post-cards.yml` verifies those results in CI. Authors do not
       manage card fields or assets. Each card is visible at the top of its
       post with an automatic italic generation caption and supplies
-      `og:image`/`twitter:image`. The issue also remains the seed for a future
-      article explaining the method.
+      `og:image`/`twitter:image`. The accompanying post, "How This Site Draws
+      Its Post Cards," documents the mathematical methods and full pipeline.
 - [ ] **#11 Zotero Integration** [OPEN, question] — not scoped yet.
 - [ ] **#15 Artsy** [OPEN, enhancement/style] — not scoped yet.
 - [ ] **#16 Nightly scheduled rebuild** [OPEN] — keeps Statistics and

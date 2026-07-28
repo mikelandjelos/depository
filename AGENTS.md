@@ -36,6 +36,7 @@ site/
 │   ├── about.md                   # About page (placeholder — personal/site content, TBD)
 │   ├── cv.md                      # CV page (front matter only; content driven by data/cv.yaml)
 │   └── posts/
+│       ├── deterministic-post-cards.md # Technical article on the card system
 │       ├── hello-world.md         # Sample post with all features
 │       ├── quarto-python-demo/    # Quarto .qmd post (Jupyter/Python engine)
 │       ├── quarto-r-demo/         # Quarto .qmd post (knitr/R engine)

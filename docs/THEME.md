@@ -280,6 +280,8 @@ same shape as Python/R.
 - Auto-render extension: `$…$` for inline, `$$…$$` for display
 - Hugo passthrough extension (`markup.goldmark.extensions.passthrough`) preserves
   LaTeX delimiters so Goldmark does not mangle backslashes
+- Article-scoped CSS makes inline and display math the same size as surrounding
+  prose; display math otherwise inherits the smaller `section` font size
 - Display math centered via `.katex-display` CSS (width: 55%, text-align: center)
 - Deferred loading — does not block page render
 
@@ -511,6 +513,8 @@ card front matter, manual generation command, or follow-up commit.
 The hook prefers `.venv/bin/python3` on a developer machine and falls back to
 the active Python interpreter in CI; both CI workflows install the same pinned
 `matplotlib` and `numpy` versions.
+`content/posts/deterministic-post-cards.md` documents the mathematical methods,
+hash partitioning, palette/frame split, and full author-to-deploy pipeline.
 
 ### Syndication (#13)
 

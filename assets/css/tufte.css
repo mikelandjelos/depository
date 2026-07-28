@@ -968,9 +968,17 @@ p.wip-notice {
     margin-bottom: 2rem;
 }
 
-/* ---------- KaTeX display math ---------- */
+/* ---------- KaTeX math ---------- */
 
-.katex-display {
+/* Paragraphs use a larger article type size, while a display-math wrapper is
+   a direct child of section and would otherwise inherit the smaller body size.
+   Override KaTeX's 1.21em default so both forms match surrounding prose. */
+article .katex {
+    font-size: 1em;
+}
+
+article .katex-display {
+    font-size: 1.4rem;
     text-align: center;
     width: 55%;
     margin: 1.4rem 0;
@@ -1126,7 +1134,7 @@ footer.site-footer {
         margin-left: 0;
     }
 
-    .katex-display {
+    article .katex-display {
         width: 100%;
         overflow-x: auto;
         overflow-y: hidden;
