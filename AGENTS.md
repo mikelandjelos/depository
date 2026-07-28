@@ -123,6 +123,11 @@ site/
   `"grid"`), not a fixed site-wide look — `single.html` turns the field
   into a class on the content `<section>`. Default (no field) is a plain
   Tufte rule-table. See docs/THEME.md → "Tables".
+- **RSS is Hugo-native**: `hugo.toml` explicitly enables RSS 2.0 output for
+home, sections, taxonomy indexes, and taxonomy terms. `baseof.html` adds
+per-page feed discovery metadata and an "RSS feed" footer link only where an
+RSS output exists; no custom feed template is maintained. See docs/THEME.md →
+  "Syndication (#13)".
 
 ## Task Sequence
 

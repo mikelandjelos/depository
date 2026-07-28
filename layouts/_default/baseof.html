@@ -16,6 +16,9 @@
     </script>
     <title>{{ if not .IsHome }}{{ .Title }} — {{ end }}{{ .Site.Title }}</title>
     <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+    {{ with .OutputFormats.Get "RSS" }}
+    <link rel="alternate" type="{{ .MediaType.Type }}" title="{{ $.Title }} RSS feed" href="{{ .Permalink }}">
+    {{ end }}
 
     <!-- Favicon -->
     <link rel="icon" href="{{ "favicon.ico" | relURL }}" type="image/x-icon">
@@ -95,6 +98,7 @@
 
     <footer class="site-footer">
         <p>{{ .Site.Params.footer | default "&copy; 2026" | safeHTML }}
+        {{ with .OutputFormats.Get "RSS" }} · <a href="{{ .RelPermalink }}">RSS feed</a>{{ end }}
         {{ with .Site.Params.repoURL }} · <a href="{{ . }}">Source</a>{{ end }}</p>
     </footer>
 

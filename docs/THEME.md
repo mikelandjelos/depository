@@ -445,8 +445,27 @@ wrap width against a sibling entry row's date position.
 
 ### Footer
 
-- Copyright notice + "Source" link to GitHub repo
+- Copyright notice, context-aware "RSS feed" link, and "Source" link to
+  GitHub repo
 - Repo URL configured via `params.repoURL` in hugo.toml
+
+### Syndication (#13)
+
+The site uses Hugo's built-in RSS 2.0 template rather than a hand-maintained
+feed template. `hugo.toml` explicitly enables the `RSS` output format for:
+
+- the home page (`/index.xml`),
+- sections, including the post stream (`/posts/index.xml`),
+- taxonomy indexes (`/tags/index.xml` and `/categories/index.xml`), and
+- individual taxonomy terms (for example, `/tags/quarto/index.xml`).
+
+The same configuration yields the standard RSS 2.0 feed with an Atom
+self-reference that Hugo emits by default. No separate Atom document is
+maintained: readers that support RSS can subscribe directly, and browsers or
+feed readers can discover the appropriate scoped feed through the
+`rel="alternate"` link in the page head. The footer also presents an `RSS
+feed` link only on pages that have an RSS output, avoiding a dead control on
+individual posts.
 
 ### Responsive (<760px)
 
@@ -467,6 +486,8 @@ wrap width against a sibling entry row's date position.
 - `ignoreFiles = ['\.qmd$', '\.ipynb$']` — Quarto source files live alongside
   their rendered `index.md` in a page bundle; this keeps Hugo from
   publishing the raw source as a static file (see docs/QUARTO.md)
+- `outputs` — explicitly retains Hugo's native RSS 2.0 generation for home,
+  section, taxonomy, and taxonomy-term pages (see "Syndication (#13)")
 
 ## Sample Content
 
@@ -478,14 +499,4 @@ wrap width against a sibling entry row's date position.
 ## Known TODOs
 
 - Consider Hugo shortcodes for sidenotes (cleaner than raw HTML in markdown)
-- Add RSS feed customization
 - Add Open Graph / meta tags for social sharing
-- TOC layout needs refinement — currently inserts too much vertical
-  whitespace; should read more like gwern.net's compact TOC treatment
-  (tracked in GitHub issue, see docs/PLAN.md)
-- Manual light/dark mode toggle (currently `prefers-color-scheme` only, no
-  user override) — inspired by gwern.net's mode selector (tracked in GitHub
-  issue, see docs/PLAN.md)
-- Post metadata: tags, singular category, date-created, and a
-  draft/not-draft "digital garden" maturity system — design still being
-  brainstormed (tracked as GitHub sub-issue #8 of #2)

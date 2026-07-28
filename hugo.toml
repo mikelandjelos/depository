@@ -17,6 +17,15 @@ ignoreFiles = ['\.qmd$', '\.ipynb$']
   tag = 'tags'
   category = 'categories'
 
+# Keep Hugo's native RSS 2.0 feeds enabled for the site, post index, and
+# taxonomy pages. Term feeds make it possible to subscribe to one tag or
+# category without receiving every post.
+[outputs]
+  home = ['HTML', 'RSS']
+  section = ['HTML', 'RSS']
+  taxonomy = ['HTML', 'RSS']
+  term = ['HTML', 'RSS']
+
 [caches]
   [caches.getresource]
     # Hugo's default is maxAge = -1 (cache forever) for resources.GetRemote,
