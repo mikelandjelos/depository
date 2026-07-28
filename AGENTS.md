@@ -109,8 +109,11 @@ site/
 - **Favicon & avatar**: Generated from GitHub profile picture (mikelandjelos).
   Also displayed as a small circular avatar on the homepage next to site title.
 - **Table of contents**: Hugo's built-in `.TableOfContents`, not a custom
-  shortcode/JS solution — styled with CSS counters into a gwern-inspired
-  numbered outline. See docs/THEME.md → "Table of contents".
+  shortcode/JS solution — styled with CSS counters into a numbered outline
+  that floats and sticks in the right reading margin on desktop, then returns
+  to normal flow on mobile. A small local script collapses it into a
+  "Table of contents" toggle when it would overlap margin content. See
+  docs/THEME.md → "Table of contents".
 - **Drop cap font**: UnifrakturMaguntia (Google Fonts) for the illuminated
   first-letter treatment on post openings. See docs/THEME.md → Typography.
 - **Curriculum Vitae is data-driven, not hand-authored**: `data/cv.yaml` is

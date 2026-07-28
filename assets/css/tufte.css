@@ -1032,9 +1032,69 @@ p.toc-label {
     margin-bottom: 0.4rem;
 }
 
+.article-toc {
+    position: sticky;
+    top: 2rem;
+    z-index: 3;
+    float: right;
+    clear: right;
+    width: 38%;
+    margin: 1.4rem 2% 1.6rem 0;
+}
+
+.article-toc-toggle {
+    display: none;
+    position: relative;
+    border: 1px solid var(--color-border);
+    padding: 0.35rem 0.55rem;
+    color: inherit;
+    font: inherit;
+    font-size: 1rem;
+    font-variant: small-caps;
+    letter-spacing: 0.04em;
+    background: var(--color-bg);
+    box-shadow: 0.2rem 0.25rem 0 rgb(0 0 0 / 18%);
+    cursor: pointer;
+}
+
+.article-toc-panel {
+    max-height: calc(100vh - 4rem);
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-scrollbar-thumb) transparent;
+}
+
+.article-toc .toc-label {
+    width: auto;
+    margin-top: 0;
+}
+
+.article-toc-collapsed .article-toc-toggle {
+    display: inline-block;
+}
+
+.article-toc-collapsed .article-toc-panel {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: min(24rem, 38vw);
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.article-toc-collapsed.article-toc-open .article-toc-panel {
+    top: calc(100% + 0.55rem);
+    padding: 0.8rem;
+    border: 1px solid var(--color-border);
+    background: var(--color-bg);
+    box-shadow: 0.3rem 0.35rem 0 rgb(0 0 0 / 14%);
+    visibility: visible;
+    pointer-events: auto;
+}
+
 #TableOfContents {
-    width: 55%;
-    margin: 0 0 1.6rem;
+    width: 100%;
+    margin: 0;
     font-size: 1.15rem;
     line-height: 1.35;
 }
@@ -1264,6 +1324,33 @@ footer.site-footer {
     .daily-art {
         width: calc(97% + 2px);
         margin-left: 0;
+    }
+
+    .article-toc {
+        position: static;
+        float: none;
+        width: 100%;
+        margin: 1.4rem 0 1.6rem;
+    }
+
+    .article-toc-panel {
+        max-height: none;
+        overflow: visible;
+    }
+
+    .article-toc-toggle {
+        display: none;
+    }
+
+    .article-toc-collapsed .article-toc-panel,
+    .article-toc-collapsed.article-toc-open .article-toc-panel {
+        position: static;
+        width: auto;
+        padding: 0;
+        border: 0;
+        box-shadow: none;
+        visibility: visible;
+        pointer-events: auto;
     }
 
     /* stylelint-disable-next-line selector-id-pattern */

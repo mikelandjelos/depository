@@ -24,8 +24,15 @@
     {{ end }}
     {{ $headingCount := len (findRE "<h[2-6][^>]*>" .Content) }}
     {{ if ge $headingCount 2 }}
-        <p class="toc-label">Contents</p>
-        {{ .TableOfContents }}
+        <aside class="article-toc" aria-label="Table of contents">
+            <button class="article-toc-toggle" type="button" aria-controls="article-toc-panel" aria-expanded="true">
+                Table of contents
+            </button>
+            <div class="article-toc-panel" id="article-toc-panel">
+                <p class="toc-label">Contents</p>
+                {{ .TableOfContents }}
+            </div>
+        </aside>
     {{ end }}
     <section{{ with .Params.tableStyle }} class="table-style-{{ . }}"{{ end }}>
         {{ .Content }}

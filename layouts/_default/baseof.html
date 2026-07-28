@@ -82,6 +82,7 @@
     <!-- CSS -->
     {{ $css := resources.Get "css/tufte.css" }}
     <link rel="stylesheet" href="{{ $css.RelPermalink }}">
+    <script defer src="{{ "js/toc-collision.js" | relURL }}"></script>
     <!-- Syntax highlighting: light theme default, dark theme for dark mode -->
     {{ $syntaxLight := resources.Get "css/syntax-light.css" }}
     {{ $syntaxDark := resources.Get "css/syntax-dark.css" }}

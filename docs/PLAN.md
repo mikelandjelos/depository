@@ -216,6 +216,12 @@ sequence, skipping issue #5 (Graph indexing) for last/brainstorm.
       refresh marker at 01:17 UTC. That GitHub commit triggers Cloudflare's
       normal deployment, refreshing Statistics and Unresolved Promises even
       when no post changes.
+- [ ] **#17 Visionbook inspo** [IMPLEMENTED, AWAITING REVIEW] — post tables
+      of contents now use a sticky, right-margin navigation rail on desktop,
+      inspired by VisionBook's persistent navigation but adapted to local post
+      structure. A small local script collapses the rail into a "Table of
+      contents" toggle whenever it would overlap margin content. On mobile,
+      the same outline returns to normal document flow.
 - [ ] **#4 Integrate Quarto Scientific publishing** [IN PROGRESS] — Python
       and R working end-to-end; Julia not started.
   - `.qmd`/`.ipynb` posts render to Hugo-native Markdown via Quarto's

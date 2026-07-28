@@ -116,11 +116,17 @@ the OS setting):
 - Hugo emits `<nav id="TableOfContents"><ul>...</ul></nav>` — the `id` is
   hardcoded by Hugo itself, hence the `selector-id-pattern` stylelint-disable
   around that block in `tufte.css`
+- Wrapped in an `aside.article-toc` and placed as a sticky, scrollable
+  right-margin rail on desktop, adapting VisionBook's persistent-navigation
+  idea to an individual post rather than copying its book-wide sidebar
+- `static/js/toc-collision.js` uses local geometry checks while scrolling and
+  resizing. If the rail would overlap a sidenote, margin note, caption, or
+  future `[data-margin-content]` element, it collapses to a "Table of
+  contents" button; the button opens the panel on demand. This is the only
+  runtime behavior in the feature and makes no network request.
 - Styled as a numbered decimal outline (1, 1.1, 1.1.1 …) purely with CSS
   counters (`counter-reset`/`counter-increment`/`counters()`), no box or
-  background — inspired by gwern.net's TOC treatment, adapted into this site's
-  existing single-column flow rather than copying gwern's separate left-rail
-  column layout
+  background
 - Nested levels shrink slightly in size/opacity (selector targets any nested
   `ul` inside `#TableOfContents`)
 - "Contents" label above it: `p.toc-label`, small-caps, matches other
@@ -561,8 +567,8 @@ individual posts.
 ### Responsive (<760px)
 
 - Body expands to 84% width, 8% padding each side
-- Main content + lists + code blocks + `.katex-display` + `#TableOfContents`
-  expand to ~100% width
+- Main content + lists + code blocks + `.katex-display` + the floating TOC
+  expand to ~100% width; the TOC returns to normal document flow
 - Sidenotes/margin notes collapse to toggleable inline blocks
 - Images scale to 100% width
 
