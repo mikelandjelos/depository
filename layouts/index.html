@@ -1,5 +1,5 @@
 {{ define "main" }}
-<article>
+<article class="home-article">
     <div class="home-header">
         <img src="{{ "favicon.png" | relURL }}" alt="{{ .Site.Title }}" class="home-avatar">
         <div>
@@ -8,37 +8,41 @@
         </div>
     </div>
     {{ .Content }}
-    {{ $posts := where .Site.RegularPages "Section" "posts" }}
-    {{ if $posts }}
-    <section>
-        <h2>Recent writing</h2>
-        <ul class="post-list">
-            {{ range first 10 ($posts.ByDate.Reverse) }}
-            <li>
-                <span class="post-date">{{ .Date.Format "2006-01-02" }}</span>
-                <a class="post-title" href="{{ .RelPermalink }}">{{ .Title }}</a>
-            </li>
-            {{ end }}
-        </ul>
-    </section>
-    {{ end }}
-    {{ with .Site.Data.daily_art }}
-    <section class="daily-art-section">
-        <h2>Art of the day</h2>
-        <figure class="daily-art">
-            <div class="daily-art-frame daily-art-frame-{{ .frame }}">
-                <span class="daily-art-corner daily-art-corner-nw" aria-hidden="true"></span>
-                <span class="daily-art-corner daily-art-corner-ne" aria-hidden="true"></span>
-                <span class="daily-art-corner daily-art-corner-sw" aria-hidden="true"></span>
-                <span class="daily-art-corner daily-art-corner-se" aria-hidden="true"></span>
-                <img src="{{ .image | relURL }}" alt="{{ .title }} by {{ .artist }}">
-            </div>
-            <figcaption>
-                <a href="{{ .object_url }}">{{ .title }}</a>, {{ .object_date }} —
-                {{ .artist }}. {{ .medium }}. The Metropolitan Museum of Art.
-            </figcaption>
-        </figure>
-    </section>
-    {{ end }}
+    <div class="home-columns">
+        {{ $posts := where .Site.RegularPages "Section" "posts" }}
+        {{ if $posts }}
+        <section>
+            <h2>Recent writing</h2>
+            <ul class="post-list">
+                {{ range first 10 ($posts.ByDate.Reverse) }}
+                <li>
+                    <span class="post-date">{{ .Date.Format "2006-01-02" }}</span>
+                    <a class="post-title" href="{{ .RelPermalink }}">{{ .Title }}</a>
+                </li>
+                {{ end }}
+            </ul>
+        </section>
+        {{ end }}
+        {{ with .Site.Data.daily_art }}
+        <section class="daily-art-section">
+            <h2>Art of the day</h2>
+            <figure class="daily-art">
+                <a class="daily-art-link" href="{{ .object_url }}">
+                    <div class="daily-art-frame daily-art-frame-{{ .frame }}">
+                        <span class="daily-art-corner daily-art-corner-nw" aria-hidden="true"></span>
+                        <span class="daily-art-corner daily-art-corner-ne" aria-hidden="true"></span>
+                        <span class="daily-art-corner daily-art-corner-sw" aria-hidden="true"></span>
+                        <span class="daily-art-corner daily-art-corner-se" aria-hidden="true"></span>
+                        <img src="{{ .image | relURL }}" alt="{{ .title }} by {{ .artist }}">
+                    </div>
+                </a>
+                <figcaption>
+                    <a href="{{ .object_url }}">{{ .title }}</a>, {{ .object_date }} —
+                    {{ .artist }}. {{ .medium }}. The Metropolitan Museum of Art.
+                </figcaption>
+            </figure>
+        </section>
+        {{ end }}
+    </div>
 </article>
 {{ end }}

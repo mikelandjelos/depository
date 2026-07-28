@@ -168,7 +168,8 @@ site/
   commits `data/site_refresh.yaml`, which triggers Cloudflare to deploy the
   new art and refresh build-time GitHub-derived content without a browser-time
   museum API request. The artwork object ID deterministically chooses one of
-  four CSS-only frames: gilt, bracket, mat, or engraved. See docs/THEME.md →
+  four CSS-only frames: gilt, bracket, mat, or engraved. On the homepage, the
+  framed image and its title both link to the Met record. See docs/THEME.md →
   "Daily art and nightly refresh".
 
 ## Task Sequence

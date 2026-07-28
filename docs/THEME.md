@@ -524,10 +524,14 @@ hash partitioning, palette/frame split, and full author-to-deploy pipeline.
 
 ### Daily art and nightly refresh (#15, #16)
 
-The homepage places an Art of the day section after Recent writing. It renders
-`data/daily_art.yaml` as a locally served Met artwork with title, artist, date,
-medium, and a link to the museum record. The image is a normal static asset at
-`static/images/daily_art.jpg`, never a browser-time API request. Its CSS-only
+The homepage places an Art of the day section after Recent writing in document
+order. On wide screens, Recent writing remains below the identity header while
+the artwork occupies a wide right column aligned with that header; on smaller
+screens they remain in normal flow. It renders `data/daily_art.yaml` as a locally served Met
+artwork with title, artist, date, medium, and a link to the museum record. The
+image is a normal static asset at `static/images/daily_art.jpg`, never a
+browser-time API request. The framed image and title both link to the same Met
+record. Its CSS-only
 frame uses layered gold-toned rules, inset lines, corner ornaments, and a fixed
 shadow offset for a baroque, three-dimensional impression that follows the
 light/dark theme. The artwork object ID deterministically selects one of four

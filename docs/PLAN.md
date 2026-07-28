@@ -210,7 +210,8 @@ sequence, skipping issue #5 (Graph indexing) for last/brainstorm.
       locally cached daily public-domain Met artwork with museum attribution.
       The artwork deterministically selects a CSS-only gilt, bracket, mat, or
       engraved frame; layered gold rules, corner ornaments, and shadow create
-      a restrained baroque depth effect without runtime JavaScript.
+      a restrained baroque depth effect without runtime JavaScript. The
+      homepage’s framed image and attribution title link to the Met record.
 - [x] **#16 Nightly scheduled rebuild** [CLOSED] — the
       `refresh-daily-art.yml` workflow selects and commits daily artwork and a
       refresh marker at 01:17 UTC. That GitHub commit triggers Cloudflare's
