@@ -1,51 +1,80 @@
-# Personal Site
+# Mihajlo Madić's Depository
 
-**Live site**: [visit](https://depository.mihajlo-madic.workers.dev/)
+Personal site for research notes, essays, and technical experiments.
 
-Personal website built with Hugo, styled with Tufte CSS typography.
+**Live site**: <https://depository.mihajlo-madic.workers.dev/>
+
+## Features
+
+- Tufte-inspired, responsive reading layout with sidenotes and margin notes
+- Light, dark, and system-following color modes
+- KaTeX math, Chroma syntax highlighting, and responsive tables/code blocks
+- Post table of contents, drop caps, tags, categories, and maturity badges
+- Tag and category archive pages, each with an RSS feed; the site and posts
+  indexes also have feeds
+- Statistics page for writing, tags, and repository activity
+- "Unresolved Promises" on the post index, sourced from open article issues
+- Data-driven Curriculum Vitae, synchronized from the separate
+  `curriculum-vitae` repository
+- Executable Quarto posts in Python and R, plus directly authored Jupyter
+  notebooks
 
 ## Stack
 
-- **Hugo** (extended) — static site generator
-- **EB Garamond** — body text
-- **JetBrains Mono** — code
-- **Tufte CSS** — layout with sidenotes and wide margins
-- **KaTeX** — math rendering
+- [Hugo](https://gohugo.io/) extended v0.157.0+ for the static site
+- Custom templates and Tufte CSS, with EB Garamond and JetBrains Mono
+- [KaTeX](https://katex.org/) for browser-side math rendering
+- [Quarto](https://quarto.org/) for optional scientific-post authoring
+- Cloudflare Workers with native GitHub integration for deployment
+- GitHub Actions and pre-commit for linting and build verification
+
+## Write a Post
+
+Plain Markdown posts live in `content/posts/`. Hugo front matter supports
+`title`, `subtitle`, `date`, `tags`, `categories`, `status`, and optional
+`tableStyle` (`"striped"` or `"grid"`).
+
+Quarto posts use a Hugo page bundle at `content/posts/<slug>/`. Render a
+`.qmd` or `.ipynb` source file before committing it:
+
+```bash
+python3 scripts/render_quarto.py content/posts/my-post/index.qmd
+```
+
+Commit the source, generated `index.md`, and any generated figures together.
+See [docs/QUARTO.md](docs/QUARTO.md) for the full Python, R, and notebook
+workflow.
 
 ## Development
 
 ```bash
-# Install Hugo (requires Go)
-go install -tags extended github.com/gohugoio/hugo@latest
+# Build the production site
+hugo --minify
 
-# Dev server with drafts
+# Serve drafts locally at http://localhost:1313/
 hugo server -D
 
-# Production build
-hugo --minify
-```
-
-## Linting
-
-Pre-commit hooks run automatically on `git commit`:
-
-```bash
-# Install hooks (first time only)
-pre-commit install
-
-# Run all checks manually
+# Run all formatting, prose, style, and build checks
 pre-commit run --all-files
 ```
 
-Checks: markdownlint, typos, proselint, stylelint, Hugo build.
-
-## Project Structure
-
-See [AGENTS.md](AGENTS.md) for full project context and architecture decisions.
+Hugo extended v0.157.0+ is required. For Quarto authoring, install the
+additional tools described in [docs/QUARTO.md](docs/QUARTO.md).
 
 ## Deployment
 
-Deployed to [Cloudflare Pages](https://pages.cloudflare.com/) via native Git integration.
-Every push to `main` auto-builds and deploys.
+Pushing to `main` triggers Cloudflare's native Git integration: it runs
+`hugo --minify` and deploys the generated `public/` directory through
+Wrangler. GitHub Actions independently runs `pre-commit run --all-files` on
+pushes and pull requests.
 
-GitHub Actions runs lint checks on all pushes and PRs.
+See [docs/DEPLOY.md](docs/DEPLOY.md) for the configuration and deployment
+flow.
+
+## Documentation
+
+- [AGENTS.md](AGENTS.md): project structure, decisions, and agent workflow
+- [docs/THEME.md](docs/THEME.md): templates, styling, and site features
+- [docs/QUARTO.md](docs/QUARTO.md): executable-post toolchain and workflow
+- [docs/DEPLOY.md](docs/DEPLOY.md): deployment architecture
+- [docs/PLAN.md](docs/PLAN.md): issue-driven implementation status
