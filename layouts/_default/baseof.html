@@ -14,8 +14,31 @@
             }
         })();
     </script>
-    <title>{{ if not .IsHome }}{{ .Title }} — {{ end }}{{ .Site.Title }}</title>
-    <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+    {{ $title := .Site.Title }}
+    {{ if not .IsHome }}{{ $title = printf "%s — %s" .Title .Site.Title }}{{ end }}
+    {{ $description := .Site.Params.description }}
+    {{ with .Description }}
+        {{ $description = . }}
+    {{ else with .Summary }}
+        {{ $summary := . | plainify | htmlUnescape | strings.TrimSpace }}
+        {{ if $summary }}{{ $description = $summary | truncate 200 }}{{ end }}
+    {{ end }}
+    {{ $isPost := and .IsPage (eq .Section "posts") }}
+    <title>{{ $title }}</title>
+    <meta name="description" content="{{ $description }}">
+    <link rel="canonical" href="{{ .Permalink }}">
+    <meta property="og:type" content="{{ if $isPost }}article{{ else }}website{{ end }}">
+    <meta property="og:url" content="{{ .Permalink }}">
+    <meta property="og:title" content="{{ $title }}">
+    <meta property="og:description" content="{{ $description }}">
+    <meta property="og:site_name" content="{{ .Site.Title }}">
+    <meta property="og:locale" content="{{ .Site.Params.ogLocale }}">
+    {{ if $isPost }}
+    <meta property="article:author" content="{{ .Site.Params.authorURL }}">
+    {{ end }}
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="{{ $title }}">
+    <meta name="twitter:description" content="{{ $description }}">
     {{ with .OutputFormats.Get "RSS" }}
     <link rel="alternate" type="{{ .MediaType.Type }}" title="{{ $.Title }} RSS feed" href="{{ .Permalink }}">
     {{ end }}

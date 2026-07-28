@@ -12,6 +12,8 @@ Personal site for research notes, essays, and technical experiments.
 - Post table of contents, drop caps, tags, categories, and maturity badges
 - Tag and category archive pages, each with an RSS feed; the site and posts
   indexes also have feeds
+- Canonical, Open Graph, and Twitter/X text metadata for useful shared-link
+  previews
 - Statistics page for writing, tags, and repository activity
 - "Unresolved Promises" on the post index, sourced from open article issues
 - Data-driven Curriculum Vitae, synchronized from the separate

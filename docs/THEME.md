@@ -449,6 +449,31 @@ wrap width against a sibling entry row's date position.
   GitHub repo
 - Repo URL configured via `params.repoURL` in hugo.toml
 
+### Social metadata (#14)
+
+`baseof.html` emits sharing metadata from a single description-resolution
+path, so the ordinary HTML description and social previews cannot drift:
+
+1. an explicit page `description`,
+2. a cleaned, plain-text page summary (truncated to 200 characters), then
+3. `params.description` for pages with neither.
+
+Every page receives a canonical URL plus `og:type`, `og:url`, `og:title`,
+`og:description`, `og:site_name`, `og:locale`, and Twitter/X's equivalent
+text-card tags (`twitter:card`, `twitter:title`, and `twitter:description`).
+Post pages use `og:type=article` and add `article:author` from the configured
+GitHub profile; all other pages use `og:type=website`. `authorURL` and
+`ogLocale` in `hugo.toml` keep the public identity and Open Graph locale out
+of the template.
+
+There are intentionally no `og:image` or `twitter:image` tags yet. The lone
+avatar asset is not suitable for a social card. Issue #33 will define a
+deterministic post-card generator: it will normalize a post's text and
+metadata into stable features and a seed, choose a simple mathematical visual
+family from those features (such as fields, geometry, fractals, cellular
+automata, or dynamical systems), render a reproducible 1200×630 asset, and
+commit it with the post. A later article will explain the method.
+
 ### Syndication (#13)
 
 The site uses Hugo's built-in RSS 2.0 template rather than a hand-maintained

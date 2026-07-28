@@ -185,7 +185,20 @@ sequence, skipping issue #5 (Graph indexing) for last/brainstorm.
       link. This provides `/index.xml`, `/posts/index.xml`, and scoped feeds
       such as `/tags/quarto/index.xml` without maintaining a custom feed
       template. See docs/THEME.md → "Syndication (#13)".
-- [ ] **#14 Add Open Graph / social meta tags** [OPEN]
+- [x] **#14 Add Open Graph / social meta tags** [IMPLEMENTED, AWAITING REVIEW]
+      — canonical URLs plus Open Graph and Twitter/X text-card metadata now
+      cover every page. Descriptions prefer explicit front matter, then a
+      cleaned/truncated summary, then the site description; post pages also
+      expose the configured GitHub profile as `article:author`. Preview images
+      are deliberately deferred to #33. See docs/THEME.md → "Social metadata
+      (#14)".
+- [ ] **#33 Generate deterministic mathematical post cards** [OPEN] — design
+      and build a reproducible 1200×630 post-card generator. It will derive
+      stable content features and a seed from each post, choose among several
+      simple mathematical visual families, and commit the generated assets
+      with each post. Labeled `article` + `enhancement`, assigned to Mihajlo,
+      and scheduled in milestone 1; it also seeds a future article explaining
+      the method.
 - [ ] **#11 Zotero Integration** [OPEN, question] — not scoped yet.
 - [ ] **#15 Artsy** [OPEN, enhancement/style] — not scoped yet.
 - [ ] **#16 Nightly scheduled rebuild** [OPEN] — keeps Statistics and

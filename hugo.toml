@@ -10,6 +10,8 @@ ignoreFiles = ['\.qmd$', '\.ipynb$']
 
 [params]
   description = 'Personal site — research, notes, and writing.'
+  authorURL = 'https://github.com/mikelandjelos'
+  ogLocale = 'en_US'
   footer = '&copy; 2026'
   repoURL = 'https://github.com/mikelandjelos/depository'
 
