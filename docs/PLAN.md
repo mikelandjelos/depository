@@ -206,9 +206,15 @@ sequence, skipping issue #5 (Graph indexing) for last/brainstorm.
       `og:image`/`twitter:image`. The accompanying post, "How This Site Draws
       Its Post Cards," documents the mathematical methods and full pipeline.
 - [ ] **#11 Zotero Integration** [OPEN, question] — not scoped yet.
-- [ ] **#15 Artsy** [OPEN, enhancement/style] — not scoped yet.
-- [ ] **#16 Nightly scheduled rebuild** [OPEN] — keeps Statistics and
-      Unresolved Promises fresh even with no pushes to `depository`.
+- [ ] **#15 Artsy** [IMPLEMENTED, AWAITING REVIEW] — the homepage now shows a
+      locally cached daily public-domain Met artwork with museum attribution.
+      A CSS-only layered gold frame, inset rules, corner ornaments, and shadow
+      create a restrained baroque depth effect without runtime JavaScript.
+- [ ] **#16 Nightly scheduled rebuild** [IMPLEMENTED, AWAITING REVIEW] — the
+      `refresh-daily-art.yml` workflow selects and commits daily artwork and a
+      refresh marker at 01:17 UTC. That GitHub commit triggers Cloudflare's
+      normal deployment, refreshing Statistics and Unresolved Promises even
+      when no post changes.
 - [ ] **#4 Integrate Quarto Scientific publishing** [IN PROGRESS] — Python
       and R working end-to-end; Julia not started.
   - `.qmd`/`.ipynb` posts render to Hugo-native Markdown via Quarto's

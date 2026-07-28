@@ -1,0 +1,35 @@
+name: Refresh Daily Art
+
+on:
+  schedule:
+    - cron: "17 01 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-daily-art
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    name: Refresh artwork and deploy trigger
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Select daily public-domain artwork
+        run: python scripts/refresh_daily_art.py
+
+      - name: Commit daily refresh
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/daily_art.yaml data/site_refresh.yaml static/images/daily_art.jpg
+          git diff --cached --quiet || git commit -m "Refresh daily artwork"
+          git push

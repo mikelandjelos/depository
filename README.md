@@ -15,6 +15,7 @@ Personal site for research notes, essays, and technical experiments.
 - Canonical, Open Graph, and Twitter/X text metadata for useful shared-link
   previews
 - Deterministic 1200×630 mathematical post cards for social previews
+- A daily public-domain Met artwork, locally cached and framed on the homepage
 - Statistics page for writing, tags, and repository activity
 - "Unresolved Promises" on the post index, sourced from open article issues
 - Data-driven Curriculum Vitae, synchronized from the separate

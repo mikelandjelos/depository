@@ -516,6 +516,28 @@ the active Python interpreter in CI; both CI workflows install the same pinned
 `content/posts/deterministic-post-cards.md` documents the mathematical methods,
 hash partitioning, palette/frame split, and full author-to-deploy pipeline.
 
+### Daily art and nightly refresh (#15, #16)
+
+The homepage places an Art of the day section after Recent writing. It renders
+`data/daily_art.yaml` as a locally served Met artwork with title, artist, date,
+medium, and a link to the museum record. The image is a normal static asset at
+`static/images/daily_art.jpg`, never a browser-time API request. Its CSS-only
+frame uses layered gold-toned rules, inset lines, corner ornaments, and a fixed
+shadow offset for a baroque, three-dimensional impression that follows the
+light/dark theme.
+
+`scripts/refresh_daily_art.py` hashes the UTC date into the Met's image-bearing
+highlight-painting search result and walks forward until it finds a
+public-domain record with an image. It downloads the Met web image and writes
+the attributable metadata plus `data/site_refresh.yaml`. The latter changes on
+every successful scheduled run even if a daily artwork repeats.
+
+`.github/workflows/refresh-daily-art.yml` runs daily at 01:17 UTC and on manual
+dispatch. It commits the artwork, metadata, and refresh marker to `main`.
+Cloudflare's Git integration then deploys that commit, which also rebuilds the
+Statistics page and GitHub-sourced Unresolved Promises list. No runtime
+JavaScript or client-side Met request is involved.
+
 ### Syndication (#13)
 
 The site uses Hugo's built-in RSS 2.0 template rather than a hand-maintained

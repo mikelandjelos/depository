@@ -22,5 +22,19 @@
         </ul>
     </section>
     {{ end }}
+    {{ with .Site.Data.daily_art }}
+    <section class="daily-art-section">
+        <h2>Art of the day</h2>
+        <figure class="daily-art">
+            <div class="daily-art-frame">
+                <img src="{{ .image | relURL }}" alt="{{ .title }} by {{ .artist }}">
+            </div>
+            <figcaption>
+                <a href="{{ .object_url }}">{{ .title }}</a>, {{ .object_date }} —
+                {{ .artist }}. {{ .medium }}. The Metropolitan Museum of Art.
+            </figcaption>
+        </figure>
+    </section>
+    {{ end }}
 </article>
 {{ end }}
