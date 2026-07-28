@@ -16,7 +16,7 @@ tableStyle: striped
 <span class="newthought">Quarto doesn’t care</span> which language produced
 the numbers — the same `.qmd` → Hugo pipeline used in the [Python
 demo](/posts/quarto-python-demo/) works for R too, executed through knitr
-instead of Jupyter.
+instead of Jupyter. {{< cite quarto2026 >}} {{< cite xie2015 >}}
 
 A simple random walk, simulated and summarized:
 
@@ -57,3 +57,5 @@ knitr::kable(head(data.frame(step = seq_along(walk), position = walk), 5))
 
 The point, same as the Python post: this table and plot are computed by R
 at build time, not maintained by hand.
+
+{{< references >}}

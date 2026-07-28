@@ -123,6 +123,17 @@ article {
     padding: 5rem 0;
 }
 
+/* A post title follows the site navigation directly. Generic article spacing
+   is intentionally generous for other page types, but adding it to h1's
+   default top margin left an unnecessarily large gap on post pages. */
+article.post-article {
+    padding-top: 1.5rem;
+}
+
+article.post-article > h1 {
+    margin-top: 0;
+}
+
 section {
     padding-top: 1rem;
     padding-bottom: 1rem;
@@ -291,6 +302,62 @@ figure.fullwidth figcaption {
 .post-card-frame-bracket {
     border-left: 4px double var(--color-text);
     border-right: 4px double var(--color-text);
+}
+
+/* Citations are authored with Hugo shortcodes and resolve to an in-page,
+   author-year bibliography. Keep the marker compact without making it a note. */
+.citation {
+    position: relative;
+    margin-left: 0.08em;
+    font-size: 0.82em;
+    white-space: nowrap;
+}
+
+.citation a {
+    text-decoration: none;
+}
+
+.citation a:hover::after,
+.citation a:focus-visible::after {
+    position: absolute;
+    z-index: 5;
+    bottom: calc(100% + 0.45rem);
+    left: 50%;
+    width: min(20rem, 70vw);
+    padding: 0.45rem 0.6rem;
+    border: 1px solid var(--color-border);
+    background: var(--color-bg);
+    box-shadow: 0.2rem 0.25rem 0 rgb(0 0 0 / 14%);
+    color: var(--color-text);
+    content: attr(data-reference);
+    font-family: "EB Garamond", Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+    font-size: 1rem;
+    font-style: normal;
+    line-height: 1.2;
+    text-align: left;
+    transform: translateX(-50%);
+    white-space: normal;
+}
+
+.references {
+    width: 55%;
+    margin-top: 3rem;
+}
+
+.references h2 {
+    font-size: 1.7rem;
+}
+
+.references ol {
+    width: 100%;
+    padding-left: 1.6em;
+    font-size: 1rem;
+    line-height: 1.45;
+}
+
+.references li {
+    margin-bottom: 0.7rem;
+    padding-left: 0.25em;
 }
 
 /* The daily museum work is a homepage feature, with an ornamental frame that
@@ -1108,6 +1175,7 @@ p.toc-label {
     overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: var(--color-scrollbar-thumb) transparent;
+    transition: opacity 0.16s ease, transform 0.16s ease;
 }
 
 .article-toc .toc-label {
@@ -1124,6 +1192,8 @@ p.toc-label {
     top: 0;
     right: 0;
     width: min(24rem, 38vw);
+    opacity: 0;
+    transform: translateY(-0.3rem);
     visibility: hidden;
     pointer-events: none;
 }
@@ -1134,6 +1204,8 @@ p.toc-label {
     border: 1px solid var(--color-border);
     background: var(--color-bg);
     box-shadow: 0.3rem 0.35rem 0 rgb(0 0 0 / 14%);
+    opacity: 1;
+    transform: translateY(0);
     visibility: visible;
     pointer-events: auto;
 }
@@ -1143,6 +1215,13 @@ p.toc-label {
     margin: 0;
     font-size: 1.15rem;
     line-height: 1.35;
+}
+
+#TableOfContents a:hover,
+#TableOfContents a:focus-visible {
+    background: var(--color-code-bg);
+    outline: 1px solid var(--color-border);
+    text-decoration: none;
 }
 
 #TableOfContents ul {
@@ -1370,6 +1449,10 @@ footer.site-footer {
     .daily-art {
         width: calc(97% + 2px);
         margin-left: 0;
+    }
+
+    .references {
+        width: 100%;
     }
 
     .article-toc {

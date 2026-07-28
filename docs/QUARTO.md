@@ -77,6 +77,12 @@ table field:
 - `tableStyle: "striped"` or `"grid"` — see docs/THEME.md → "Tables" for
   what each looks like. Default (no field) is a plain Tufte rule-table.
 
+For citations, use the site's Hugo shortcodes directly in `.qmd` prose or a
+notebook Markdown cell: `{{< cite key >}}` at a claim and
+`{{< references >}}` at the end. Quarto preserves them in `index.md` (while
+warning that it does not implement those Hugo shortcodes); Hugo resolves the
+records from `data/references.yaml` during the site build.
+
 Post cards require no additional front matter or local command. The
 pre-commit hook detects a changed post, derives its card from the rendered
 Markdown, and stages the generated asset and Hugo data manifest in the same

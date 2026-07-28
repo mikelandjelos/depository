@@ -18,7 +18,7 @@ tags:
 notebook (`.ipynb`), edited the normal way in Jupyter or JupyterLab, with a
 raw cell at the top carrying the front matter instead of a `.qmd`’s YAML
 header. Quarto renders `.ipynb` files exactly the same way it renders
-`.qmd` files — same `hugo-md` output, same page bundle, same pipeline.
+`.qmd` files — same `hugo-md` output, same page bundle, same pipeline. {{< cite quarto2026 >}} {{< cite jupyter2016 >}}
 
 A quick word-frequency count, the kind of thing that’s easier to explore
 interactively in a notebook than to write as a static script:
@@ -59,3 +59,5 @@ plt.show()
 Nothing here was hand-transcribed: the counts and the plot both come
 from actually running the cells above at build time, whether the source
 is a `.qmd` or, as here, a plain `.ipynb`.
+
+{{< references >}}

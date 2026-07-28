@@ -17,11 +17,11 @@ document rather than plain Markdown. The prose you’re reading and the code
 below live in the same source file, and the code actually runs: Quarto
 executes it at build time via Jupyter, then hands the rendered Markdown —
 prose, code, and figures — to Hugo, which lays it out with the site’s usual
-typography, table of contents, and tags.
+typography, table of contents, and tags. {{< cite quarto2026 >}}
 
 Here’s a small numerical experiment: approximating $\pi$ by sampling random
 points in a unit square and checking what fraction land inside the inscribed
-circle.
+circle. {{< cite metropolis1949 >}}
 
 ``` python
 import numpy as np
@@ -66,3 +66,5 @@ this whole thing (code, output, and figure) regenerates automatically
 whenever the source `.qmd` changes, the same way the [statistics
 page](/stats/) regenerates from live GitHub data rather than being
 hand-updated.
+
+{{< references >}}

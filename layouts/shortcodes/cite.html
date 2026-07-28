@@ -1,0 +1,22 @@
+{{- $key := .Get 0 -}}
+{{- $reference := index .Site.Data.references $key -}}
+{{- if not $reference -}}
+    {{- errorf "%s: unknown citation key %q" .Page.File.Path $key -}}
+{{- end -}}
+{{- $keys := .Page.Store.Get "citationKeys" -}}
+{{- if not $keys -}}
+    {{- $keys = slice -}}
+{{- end -}}
+{{- $number := 0 -}}
+{{- range $index, $existing := $keys -}}
+    {{- if eq $existing $key -}}
+        {{- $number = add $index 1 -}}
+    {{- end -}}
+{{- end -}}
+{{- if eq $number 0 -}}
+    {{- $keys = $keys | append $key -}}
+    {{- .Page.Store.Set "citationKeys" $keys -}}
+    {{- $number = len $keys -}}
+{{- end -}}
+{{- $summary := printf "%s (%v). %s. %s." $reference.authors $reference.year $reference.title $reference.publication -}}
+<span class="citation"><a href="#ref-{{ $key }}" aria-label="Citation: {{ $summary }}" data-reference="{{ $summary }}" title="{{ $summary }}">({{ $reference.label }})</a></span>

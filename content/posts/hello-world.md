@@ -16,6 +16,7 @@ suited to long-form writing on the web.
 ## Sidenotes
 
 Tufte CSS provides sidenotes as an alternative to footnotes.
+{{< cite tufte2006 >}}
 <label for="sn-example" class="margin-toggle sidenote-number"></label>
 <input type="checkbox" id="sn-example" class="margin-toggle">
 <span class="sidenote">This is a sidenote. On wide screens it appears in the
@@ -51,7 +52,8 @@ def fibonacci(n: int) -> int:
 
 ## Mathematics
 
-KaTeX renders math inline like $e^{i\pi} + 1 = 0$ and in display mode:
+KaTeX renders math inline like $e^{i\pi} + 1 = 0$ and in display mode.
+{{< cite katex2026 >}}
 
 $$
 \int_{-\infty}^{\infty} e^{-x^2} \, dx = \sqrt{\pi}
@@ -82,4 +84,6 @@ Some things worth reading:
 <span class="newthought">In his later work,</span> Tufte advocated for
 information-dense graphics that respect the reader's intelligence. This
 paragraph demonstrates the `newthought` small-caps opener used to signal a
-shift in topic without a full section heading.
+shift in topic without a full section heading. {{< cite tufte2006 >}}
+
+{{< references >}}

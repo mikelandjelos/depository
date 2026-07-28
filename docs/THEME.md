@@ -28,6 +28,10 @@ Custom theme built inline (no `themes/` directory). All templates live in
 - **Body**: EB Garamond (Google Fonts) — serif, 15px base, 1.4rem paragraph size
 - **Code**: JetBrains Mono (Google Fonts) — 1rem inline, 0.9rem in blocks
 - **Headings**: h1 normal weight 3.2rem; h2/h3 italic weight 400
+- **Post title spacing**: `article.post-article` overrides generic article
+  padding and clears its direct h1's top margin, so a post title follows the
+  navigation at a deliberate reading distance rather than inheriting two
+  stacked vertical gaps.
 - **New thought**: `span.newthought` — small-caps opener for topic shifts
 - **Drop cap**: `article section > p:first-child::first-letter` — first letter of a
   post's first paragraph rendered large (4.2rem) in UnifrakturMaguntia (Google
@@ -129,6 +133,9 @@ the OS setting):
   background
 - Nested levels shrink slightly in size/opacity (selector targets any nested
   `ul` inside `#TableOfContents`)
+- Links receive a subtle ink-and-paper hover/focus highlight; the collision
+  panel fades and shifts into place when opened, rather than appearing
+  abruptly.
 - "Contents" label above it: `p.toc-label`, small-caps, matches other
   small-caps accents on the site
 - Vertical rhythm deliberately tighter than body prose (line-height 1.35 at
@@ -290,6 +297,24 @@ same shape as Python/R.
   prose; display math otherwise inherits the smaller `section` font size
 - Display math centered via `.katex-display` CSS (width: 55%, text-align: center)
 - Deferred loading — does not block page render
+
+### Citations
+
+Hugo Markdown, Quarto source, and notebook Markdown cells use local shortcodes
+instead of a browser-side citation processor. Write `{{< cite key >}}` at the claim and one
+`{{< references >}}` shortcode where the bibliography belongs. Citation
+records live in `data/references.yaml`, keyed like BibTeX entries. The
+`cite` shortcode records each key on the page and renders a compact
+author-year marker. The `references` shortcode renders only the records
+cited on that page, in first-citation order.
+Hovering or keyboard-focusing a marker shows its full reference in an opaque
+CSS tooltip; activating it still moves to the corresponding bibliography
+entry, so touch devices retain the same simple navigation.
+Unknown keys and a references block with no citations fail the Hugo build.
+
+`hello-world.md` is the live specimen: it includes repeated citations,
+existing sidenotes and margin notes, equations, syntax-highlighted code, the
+automatic post card, and the generated bibliography.
 
 ### Syntax Highlighting
 

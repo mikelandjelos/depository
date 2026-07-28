@@ -1,0 +1,17 @@
+{{- $keys := .Page.Store.Get "citationKeys" -}}
+{{- if not $keys -}}
+    {{- errorf "%s: references shortcode has no preceding citations" .Page.File.Path -}}
+{{- end -}}
+<section class="references" aria-labelledby="references">
+    <h2 id="references">References</h2>
+    <ol>
+        {{- range $key := $keys -}}
+            {{- $reference := index $.Site.Data.references $key -}}
+            <li id="ref-{{ $key }}">
+                {{ $reference.authors }} ({{ $reference.year }}).
+                <a href="{{ $reference.url }}">{{ $reference.title }}</a>.
+                <em>{{ $reference.publication }}</em>.
+            </li>
+        {{- end -}}
+    </ol>
+</section>

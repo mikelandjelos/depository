@@ -23,7 +23,8 @@ deterministic function of the authored text.
 ## The two hashes
 
 Let $B$ be a normalized version of the article body and $M$ a normalized
-version of its front matter. The generator computes
+version of its front matter. The generator computes the standard SHA-256
+digests {{< cite fips1804 >}}
 
 $$
 H_s = \operatorname{SHA256}(B), \qquad H_c = \operatorname{SHA256}(M).
@@ -104,6 +105,8 @@ regions. The graph is intentionally approximate rather than a formal Delaunay
 triangulation; it exposes local structure while keeping the method small, fast,
 and reproducible.
 
+{{< cite aurenhammer1991 >}}
+
 The hash-seeded sample positions determine both the regions and the network.
 Consequently, two cards cannot differ only in palette while retaining the same
 accidental point arrangement unless their body digest is also the same.
@@ -135,6 +138,8 @@ which removes harsh bands from the color field. Points which do not escape are
 masked to the dark background. This is why the Julia cards retain a strong
 silhouette and contrast instead of becoming uniformly bright noise.
 
+{{< cite milnor2006 >}}
+
 ### Elementary cellular automata
 
 The cellular family is a one-dimensional binary automaton shown through time.
@@ -158,6 +163,8 @@ boundary conditions. The result is a space-time diagram: every horizontal row
 is a complete state, and every diagonal trace records causal propagation
 through the local rule.
 
+{{< cite wolfram2002 >}}
+
 ### De Jong dynamical systems
 
 The final family uses a two-dimensional nonlinear recurrence commonly called a
@@ -178,6 +185,8 @@ and displays $\log(1 + h)$, where $h$ is the bin count. The logarithm makes
 both dense attractor cores and faint outer structure visible. Some parameter
 choices form a compact attractor; others disperse. That variation is an
 expected property of the recurrence, not a fallback failure.
+
+{{< cite bourke1991 >}}
 
 ## Palette and frame are a second system
 
@@ -228,3 +237,5 @@ actual pixels, and prevents a future renderer upgrade from changing old cards
 without a deliberate regeneration commit. The automated caption and manifest
 make the process inspectable in the finished site, while the hash functions
 make it reproducible from the source.
+
+{{< references >}}

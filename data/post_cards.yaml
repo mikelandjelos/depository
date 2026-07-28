@@ -2,11 +2,11 @@
 
 deterministic-post-cards:
   frame: double
-  shape: voronoi
+  shape: julia
   color: cellular
 hello-world:
   frame: rule
-  shape: julia
+  shape: cellular
   color: flow
 quarto-ipynb-demo:
   frame: rule

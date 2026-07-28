@@ -52,6 +52,11 @@ cards are current.
 See [docs/QUARTO.md](docs/QUARTO.md) for the full Python, R, and notebook
 workflow.
 
+Use `{{< cite key >}}` in Markdown, Quarto, or notebook posts for an
+author-year citation, then place `{{< references >}}` at the end. Add the
+keyed record to `data/references.yaml`; the bibliography includes only cited
+works.
+
 ## Development
 
 ```bash

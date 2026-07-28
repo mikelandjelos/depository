@@ -217,12 +217,19 @@ sequence, skipping issue #5 (Graph indexing) for last/brainstorm.
       refresh marker at 01:17 UTC. That GitHub commit triggers Cloudflare's
       normal deployment, refreshing Statistics and Unresolved Promises even
       when no post changes.
-- [x] **#17 Visionbook inspo** [CLOSED] — post tables
-      of contents now use a sticky, right-margin navigation rail on desktop,
-      inspired by VisionBook's persistent navigation but adapted to local post
-      structure. A small local script collapses the rail into a "Table of
-      contents" toggle whenever it would overlap margin content. On mobile,
-      the same outline returns to normal document flow.
+- [x] **#17 Visionbook inspo / #18 ToC** [CLOSED] — post tables of contents
+      use a sticky, right-margin navigation rail on desktop, inspired by
+      VisionBook's persistent navigation but adapted to local post structure.
+      A small local script collapses the rail into a "Table of contents"
+      toggle whenever it would overlap margin content. The outline has
+      hover/focus highlighting and the opaque panel has a short open/close
+      transition. On mobile, it returns to normal document flow.
+- [x] **#19 References** [CLOSED] — Markdown, Quarto, and notebook posts
+      cite `{{< cite key >}}` and render a page-local author-year bibliography
+      with `{{< references >}}`. Records live in `data/references.yaml`; all
+      current posts demonstrate the workflow, while Hello World exercises it
+      alongside the site's existing feature set. Hover/focus previews expose
+      a full citation, and each marker links to its bibliography entry.
 - [ ] **#4 Integrate Quarto Scientific publishing** [IN PROGRESS] — Python
       and R working end-to-end; Julia not started.
   - `.qmd`/`.ipynb` posts render to Hugo-native Markdown via Quarto's

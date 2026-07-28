@@ -1,0 +1,77 @@
+fips1804:
+  label: "NIST 2015"
+  authors: "National Institute of Standards and Technology"
+  title: "Secure Hash Standard"
+  publication: "FIPS PUB 180-4"
+  year: 2015
+  url: "https://doi.org/10.6028/NIST.FIPS.180-4"
+aurenhammer1991:
+  label: "Aurenhammer 1991"
+  authors: "Franz Aurenhammer"
+  title: "Voronoi diagrams: A survey of a fundamental geometric data structure"
+  publication: "ACM Computing Surveys"
+  year: 1991
+  url: "https://doi.org/10.1145/116873.116880"
+milnor2006:
+  label: "Milnor 2006"
+  authors: "John Milnor"
+  title: "Dynamics in One Complex Variable"
+  publication: "Annals of Mathematics Studies, Princeton University Press"
+  year: 2006
+  url: "https://press.princeton.edu/books/paperback/9780691124889/dynamics-in-one-complex-variable"
+wolfram2002:
+  label: "Wolfram 2002"
+  authors: "Stephen Wolfram"
+  title: "A New Kind of Science"
+  publication: "Wolfram Media"
+  year: 2002
+  url: "https://www.wolframscience.com/nks/"
+bourke1991:
+  label: "Bourke 1991"
+  authors: "Paul Bourke"
+  title: "The Strange Attractors of Peter de Jong"
+  publication: "Paul Bourke: Geometry, Surfaces, Curves, Polyhedra"
+  year: 1991
+  url: "https://paulbourke.net/fractals/peterdejong/"
+tufte2006:
+  label: "Tufte 2006"
+  authors: "Edward R. Tufte"
+  title: "Beautiful Evidence"
+  publication: "Graphics Press"
+  year: 2006
+  url: "https://www.edwardtufte.com/book/beautiful-evidence/"
+katex2026:
+  label: "KaTeX 2026"
+  authors: "KaTeX Contributors"
+  title: "KaTeX Documentation"
+  publication: "KaTeX"
+  year: 2026
+  url: "https://katex.org/docs/autorender"
+quarto2026:
+  label: "Quarto 2026"
+  authors: "Posit, PBC"
+  title: "Quarto Documentation"
+  publication: "Quarto"
+  year: 2026
+  url: "https://quarto.org/docs/get-started/"
+jupyter2016:
+  label: "Kluyver et al. 2016"
+  authors: "Thomas Kluyver et al."
+  title: "Jupyter Notebooks - a publishing format for reproducible computational workflows"
+  publication: "Positioning and Power in Academic Publishing"
+  year: 2016
+  url: "https://doi.org/10.3233/978-1-61499-649-1-87"
+xie2015:
+  label: "Xie 2015"
+  authors: "Yihui Xie"
+  title: "Dynamic Documents with R and knitr"
+  publication: "Chapman and Hall/CRC"
+  year: 2015
+  url: "https://doi.org/10.1201/b18062"
+metropolis1949:
+  label: "Metropolis and Ulam 1949"
+  authors: "Nicholas Metropolis and Stanislaw Ulam"
+  title: "The Monte Carlo Method"
+  publication: "Journal of the American Statistical Association"
+  year: 1949
+  url: "https://doi.org/10.1080/01621459.1949.10483310"
