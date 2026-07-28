@@ -1,0 +1,37 @@
+name: Verify Post Cards
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'content/posts/**'
+      - 'scripts/generate_post_cards.py'
+      - '.github/workflows/generate-post-cards.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'content/posts/**'
+      - 'scripts/generate_post_cards.py'
+      - '.github/workflows/generate-post-cards.yml'
+
+jobs:
+  verify:
+    name: Verify Cards
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Install renderer dependencies
+        run: pip install matplotlib==3.11.1 numpy==2.5.1
+
+      - name: Regenerate deterministic cards
+        env:
+          MPLCONFIGDIR: /tmp/matplotlib
+        run: python scripts/generate_post_cards.py
+
+      - name: Verify committed cards are current
+        run: git diff --exit-code -- data/post_cards.yaml static/images/post-cards

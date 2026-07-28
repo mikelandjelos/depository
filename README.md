@@ -14,6 +14,7 @@ Personal site for research notes, essays, and technical experiments.
   indexes also have feeds
 - Canonical, Open Graph, and Twitter/X text metadata for useful shared-link
   previews
+- Deterministic 1200×630 mathematical post cards for social previews
 - Statistics page for writing, tags, and repository activity
 - "Unresolved Promises" on the post index, sourced from open article issues
 - Data-driven Curriculum Vitae, synchronized from the separate
@@ -41,9 +42,13 @@ Quarto posts use a Hugo page bundle at `content/posts/<slug>/`. Render a
 
 ```bash
 python3 scripts/render_quarto.py content/posts/my-post/index.qmd
+.venv/bin/python3 scripts/generate_post_cards.py
 ```
 
 Commit the source, generated `index.md`, and any generated figures together.
+Post cards need no author action: GitHub Actions generates and commits them
+in the same commit through the local pre-commit hook; GitHub Actions verifies
+that the committed cards are current.
 See [docs/QUARTO.md](docs/QUARTO.md) for the full Python, R, and notebook
 workflow.
 

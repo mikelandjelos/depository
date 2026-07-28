@@ -12,6 +12,16 @@
             — <span class="post-tags">{{ range $i, $t := . }}{{ if $i }}, {{ end }}<a href="{{ $t.RelPermalink }}">{{ $t.Title }}</a>{{ end }}</span>
         {{ end }}
     </p>
+    {{ if eq .Section "posts" }}
+        {{ $cardSlug := strings.TrimPrefix "/posts/" (strings.TrimSuffix "/" .RelPermalink) }}
+        {{ with index .Site.Data.post_cards $cardSlug }}
+        {{ $cardPath := printf "images/post-cards/%s.png" $cardSlug }}
+        <figure class="post-card post-card-frame-{{ .frame }}">
+            <img src="{{ $cardPath | relURL }}" alt="Deterministic mathematical card for {{ $.Title }}">
+            <figcaption>Generated automatically: the post body selects a {{ .shape }} drawing; its title and metadata select this {{ .color }} palette and {{ .frame }} frame.</figcaption>
+        </figure>
+        {{ end }}
+    {{ end }}
     {{ $headingCount := len (findRE "<h[2-6][^>]*>" .Content) }}
     {{ if ge $headingCount 2 }}
         <p class="toc-label">Contents</p>

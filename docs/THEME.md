@@ -466,13 +466,48 @@ GitHub profile; all other pages use `og:type=website`. `authorURL` and
 `ogLocale` in `hugo.toml` keep the public identity and Open Graph locale out
 of the template.
 
-There are intentionally no `og:image` or `twitter:image` tags yet. The lone
-avatar asset is not suitable for a social card. Issue #33 will define a
-deterministic post-card generator: it will normalize a post's text and
-metadata into stable features and a seed, choose a simple mathematical visual
-family from those features (such as fields, geometry, fractals, cellular
-automata, or dynamical systems), render a reproducible 1200×630 asset, and
-commit it with the post. A later article will explain the method.
+When a post appears in the generated `data/post_cards.yaml` manifest,
+`baseof.html` adds absolute `og:image` and `twitter:image` tags, plus Open
+Graph's explicit 1200×630 dimensions. Non-post pages remain text-only cards
+instead of inheriting a generic fallback.
+
+### Mathematical post cards (#33)
+
+`scripts/generate_post_cards.py` reads every `content/posts/*.md` and
+`content/posts/*/index.md`, renders an opaque 1200×630 PNG at
+`static/images/post-cards/<post-slug>.png`, and writes the selected shape,
+color, and frame to `data/post_cards.yaml`. Hugo uses that manifest to render
+the figure immediately under post metadata, before the table of contents and
+article body. Keeping the assets and manifest under version control means the
+deployed Hugo build needs no Python rendering runtime.
+
+The body is normalized (line endings, markup-only variation, and whitespace
+are removed) and SHA-256 hashed. `shape_digest[0] % 5` chooses one of five
+mathematical drawing families, making each equally probable across the hash
+space:
+
+- streamlines through a trigonometric flow field,
+- nearest-site Voronoi regions plus local network connections,
+- escape-time Julia sets, or
+- elementary cellular automata, or
+- histograms of a De Jong dynamical system.
+
+The remaining body-digest bytes derive all drawing coefficients, initial
+points, densities, and iteration counts. Separately, a hash of the title and
+front-matter metadata chooses a color family, palette variation, and one of
+four restrained print-like frames. Consequently prose changes reshape a card,
+while title or metadata changes recolor and reframe it. The generator prints
+those selections and basic body statistics each run. Every visible card also
+has a small italic caption that states this body-versus-metadata split using
+its actual selected drawing, palette, and frame.
+
+Authors only write and commit posts. The local `generate-post-cards`
+pre-commit hook runs `scripts/stage_post_cards.py` whenever a staged post
+changes; it invokes the generator and stages the PNG files and manifest into that
+same commit. `.github/workflows/generate-post-cards.yml` pins the renderer
+versions, regenerates the cards in CI, and fails if the committed assets are
+stale. Cloudflare therefore receives posts and cards in one deploy, with no
+card front matter, manual generation command, or follow-up commit.
 
 ### Syndication (#13)
 

@@ -46,6 +46,16 @@ repos:
         language: system
         types: [css]
 
+  # Generated mathematical cards for changed posts
+  - repo: local
+    hooks:
+      - id: generate-post-cards
+        name: generate post cards
+        entry: .venv/bin/python3 scripts/stage_post_cards.py
+        language: system
+        files: ^content/posts/
+        pass_filenames: false
+
   # Hugo build check
   - repo: local
     hooks:

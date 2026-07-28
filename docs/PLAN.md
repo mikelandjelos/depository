@@ -192,13 +192,19 @@ sequence, skipping issue #5 (Graph indexing) for last/brainstorm.
       configured GitHub profile as `article:author`. Preview images are
       deliberately deferred to #33. See docs/THEME.md → "Social metadata
       (#14)".
-- [ ] **#33 Generate deterministic mathematical post cards** [OPEN] — design
-      and build a reproducible 1200×630 post-card generator. It will derive
-      stable content features and a seed from each post, choose among several
-      simple mathematical visual families, and commit the generated assets
-      with each post. Labeled `article` + `enhancement`, assigned to Mihajlo,
-      and scheduled in milestone 1; it also seeds a future article explaining
-      the method.
+- [x] **#33 Generate deterministic mathematical post cards** [IMPLEMENTED,
+      AWAITING REVIEW] — `scripts/generate_post_cards.py` hashes normalized
+      post source and renders opaque, reproducible 1200×630 cards. A digest
+      byte selects uniformly among flow fields, Voronoi geometry, Julia
+      fractals, cellular automata, and dynamical-system trajectories. The
+      body hash controls shapes; a separate title-and-metadata hash controls
+      palette and visible frame. The local pre-commit hook generates and
+      stages PNG files and manifest in the same post-changing commit, while
+      `generate-post-cards.yml` verifies those results in CI. Authors do not
+      manage card fields or assets. Each card is visible at the top of its
+      post with an automatic italic generation caption and supplies
+      `og:image`/`twitter:image`. The issue also remains the seed for a future
+      article explaining the method.
 - [ ] **#11 Zotero Integration** [OPEN, question] — not scoped yet.
 - [ ] **#15 Artsy** [OPEN, enhancement/style] — not scoped yet.
 - [ ] **#16 Nightly scheduled rebuild** [OPEN] — keeps Statistics and

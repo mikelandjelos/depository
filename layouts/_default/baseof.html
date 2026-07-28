@@ -24,6 +24,12 @@
         {{ if $summary }}{{ $description = $summary | truncate 200 }}{{ end }}
     {{ end }}
     {{ $isPost := and .IsPage (eq .Section "posts") }}
+    {{ $card := false }}
+    {{ $cardSlug := "" }}
+    {{ if $isPost }}
+        {{ $cardSlug = strings.TrimPrefix "/posts/" (strings.TrimSuffix "/" .RelPermalink) }}
+        {{ $card = index .Site.Data.post_cards $cardSlug }}
+    {{ end }}
     <title>{{ $title }}</title>
     <meta name="description" content="{{ $description }}">
     <link rel="canonical" href="{{ .Permalink }}">
@@ -33,12 +39,22 @@
     <meta property="og:description" content="{{ $description }}">
     <meta property="og:site_name" content="{{ .Site.Title }}">
     <meta property="og:locale" content="{{ .Site.Params.ogLocale }}">
+    {{ with $card }}
+    {{ $cardPath := printf "images/post-cards/%s.png" $cardSlug }}
+    <meta property="og:image" content="{{ $cardPath | absURL }}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    {{ end }}
     {{ if $isPost }}
     <meta property="article:author" content="{{ .Site.Params.authorURL }}">
     {{ end }}
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="{{ $title }}">
     <meta name="twitter:description" content="{{ $description }}">
+    {{ with $card }}
+    {{ $cardPath := printf "images/post-cards/%s.png" $cardSlug }}
+    <meta name="twitter:image" content="{{ $cardPath | absURL }}">
+    {{ end }}
     {{ with .OutputFormats.Get "RSS" }}
     <link rel="alternate" type="{{ .MediaType.Type }}" title="{{ $.Title }} RSS feed" href="{{ .Permalink }}">
     {{ end }}

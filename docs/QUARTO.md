@@ -72,10 +72,15 @@ hugo server -D   # check it live, both themes
 
 Front matter works exactly like a plain-Markdown post (`title`, `subtitle`,
 `date`, `status`, `categories`, `tags` all pass through). One extra optional
-field:
+table field:
 
 - `tableStyle: "striped"` or `"grid"` — see docs/THEME.md → "Tables" for
   what each looks like. Default (no field) is a plain Tufte rule-table.
+
+Post cards require no additional front matter or local command. The
+pre-commit hook detects a changed post, derives its card from the rendered
+Markdown, and stages the generated asset and Hugo data manifest in the same
+commit. GitHub Actions independently verifies the committed output.
 
 For a hand-authored `.ipynb` (not compiled from `.qmd`), front matter goes
 in a **raw cell** (Jupyter cell type "Raw") as the very first cell,
