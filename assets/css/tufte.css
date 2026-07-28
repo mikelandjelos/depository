@@ -304,11 +304,14 @@ figure.fullwidth figcaption {
 .daily-art-frame {
     box-sizing: border-box;
     position: relative;
+    background: var(--color-bg);
+}
+
+.daily-art-frame-gilt {
     padding: 0.8rem;
     border: 1px solid var(--color-art-accent);
     outline: 1px solid var(--color-text);
     outline-offset: -5px;
-    background: var(--color-bg);
     box-shadow:
         0.45rem 0.55rem 0 rgb(0 0 0 / 18%),
         0 0 0 6px var(--color-bg),
@@ -317,28 +320,79 @@ figure.fullwidth figcaption {
         inset 0 0 0 5px var(--color-bg);
 }
 
-.daily-art-frame::before,
-.daily-art-frame::after {
+.daily-art-frame-bracket {
+    padding: 1rem;
+    border: 1px solid var(--color-text);
+    box-shadow:
+        0.4rem 0.45rem 0 rgb(0 0 0 / 16%),
+        inset 0 0 0 4px var(--color-bg),
+        inset 0 0 0 5px var(--color-art-accent);
+}
+
+.daily-art-frame-mat {
+    padding: 1.25rem;
+    border: 1px solid var(--color-art-accent);
+    background: var(--color-code-bg);
+    box-shadow:
+        0.5rem 0.6rem 0 rgb(0 0 0 / 20%),
+        inset 0 0 0 0.35rem var(--color-bg),
+        inset 0 0 0 0.43rem var(--color-art-accent);
+}
+
+.daily-art-frame-engraved {
+    padding: 0.95rem;
+    border: 3px double var(--color-art-accent);
+    outline: 1px solid var(--color-text);
+    outline-offset: 4px;
+    box-shadow:
+        0.3rem 0.35rem 0 rgb(0 0 0 / 14%),
+        inset 0 0 0 1px var(--color-text);
+}
+
+.daily-art-corner {
     position: absolute;
-    width: 1.8rem;
-    height: 1.8rem;
-    content: "";
+    width: 1.55rem;
+    height: 1.55rem;
     border-color: var(--color-art-accent);
     pointer-events: none;
 }
 
-.daily-art-frame::before {
-    top: -0.35rem;
-    left: -0.35rem;
+.daily-art-corner-nw {
+    top: -0.4rem;
+    left: -0.4rem;
     border-top: 2px solid;
     border-left: 2px solid;
 }
 
-.daily-art-frame::after {
-    right: -0.35rem;
-    bottom: -0.35rem;
+.daily-art-corner-ne {
+    top: -0.4rem;
+    right: -0.4rem;
+    border-top: 2px solid;
+    border-right: 2px solid;
+}
+
+.daily-art-corner-sw {
+    bottom: -0.4rem;
+    left: -0.4rem;
+    border-bottom: 2px solid;
+    border-left: 2px solid;
+}
+
+.daily-art-corner-se {
+    right: -0.4rem;
+    bottom: -0.4rem;
     border-right: 2px solid;
     border-bottom: 2px solid;
+}
+
+.daily-art-frame-mat .daily-art-corner {
+    border-color: var(--color-text);
+}
+
+.daily-art-frame-engraved .daily-art-corner {
+    width: 1.1rem;
+    height: 1.1rem;
+    border-width: 1px;
 }
 
 .daily-art img {

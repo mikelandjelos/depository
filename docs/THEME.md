@@ -524,7 +524,9 @@ medium, and a link to the museum record. The image is a normal static asset at
 `static/images/daily_art.jpg`, never a browser-time API request. Its CSS-only
 frame uses layered gold-toned rules, inset lines, corner ornaments, and a fixed
 shadow offset for a baroque, three-dimensional impression that follows the
-light/dark theme.
+light/dark theme. The artwork object ID deterministically selects one of four
+frame classes: a gilt bevel, corner brackets, a gallery mat, or engraved
+double rules. Each uses the same restrained ink-and-paper palette.
 
 `scripts/refresh_daily_art.py` hashes the UTC date into the Met's image-bearing
 highlight-painting search result and walks forward until it finds a

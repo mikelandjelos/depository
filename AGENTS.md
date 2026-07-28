@@ -164,7 +164,9 @@ site/
   attribution in `data/daily_art.yaml`. The scheduled GitHub workflow also
   commits `data/site_refresh.yaml`, which triggers Cloudflare to deploy the
   new art and refresh build-time GitHub-derived content without a browser-time
-  museum API request. See docs/THEME.md → "Daily art and nightly refresh".
+  museum API request. The artwork object ID deterministically chooses one of
+  four CSS-only frames: gilt, bracket, mat, or engraved. See docs/THEME.md →
+  "Daily art and nightly refresh".
 
 ## Task Sequence
 

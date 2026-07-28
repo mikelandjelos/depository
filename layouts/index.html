@@ -26,7 +26,11 @@
     <section class="daily-art-section">
         <h2>Art of the day</h2>
         <figure class="daily-art">
-            <div class="daily-art-frame">
+            <div class="daily-art-frame daily-art-frame-{{ .frame }}">
+                <span class="daily-art-corner daily-art-corner-nw" aria-hidden="true"></span>
+                <span class="daily-art-corner daily-art-corner-ne" aria-hidden="true"></span>
+                <span class="daily-art-corner daily-art-corner-sw" aria-hidden="true"></span>
+                <span class="daily-art-corner daily-art-corner-se" aria-hidden="true"></span>
                 <img src="{{ .image | relURL }}" alt="{{ .title }} by {{ .artist }}">
             </div>
             <figcaption>
