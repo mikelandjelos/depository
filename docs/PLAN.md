@@ -192,8 +192,8 @@ sequence, skipping issue #5 (Graph indexing) for last/brainstorm.
       configured GitHub profile as `article:author`. Preview images are
       deliberately deferred to #33. See docs/THEME.md → "Social metadata
       (#14)".
-- [x] **#33 Generate deterministic mathematical post cards** [IMPLEMENTED,
-      AWAITING REVIEW] — `scripts/generate_post_cards.py` hashes normalized
+- [x] **#33 Generate deterministic mathematical post cards** [CLOSED] —
+      `scripts/generate_post_cards.py` hashes normalized
       post source and renders opaque, reproducible 1200×630 cards. A digest
       byte selects uniformly among flow fields, Voronoi geometry, Julia
       fractals, cellular automata, and dynamical-system trajectories. The
