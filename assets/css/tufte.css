@@ -942,6 +942,85 @@ header.site-header .nav-links a:hover {
     font-size: 1.3rem;
 }
 
+/* ---------- Post routing and hover previews (#20, #24) ---------- */
+
+.post-routing {
+    width: 55%;
+    margin-top: 4rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid var(--color-border);
+}
+
+.post-routing-label {
+    margin: 0 0 0.45rem;
+    font-size: 1rem;
+    font-variant: small-caps;
+    letter-spacing: 0.05em;
+    opacity: 0.65;
+}
+
+.post-routing-link {
+    display: block;
+    text-decoration: none;
+}
+
+.post-routing-title {
+    display: block;
+    font-size: 1.65rem;
+    line-height: 1.05;
+    text-decoration: underline;
+    text-decoration-thickness: 0.05em;
+    text-underline-offset: 0.15em;
+}
+
+.post-routing-summary {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 1.15rem;
+    font-style: italic;
+    line-height: 1.2;
+    opacity: 0.72;
+}
+
+.post-preview {
+    position: fixed;
+    z-index: 20;
+    box-sizing: border-box;
+    width: min(22rem, calc(100vw - 1.5rem));
+    padding: 0.65rem;
+    border: 1px solid var(--color-border);
+    background: var(--color-bg);
+    box-shadow: 0.35rem 0.45rem 0 rgb(0 0 0 / 18%);
+    color: var(--color-text);
+    pointer-events: none;
+}
+
+.post-preview img {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-bottom: 0.55rem;
+}
+
+.post-preview strong,
+.post-preview span {
+    display: block;
+}
+
+.post-preview strong {
+    font-size: 1.35rem;
+    font-weight: 400;
+    line-height: 1.05;
+}
+
+.post-preview span {
+    margin-top: 0.35rem;
+    font-size: 1rem;
+    font-style: italic;
+    line-height: 1.2;
+    opacity: 0.75;
+}
+
 /* ---------- Unresolved Promises (pending article-idea teasers, #7) ---------- */
 
 section.futures {
@@ -1452,6 +1531,10 @@ footer.site-footer {
     }
 
     .references {
+        width: 100%;
+    }
+
+    .post-routing {
         width: 100%;
     }
 

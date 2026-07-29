@@ -1,0 +1,14 @@
+{{- $previews := slice -}}
+{{- range where .Site.RegularPages "Section" "posts" -}}
+    {{- $description := .Summary | plainify | htmlUnescape | strings.TrimSpace | truncate 180 -}}
+    {{- with .Params.subtitle -}}
+        {{- $description = . -}}
+    {{- end -}}
+    {{- $slug := strings.TrimPrefix "/posts/" (strings.TrimSuffix "/" .RelPermalink) -}}
+    {{- $image := "" -}}
+    {{- with index .Site.Data.post_cards $slug -}}
+        {{- $image = printf "images/post-cards/%s.png" $slug | relURL -}}
+    {{- end -}}
+    {{- $previews = $previews | append (dict "url" .RelPermalink "title" .Title "description" $description "image" $image) -}}
+{{- end -}}
+<script id="post-preview-data" type="application/json">{{ $previews | jsonify | safeJS }}</script>

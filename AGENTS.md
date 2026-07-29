@@ -61,8 +61,11 @@ site/
 │   │   ├── single.html            # Article/post template
 │   │   └── stats.html             # Statistics page template
 │   ├── index.html                 # Homepage template
+│   ├── partials/
+│   │   └── post-preview-data.html # Build-time internal-post preview registry
 │   └── shortcodes/
 │       ├── cite.html              # Registers a keyed author-year citation
+│       ├── post.html              # Resolves a validated inter-post link
 │       └── references.html        # Renders a page's cited bibliography
 ├── scripts/
 │   ├── sync_cv.py                 # Parses curriculum-vitae's cv.tex into data/cv.yaml
@@ -77,6 +80,9 @@ site/
 │   └── images/
 │       ├── daily_art.jpg          # Generated homepage artwork for the day
 │       └── post-cards/            # Generated 1200×630 social-preview images
+├── static/js/
+│   ├── post-previews.js           # Local hover/focus previews for internal post links
+│   └── toc-collision.js           # Protects margin content from the floating ToC
 ├── themes/                        # (unused — custom theme in layouts/ + assets/)
 ├── .github/
 │   └── workflows/
@@ -180,6 +186,12 @@ site/
   render author-year labels and a first-citation-ordered bibliography from
   `data/references.yaml`; no client-side citation processor or Quarto
   conversion is required. See docs/THEME.md → "Citations".
+- **Post routing and previews are build-assisted**: Hugo's related-content
+  configuration prefers shared tags/categories for the next post after an
+  article, with date fallback. Authors use `{{< post slug="post-slug" >}}`
+  for validated post links. A small local script reads an inline build-time
+  registry to add title, summary, and card previews to every internal post
+  link without a network request. See docs/THEME.md → "Post routing and previews".
 
 ## Task Sequence
 

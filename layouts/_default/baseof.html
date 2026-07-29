@@ -83,6 +83,7 @@
     {{ $css := resources.Get "css/tufte.css" }}
     <link rel="stylesheet" href="{{ $css.RelPermalink }}">
     <script defer src="{{ "js/toc-collision.js" | relURL }}"></script>
+    <script defer src="{{ "js/post-previews.js" | relURL }}"></script>
     <!-- Syntax highlighting: light theme default, dark theme for dark mode -->
     {{ $syntaxLight := resources.Get "css/syntax-light.css" }}
     {{ $syntaxDark := resources.Get "css/syntax-dark.css" }}
@@ -141,6 +142,8 @@
         {{ with .OutputFormats.Get "RSS" }} · <a href="{{ .RelPermalink }}">RSS feed</a>{{ end }}
         {{ with .Site.Params.repoURL }} · <a href="{{ . }}">Source</a>{{ end }}</p>
     </footer>
+
+    {{ partial "post-preview-data.html" . }}
 
     <script>
         (function () {

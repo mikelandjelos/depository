@@ -177,14 +177,17 @@ y_{n+1} &= \sin(c x_n) - \cos(d y_n).
 \end{aligned}
 $$
 
-The four coefficients are independently mapped into $[-2, 2)$ from the
-digest. Starting at $(0.1, 0.1)$, the generator discards the first 500
-states as a transient and records the next 150,000. Rather than drawing each
-point directly, it bins the orbit into a 900 by 480 two-dimensional histogram
-and displays $\log(1 + h)$, where $h$ is the bin count. The logarithm makes
-both dense attractor cores and faint outer structure visible. Some parameter
-choices form a compact attractor; others disperse. That variation is an
-expected property of the recurrence, not a fallback failure.
+The generator chooses one of several vetted coefficient quadruples, then adds
+a small digest-derived perturbation to all four values. Starting at
+$(0.1, 0.1)$, it discards the first 500 states as a transient and records the
+next 150,000. Rather than drawing each point directly, it bins the orbit into
+a 900 by 480 two-dimensional histogram and displays $\log(1 + h)$, where
+$h$ is the bin count. The logarithm makes both dense attractor cores and faint
+outer structure visible. A fixed point or tiny cycle is valid dynamics but
+unreadable at card scale, so a deterministic alternate vetted seed is used
+when fewer than 1,500 histogram bins are occupied. Empty bins are masked to
+the dark canvas background, leaving only the orbit visible across the full
+1200 by 630 frame.
 
 {{< cite bourke1991 >}}
 

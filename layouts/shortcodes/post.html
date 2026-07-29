@@ -1,0 +1,7 @@
+{{- $slug := .Get "slug" -}}
+{{- $target := .Site.GetPage (printf "/posts/%s" $slug) -}}
+{{- if not $target -}}
+    {{- errorf "%s: unknown or missing post slug %q" .Page.File.Path $slug -}}
+{{- end -}}
+{{- $label := .Get "text" | default $target.Title -}}
+<a class="post-link" href="{{ $target.RelPermalink }}">{{ $label }}</a>

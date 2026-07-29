@@ -57,6 +57,11 @@ author-year citation, then place `{{< references >}}` at the end. Add the
 keyed record to `data/references.yaml`; the bibliography includes only cited
 works.
 
+Use `{{< post slug="post-slug" >}}` to reference another post while writing,
+or add `text="Label"` to supply link text. Hugo resolves the post title and
+URL at build time; internal post links receive a local hover/focus preview
+automatically.
+
 ## Development
 
 ```bash

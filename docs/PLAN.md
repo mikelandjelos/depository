@@ -230,6 +230,11 @@ sequence, skipping issue #5 (Graph indexing) for last/brainstorm.
       current posts demonstrate the workflow, while Hello World exercises it
       alongside the site's existing feature set. Hover/focus previews expose
       a full citation, and each marker links to its bibliography entry.
+- [ ] **#20 Inter Post Routing / #24 Post previews** [IN PROGRESS] — authors
+      can write validated `{{< post slug >}}` links; every internal post link
+      gets a local hover/focus preview from build-time metadata, while each
+      post ends with a tag/category-ranked next-reading route and deterministic
+      date fallback.
 - [ ] **#4 Integrate Quarto Scientific publishing** [IN PROGRESS] — Python
       and R working end-to-end; Julia not started.
   - `.qmd`/`.ipynb` posts render to Hugo-native Markdown via Quarto's

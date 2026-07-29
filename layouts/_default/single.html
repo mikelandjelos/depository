@@ -37,5 +37,29 @@
     <section{{ with .Params.tableStyle }} class="table-style-{{ . }}"{{ end }}>
         {{ .Content }}
     </section>
+    {{ if eq .Section "posts" }}
+        {{ $next := false }}
+        {{ range .Site.RegularPages.Related . }}
+            {{ if and (not $next) (ne .RelPermalink $.RelPermalink) }}
+                {{ $next = . }}
+            {{ end }}
+        {{ end }}
+        {{ if not $next }}
+            {{ range .Site.RegularPages.ByDate.Reverse }}
+                {{ if and (not $next) (eq .Section "posts") (ne .RelPermalink $.RelPermalink) }}
+                    {{ $next = . }}
+                {{ end }}
+            {{ end }}
+        {{ end }}
+        {{ with $next }}
+        <nav class="post-routing" aria-label="Continue reading">
+            <p class="post-routing-label">Continue reading</p>
+            <a class="post-routing-link" href="{{ .RelPermalink }}">
+                <span class="post-routing-title">{{ .Title }}</span>
+                {{ with .Params.subtitle }}<span class="post-routing-summary">{{ . }}</span>{{ end }}
+            </a>
+        </nav>
+        {{ end }}
+    {{ end }}
 </article>
 {{ end }}

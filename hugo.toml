@@ -19,6 +19,19 @@ ignoreFiles = ['\.qmd$', '\.ipynb$']
   tag = 'tags'
   category = 'categories'
 
+# Post routing first follows the strongest shared taxonomy, then falls back to
+# chronology when a post has no related neighbour.
+[related]
+  threshold = 10
+  includeNewer = true
+  toLower = true
+  [[related.indices]]
+    name = 'tags'
+    weight = 100
+  [[related.indices]]
+    name = 'categories'
+    weight = 20
+
 # Keep Hugo's native RSS 2.0 feeds enabled for the site, post index, and
 # taxonomy pages. Term feeds make it possible to subscribe to one tag or
 # category without receiving every post.

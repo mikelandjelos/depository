@@ -227,22 +227,60 @@ def julia_set(
     ax.set_ylim(-1.0, 1.0)
 
 
-def dynamical_system(ax: plt.Axes, digest: bytes, palette_map: colors.Colormap) -> None:
-    a, b, c, d = [-2 + 4 * byte_float(digest, index) for index in range(8, 12)]
+DE_JONG_BASES = (
+    (1.400, -2.300, 2.400, -2.100),
+    (1.641, 1.902, 0.316, 1.525),
+    (-1.770, -0.601, 1.127, 0.889),
+    (0.970, -1.899, 1.381, -1.506),
+    (1.500, -1.800, 1.600, 0.900),
+)
+
+
+def dynamical_histogram(parameters: tuple[float, float, float, float]) -> np.ndarray | None:
+    """Return a non-degenerate De Jong density, or reject a collapsed orbit."""
+    a, b, c, d = parameters
     x, y = 0.1, 0.1
     points = np.empty((150_000, 2))
     for index in range(len(points) + 500):
         x, y = np.sin(a * y) - np.cos(b * x), np.sin(c * x) - np.cos(d * y)
         if index >= 500:
             points[index - 500] = x, y
-    histogram, x_edges, y_edges = np.histogram2d(points[:, 0], points[:, 1], bins=(900, 480), range=((-2, 2), (-2, 2)))
-    image = np.log1p(histogram.T)
+
+    histogram, _, _ = np.histogram2d(
+        points[:, 0], points[:, 1], bins=(900, 480), range=((-2, 2), (-2, 2))
+    )
+    # A fixed point or tiny cycle is mathematically legitimate but unreadable
+    # as a card. Require enough occupied bins to expose an actual attractor.
+    if np.count_nonzero(histogram) < 1_500:
+        return None
+    return np.ma.masked_equal(np.log1p(histogram.T), 0)
+
+
+def dynamical_system(ax: plt.Axes, digest: bytes, palette_map: colors.Colormap) -> None:
+    perturbation = tuple((byte_float(digest, index) - 0.5) * 0.12 for index in range(9, 13))
+    start = digest[8] % len(DE_JONG_BASES)
+    image = None
+    for offset in range(len(DE_JONG_BASES)):
+        base = DE_JONG_BASES[(start + offset) % len(DE_JONG_BASES)]
+        parameters = tuple(value + delta for value, delta in zip(base, perturbation))
+        image = dynamical_histogram(parameters)
+        if image is not None:
+            break
+
+    if image is None:
+        # The vetted first seed remains a deterministic final guard for future
+        # numerical-library changes that alter an edge-case orbit.
+        image = dynamical_histogram(DE_JONG_BASES[0])
+    assert image is not None
+    density_map = palette_map.copy()
+    density_map.set_bad(alpha=0)
     ax.imshow(
         image,
-        extent=(x_edges[0], x_edges[-1], y_edges[0], y_edges[-1]),
+        extent=(-2, 2, -2, 2),
         origin="lower",
-        cmap=palette_map,
+        cmap=density_map,
         interpolation="bilinear",
+        aspect="auto",
     )
     ax.set_xlim(-2, 2)
     ax.set_ylim(-2, 2)

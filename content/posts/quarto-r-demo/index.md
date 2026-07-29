@@ -14,9 +14,9 @@ tableStyle: striped
 
 
 <span class="newthought">Quarto doesn’t care</span> which language produced
-the numbers — the same `.qmd` → Hugo pipeline used in the [Python
-demo](/posts/quarto-python-demo/) works for R too, executed through knitr
-instead of Jupyter. {{< cite quarto2026 >}} {{< cite xie2015 >}}
+the numbers — the same `.qmd` → Hugo pipeline used in the
+{{< post slug="quarto-python-demo" text="Python demo" >}} works for R too, executed
+through knitr instead of Jupyter. {{< cite quarto2026 >}} {{< cite xie2015 >}}
 
 A simple random walk, simulated and summarized:
 

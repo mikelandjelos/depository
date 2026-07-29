@@ -17,9 +17,12 @@ Custom theme built inline (no `themes/` directory). All templates live in
 | `layouts/index.html` | Homepage: site title, description, recent 10 posts from `posts/` section |
 | `layouts/_default/cv.html` | Curriculum Vitae page: renders `data/cv.yaml` (see "Curriculum Vitae" below) |
 | `layouts/_default/stats.html` | Statistics page: writing/tag/repo-activity numbers (see "Statistics" below) |
+| `layouts/partials/post-preview-data.html` | Build-time JSON metadata for internal-post previews |
+| `layouts/shortcodes/post.html` | Validated author-facing inter-post link shortcode |
 | `assets/css/tufte.css` | All styles — adapted Tufte CSS + site header/nav/footer/post-list/avatar |
 | `assets/css/syntax-light.css` | Chroma syntax highlighting — monokailight (light mode) |
 | `assets/css/syntax-dark.css` | Chroma syntax highlighting — monokai (dark mode) |
+| `static/js/post-previews.js` | Positions and dismisses local hover/focus post previews |
 
 ## Design Decisions
 
@@ -144,6 +147,41 @@ the OS setting):
   big empty block before the article started. This is a reference list, not
   flowing prose, so it should read compact rather than matching paragraph
   spacing.
+
+### Post routing and previews (#20, #24)
+
+- `hugo.toml` configures Hugo related content with tags weighted above
+  categories. Every post ends with a "Continue reading" route to its highest
+  ranked related post; when no related result exists, it uses the newest other
+  post as a deterministic fallback.
+- Authors use `{{< post slug="post-slug" >}}` (and optionally
+  `text="Label"`) in Markdown, Quarto source, or notebook Markdown cells.
+  The shortcode resolves the title and relative URL at build time and makes an
+  unknown slug a build error. Ordinary internal `/posts/...` links remain
+  valid too.
+- `post-preview-data.html` emits a compact JSON registry of every post's URL,
+  title, subtitle-or-summary, and generated card path. `post-previews.js`
+  consumes only that in-page data: hover or keyboard focus on an internal post
+  link shows an opaque, positioned preview with no fetch or third-party code.
+  Escape, link activation, scrolling, resizing, blur, and pointer exit hide
+  it. On touch, normal link navigation remains unchanged.
+- The preview deliberately uses the existing card image and ink-and-paper
+  styling instead of a separate card system. It is a tooltip rather than an
+  interactive overlay, so the source link remains the single navigation
+  target.
+
+### Post-card dynamical systems
+
+The De Jong family is selected with the same uniform digest partition as every
+other card family, but it does not map arbitrary digest bytes directly to all
+four recurrence coefficients. Instead it chooses a vetted attractor seed and
+applies a small deterministic perturbation. The generator rejects a fixed
+point or near-cycle with fewer than 1,500 occupied density bins, then tries
+the next deterministic vetted seed. This preserves reproducibility and family
+selection while ensuring a dynamical card actually has visible structure.
+Empty density bins are transparent against the card's dark canvas and the
+histogram uses the full 1200×630 aspect ratio, rather than exposing a square
+plot field inside a wide social image.
 
 ### Metadata: tags, categories, status
 
