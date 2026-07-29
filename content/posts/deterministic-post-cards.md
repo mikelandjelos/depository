@@ -165,31 +165,29 @@ through the local rule.
 
 {{< cite wolfram2002 >}}
 
-### De Jong dynamical systems
+### Potential-field contours
 
-The final family uses a two-dimensional nonlinear recurrence commonly called a
-De Jong attractor:
+The final family constructs a scalar field from 3 to 6 anisotropic radial
+basis sources. For a source at $p_j$, write its rotated coordinates as
+$(u_j, v_j)$ and its principal scales as $(\sigma_{x,j}, \sigma_{y,j})$. The
+field is
 
 $$
-\begin{aligned}
-x_{n+1} &= \sin(a y_n) - \cos(b x_n), \\
-y_{n+1} &= \sin(c x_n) - \cos(d y_n).
-\end{aligned}
+F(x,y) = \sum_{j=1}^{m} w_j
+\exp\!\left[-\frac{1}{2}\left(
+\frac{u_j^2}{\sigma_{x,j}^2} +
+\frac{v_j^2}{\sigma_{y,j}^2}\right)\right].
 $$
 
-The generator chooses one of several vetted coefficient quadruples, then adds
-a small digest-derived perturbation to all four values. Starting at
-$(0.1, 0.1)$, it discards the first 500 states as a transient and records the
-next 150,000. Rather than drawing each point directly, it bins the orbit into
-a 900 by 480 two-dimensional histogram and displays $\log(1 + h)$, where
-$h$ is the bin count. The logarithm makes both dense attractor cores and faint
-outer structure visible. A fixed point or tiny cycle is valid dynamics but
-unreadable at card scale, so a deterministic alternate vetted seed is used
-when fewer than 1,500 histogram bins are occupied. Empty bins are masked to
-the dark canvas background, leaving only the orbit visible across the full
-1200 by 630 frame.
+Each source's position, orientation, scales, and signed weight $w_j$ come
+from a digest-seeded pseudo-random stream. The card draws 13 level curves
+$F(x,y) = \ell$ between the 10th and 92nd percentiles of the field. Positive
+and negative sources create ridges, saddles, and nested basins; anisotropy
+prevents the result from degenerating into concentric circles. The output is
+mathematical linework rather than a density raster, so it remains crisp at the
+1200 by 630 social-card resolution.
 
-{{< cite bourke1991 >}}
+{{< cite buhmann2003 >}}
 
 ## Palette and frame are a second system
 

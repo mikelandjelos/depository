@@ -80,7 +80,7 @@ def read_post(source: Path) -> Post:
 
 
 COLOR_HUES = (0.52, 0.08, 0.76, 0.25, 0.60)
-COLOR_NAMES = ("flow", "voronoi", "julia", "cellular", "dynamical")
+COLOR_NAMES = ("flow", "voronoi", "julia", "cellular", "contour")
 FRAME_NAMES = ("rule", "double", "inset", "bracket")
 
 
@@ -227,67 +227,36 @@ def julia_set(
     ax.set_ylim(-1.0, 1.0)
 
 
-DE_JONG_BASES = (
-    (1.400, -2.300, 2.400, -2.100),
-    (1.641, 1.902, 0.316, 1.525),
-    (-1.770, -0.601, 1.127, 0.889),
-    (0.970, -1.899, 1.381, -1.506),
-    (1.500, -1.800, 1.600, 0.900),
-)
+def potential_contours(
+    ax: plt.Axes,
+    digest: bytes,
+    palette_map: colors.Colormap,
+) -> None:
+    """Draw level curves of a deterministic anisotropic radial basis field."""
+    rng = np.random.default_rng(int.from_bytes(digest[8:16], "big"))
+    x, y = np.meshgrid(np.linspace(-1.5, 1.5, 960), np.linspace(-0.8, 0.8, 540))
+    field = np.zeros_like(x)
+    source_count = 3 + digest[16] % 4
+    for _ in range(source_count):
+        center_x, center_y = rng.uniform((-1.15, -0.55), (1.15, 0.55))
+        scale_x, scale_y = rng.uniform(0.20, 0.60), rng.uniform(0.12, 0.38)
+        angle = rng.uniform(0, np.pi)
+        amplitude = rng.choice((-1, 1)) * rng.uniform(0.65, 1.35)
+        dx, dy = x - center_x, y - center_y
+        major = np.cos(angle) * dx + np.sin(angle) * dy
+        minor = -np.sin(angle) * dx + np.cos(angle) * dy
+        field += amplitude * np.exp(-0.5 * ((major / scale_x) ** 2 + (minor / scale_y) ** 2))
+
+    low, high = np.quantile(field, (0.10, 0.92))
+    levels = np.linspace(low, high, 13)
+    line_colors = [palette_map(index / (len(levels) - 1)) for index in range(len(levels))]
+    ax.contour(x, y, field, levels=levels, colors=line_colors, linewidths=1.25, antialiased=True)
+    ax.set_xlim(-1.5, 1.5)
+    ax.set_ylim(-0.8, 0.8)
 
 
-def dynamical_histogram(parameters: tuple[float, float, float, float]) -> np.ndarray | None:
-    """Return a non-degenerate De Jong density, or reject a collapsed orbit."""
-    a, b, c, d = parameters
-    x, y = 0.1, 0.1
-    points = np.empty((150_000, 2))
-    for index in range(len(points) + 500):
-        x, y = np.sin(a * y) - np.cos(b * x), np.sin(c * x) - np.cos(d * y)
-        if index >= 500:
-            points[index - 500] = x, y
-
-    histogram, _, _ = np.histogram2d(
-        points[:, 0], points[:, 1], bins=(900, 480), range=((-2, 2), (-2, 2))
-    )
-    # A fixed point or tiny cycle is mathematically legitimate but unreadable
-    # as a card. Require enough occupied bins to expose an actual attractor.
-    if np.count_nonzero(histogram) < 1_500:
-        return None
-    return np.ma.masked_equal(np.log1p(histogram.T), 0)
-
-
-def dynamical_system(ax: plt.Axes, digest: bytes, palette_map: colors.Colormap) -> None:
-    perturbation = tuple((byte_float(digest, index) - 0.5) * 0.12 for index in range(9, 13))
-    start = digest[8] % len(DE_JONG_BASES)
-    image = None
-    for offset in range(len(DE_JONG_BASES)):
-        base = DE_JONG_BASES[(start + offset) % len(DE_JONG_BASES)]
-        parameters = tuple(value + delta for value, delta in zip(base, perturbation))
-        image = dynamical_histogram(parameters)
-        if image is not None:
-            break
-
-    if image is None:
-        # The vetted first seed remains a deterministic final guard for future
-        # numerical-library changes that alter an edge-case orbit.
-        image = dynamical_histogram(DE_JONG_BASES[0])
-    assert image is not None
-    density_map = palette_map.copy()
-    density_map.set_bad(alpha=0)
-    ax.imshow(
-        image,
-        extent=(-2, 2, -2, 2),
-        origin="lower",
-        cmap=density_map,
-        interpolation="bilinear",
-        aspect="auto",
-    )
-    ax.set_xlim(-2, 2)
-    ax.set_ylim(-2, 2)
-
-
-FAMILIES = (flow_field, voronoi_geometry, julia_set, cellular_automaton, dynamical_system)
-FAMILY_NAMES = ("flow", "voronoi", "julia", "cellular", "dynamical")
+FAMILIES = (flow_field, voronoi_geometry, julia_set, cellular_automaton, potential_contours)
+FAMILY_NAMES = ("flow", "voronoi", "julia", "cellular", "contour")
 
 
 def render(post: Post) -> tuple[str, str]:

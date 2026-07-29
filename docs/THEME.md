@@ -170,18 +170,14 @@ the OS setting):
   interactive overlay, so the source link remains the single navigation
   target.
 
-### Post-card dynamical systems
+### Post-card potential-field contours
 
-The De Jong family is selected with the same uniform digest partition as every
-other card family, but it does not map arbitrary digest bytes directly to all
-four recurrence coefficients. Instead it chooses a vetted attractor seed and
-applies a small deterministic perturbation. The generator rejects a fixed
-point or near-cycle with fewer than 1,500 occupied density bins, then tries
-the next deterministic vetted seed. This preserves reproducibility and family
-selection while ensuring a dynamical card actually has visible structure.
-Empty density bins are transparent against the card's dark canvas and the
-histogram uses the full 1200×630 aspect ratio, rather than exposing a square
-plot field inside a wide social image.
+The fifth uniformly selected card family is a deterministic anisotropic radial
+basis field. A digest-seeded generator chooses 3 to 6 source positions,
+orientations, scales, and signed weights; the renderer sums their Gaussian
+potentials and draws 13 contour levels between the field's 10th and 92nd
+percentiles. This produces crisp ridges, saddles, nested basins, and
+topographic-like linework without a fragile orbit-density raster.
 
 ### Metadata: tags, categories, status
 
@@ -561,7 +557,7 @@ space:
 - nearest-site Voronoi regions plus local network connections,
 - escape-time Julia sets, or
 - elementary cellular automata, or
-- histograms of a De Jong dynamical system.
+- level curves of an anisotropic radial basis potential field.
 
 The remaining body-digest bytes derive all drawing coefficients, initial
 points, densities, and iteration counts. Separately, a hash of the title and

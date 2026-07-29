@@ -196,7 +196,7 @@ sequence, skipping issue #5 (Graph indexing) for last/brainstorm.
       `scripts/generate_post_cards.py` hashes normalized
       post source and renders opaque, reproducible 1200×630 cards. A digest
       byte selects uniformly among flow fields, Voronoi geometry, Julia
-      fractals, cellular automata, and dynamical-system trajectories. The
+      fractals, cellular automata, and potential-field contours. The
       body hash controls shapes; a separate title-and-metadata hash controls
       palette and visible frame. The local pre-commit hook generates and
       stages PNG files and manifest in the same post-changing commit, while

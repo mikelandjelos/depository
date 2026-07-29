@@ -2,7 +2,7 @@
 
 deterministic-post-cards:
   frame: double
-  shape: dynamical
+  shape: voronoi
   color: cellular
 hello-world:
   frame: rule
@@ -11,12 +11,12 @@ hello-world:
 quarto-ipynb-demo:
   frame: rule
   shape: flow
-  color: dynamical
+  color: contour
 quarto-python-demo:
   frame: double
   shape: julia
   color: cellular
 quarto-r-demo:
   frame: bracket
-  shape: dynamical
+  shape: contour
   color: voronoi

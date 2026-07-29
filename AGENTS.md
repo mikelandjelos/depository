@@ -167,7 +167,7 @@ site/
   `generate-post-cards.yml` regenerates in CI and fails if the committed
   results differ. A post body hash chooses and
   parameterizes the drawing family (flow fields, Voronoi geometry, Julia
-  fractals, cellular automata, or dynamical trajectories); a separate title
+  fractals, cellular automata, or potential-field contours); a separate title
   and metadata hash chooses color and frame. Hugo reads the manifest to show
   the card in the post and expose it through `og:image`/`twitter:image`. See
   docs/THEME.md → "Mathematical post cards (#33)".

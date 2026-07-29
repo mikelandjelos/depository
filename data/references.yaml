@@ -26,13 +26,13 @@ wolfram2002:
   publication: "Wolfram Media"
   year: 2002
   url: "https://www.wolframscience.com/nks/"
-bourke1991:
-  label: "Bourke 1991"
-  authors: "Paul Bourke"
-  title: "The Strange Attractors of Peter de Jong"
-  publication: "Paul Bourke: Geometry, Surfaces, Curves, Polyhedra"
-  year: 1991
-  url: "https://paulbourke.net/fractals/peterdejong/"
+buhmann2003:
+  label: "Buhmann 2003"
+  authors: "Martin D. Buhmann"
+  title: "Radial Basis Functions: Theory and Implementations"
+  publication: "Cambridge University Press"
+  year: 2003
+  url: "https://doi.org/10.1017/CBO9780511543241"
 tufte2006:
   label: "Tufte 2006"
   authors: "Edward R. Tufte"
